@@ -1,0 +1,619 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "additionalProperties": false,
+    "definitions": {
+        "CategoryType": {
+            "enum": [
+                "biology",
+                "science",
+                "social science"
+            ],
+            "type": "string"
+        },
+        "Cond": {
+            "additionalProperties": false,
+            "properties": {
+                "else": {
+                    "description": "When all of the when conditions are nil, format the children.",
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                },
+                "when": {
+                    "description": "For the first condition that is non-nil, format the children.",
+                    "items": {
+                        "$ref": "#/definitions/Condition"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Condition": {
+            "additionalProperties": false,
+            "properties": {
+                "hasVariable": {
+                    "description": "A list of reference item variables; if one is true, then return true.",
+                    "items": {
+                        "$ref": "#/definitions/VariableType"
+                    },
+                    "type": "array"
+                },
+                "isDate": {
+                    "description": "Is the item variable a date?\nTODO again, align.",
+                    "type": "boolean"
+                },
+                "isNumber": {
+                    "description": "Is the item variable a number?\nTODO this doesn't align with the above.",
+                    "type": "boolean"
+                },
+                "isReftype": {
+                    "description": "A list of reference item types; if one is true, then return true.",
+                    "items": {
+                        "$ref": "#/definitions/RefType"
+                    },
+                    "type": "array"
+                },
+                "match": {
+                    "$ref": "#/definitions/MatchType"
+                },
+                "mode": {
+                    "$ref": "#/definitions/ModeType",
+                    "description": "The local citation mode or style."
+                },
+                "templates": {
+                    "description": "When condition is met, run the template(s).\nREVIEW not sure about the details here.",
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "match",
+                "templates"
+            ],
+            "type": "object"
+        },
+        "ContributorType": {
+            "enum": [
+                "author",
+                "editor",
+                "publisher"
+            ],
+            "type": "string"
+        },
+        "GroupSortType": {
+            "enum": [
+                "cs-author",
+                "cs-author-year",
+                "cs-year"
+            ],
+            "type": "string"
+        },
+        "LocatorType": {
+            "enum": [
+                "chapter",
+                "page"
+            ],
+            "type": "string"
+        },
+        "MatchType": {
+            "enum": [
+                "all",
+                "any",
+                "none"
+            ],
+            "type": "string"
+        },
+        "ModeType": {
+            "enum": [
+                "default",
+                "narrative"
+            ],
+            "type": "string"
+        },
+        "NamedTemplate": {
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "description": "The name token for the template, for reference from other templates.",
+                    "type": "string"
+                },
+                "template": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "name",
+                "template"
+            ],
+            "type": "object"
+        },
+        "RefItemBibliographyList": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "delimiter": {
+                    "type": "string"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "groupBy": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to group the list of reference items in a citation or bibliography."
+                },
+                "heading": {
+                    "type": "string"
+                },
+                "inline": {
+                    "description": "Render the list inlne; otherwise block.",
+                    "type": "boolean"
+                },
+                "listStyle": {
+                    "type": "string"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "sort": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to sort the reference items in citation or bibliography."
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "templates": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "heading",
+                "listStyle",
+                "templates"
+            ],
+            "type": "object"
+        },
+        "RefItemCitationList": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "delimiter": {
+                    "type": "string"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "groupBy": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to group the list of reference items in a citation or bibliography."
+                },
+                "inline": {
+                    "default": true,
+                    "description": "Render the list inlne; otherwise block.",
+                    "enum": [
+                        true
+                    ],
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "sort": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to sort the reference items in citation or bibliography."
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "templates": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "templates"
+            ],
+            "type": "object"
+        },
+        "RefItemContributorList": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "delimiter": {
+                    "type": "string"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "groupBy": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to group the list of reference items in a citation or bibliography."
+                },
+                "inline": {
+                    "description": "Render the list inlne; otherwise block.",
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "sort": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to sort the reference items in citation or bibliography."
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "templates": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                },
+                "variable": {
+                    "$ref": "#/definitions/ContributorType"
+                }
+            },
+            "required": [
+                "templates",
+                "variable"
+            ],
+            "type": "object"
+        },
+        "RefItemDate": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "variable": {
+                    "enum": [
+                        "issued"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "variable"
+            ],
+            "type": "object"
+        },
+        "RefItemLocatorList": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "delimiter": {
+                    "type": "string"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "groupBy": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to group the list of reference items in a citation or bibliography."
+                },
+                "inline": {
+                    "description": "Render the list inlne; otherwise block.",
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "sort": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to sort the reference items in citation or bibliography."
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "templates": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                },
+                "variable": {
+                    "$ref": "#/definitions/LocatorType"
+                }
+            },
+            "required": [
+                "templates",
+                "variable"
+            ],
+            "type": "object"
+        },
+        "RefItemSimple": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "variable": {
+                    "$ref": "#/definitions/SimpleType"
+                }
+            },
+            "required": [
+                "variable"
+            ],
+            "type": "object"
+        },
+        "RefItemTemplate": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "template": {
+                    "description": "The template name to use for partial formatting.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "template"
+            ],
+            "type": "object"
+        },
+        "RefItemTitle": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "variable": {
+                    "$ref": "#/definitions/TitleType"
+                }
+            },
+            "required": [
+                "variable"
+            ],
+            "type": "object"
+        },
+        "RefList": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "delimiter": {
+                    "type": "string"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "groupBy": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to group the list of reference items in a citation or bibliography."
+                },
+                "inline": {
+                    "description": "Render the list inlne; otherwise block.",
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "sort": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to sort the reference items in citation or bibliography."
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "templates": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "templates"
+            ],
+            "type": "object"
+        },
+        "RefType": {
+            "enum": [
+                "article",
+                "book",
+                "chapter"
+            ],
+            "type": "string"
+        },
+        "SimpleType": {
+            "enum": [
+                "issue",
+                "pages",
+                "volume"
+            ],
+            "type": "string"
+        },
+        "TemplateModel": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/RefList"
+                },
+                {
+                    "$ref": "#/definitions/RefItemTemplate"
+                },
+                {
+                    "$ref": "#/definitions/RefItemSimple"
+                },
+                {
+                    "$ref": "#/definitions/RefItemContributorList"
+                },
+                {
+                    "$ref": "#/definitions/RefItemLocatorList"
+                },
+                {
+                    "$ref": "#/definitions/RefItemDate"
+                },
+                {
+                    "$ref": "#/definitions/RefItemTitle"
+                },
+                {
+                    "$ref": "#/definitions/Cond"
+                }
+            ]
+        },
+        "TitleType": {
+            "enum": [
+                "container-title",
+                "title"
+            ],
+            "type": "string"
+        },
+        "VariableType": {
+            "enum": [
+                "article",
+                "author",
+                "book",
+                "chapter",
+                "container-title",
+                "editor",
+                "issue",
+                "issued",
+                "pages",
+                "publisher",
+                "title",
+                "volume"
+            ],
+            "type": "string"
+        }
+    },
+    "properties": {
+        "bibliography": {
+            "$ref": "#/definitions/RefItemBibliographyList",
+            "description": "The bibliography specification."
+        },
+        "categories": {
+            "description": "The categories the style belongs to; for purposes of indexing.",
+            "items": {
+                "$ref": "#/definitions/CategoryType"
+            },
+            "type": "array"
+        },
+        "citation": {
+            "$ref": "#/definitions/RefItemCitationList",
+            "description": "The citation specification."
+        },
+        "description": {
+            "description": "The description of the style.",
+            "type": "string"
+        },
+        "id": {
+            "description": "The machine-readable token that uniquely identifies the style.",
+            "type": "string"
+        },
+        "templates": {
+            "description": "Template definitions, for use elsewhere in the style.",
+            "items": {
+                "$ref": "#/definitions/NamedTemplate"
+            },
+            "type": "array"
+        },
+        "title": {
+            "description": "The human-readable name of the style.",
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+

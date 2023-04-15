@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "lib": [],
+    "jsx": "preserve",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "lib",
+    "declaration": true,
+    "declarationDir": "types",
+    "isolatedModules": true
+  },
+  "include": [
+    "src/style.ts",
+    "src/reference.ts",
+    "src/citation.ts"
+  ]
+}

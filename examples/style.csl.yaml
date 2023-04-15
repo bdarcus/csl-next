@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-style-schema.json
+---
+title: APA
+id: apa
+description: APA style
+citation:
+  inline: true
+  sort: cs-author-year
+  groupBy: cs-author-year
+  delimiter: "; "
+  templates:
+    - when:
+        - match: all
+          mode: narrative
+          templates: # is this needed?; also, confused on grouping in this case
+            - template: author-apa
+              suffix: ", "
+            - prefix: (
+              suffix: )
+              variable: issued
+      else:
+        - template: author-apa
+  

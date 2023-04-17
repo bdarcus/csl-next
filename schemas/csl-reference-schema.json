@@ -24,6 +24,12 @@
             ],
             "type": "object"
         },
+        "ID": {
+            "type": [
+                "string",
+                "number"
+            ]
+        },
         "ReferenceType": {
             "enum": [
                 "article",
@@ -81,7 +87,7 @@
             "type": "array"
         },
         "id": {
-            "type": "string"
+            "$ref": "#/definitions/ID"
         },
         "issued": {
             "type": "string"

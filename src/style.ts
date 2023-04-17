@@ -77,6 +77,8 @@ type VariableType = RefType | ContributorType | DateType | TitleType | SimpleTyp
 
 type MatchType =
   /**
+   * Which of the match conditions must be satisfied for it be true?
+   * 
    * @default "all"
    */
   | "all"
@@ -122,7 +124,7 @@ type Match = {
   /**
    * When a match, process these templates.
    */
-  templates?: TemplateModel[];
+  templates: TemplateModel[];
 }
 
 type IsNumber = { 

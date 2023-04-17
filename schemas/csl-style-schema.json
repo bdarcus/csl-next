@@ -58,7 +58,8 @@
                         }
                     },
                     "required": [
-                        "isNumber"
+                        "isNumber",
+                        "templates"
                     ],
                     "type": "object"
                 },
@@ -91,7 +92,8 @@
                         }
                     },
                     "required": [
-                        "isEDTFDate"
+                        "isEDTFDate",
+                        "templates"
                     ],
                     "type": "object"
                 },
@@ -124,7 +126,8 @@
                         }
                     },
                     "required": [
-                        "isRefType"
+                        "isRefType",
+                        "templates"
                     ],
                     "type": "object"
                 },
@@ -157,7 +160,8 @@
                         }
                     },
                     "required": [
-                        "hasVariable"
+                        "hasVariable",
+                        "templates"
                     ],
                     "type": "object"
                 },
@@ -187,7 +191,8 @@
                         }
                     },
                     "required": [
-                        "mode"
+                        "mode",
+                        "templates"
                     ],
                     "type": "object"
                 }

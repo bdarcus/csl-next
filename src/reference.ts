@@ -10,10 +10,7 @@ type ReferenceType =
   | "book"
   | "article"
   | "chapter"
-
-type Title = TitleStructured | TitleString
-
-type TitleString = string; // plain or Djot?
+  ;
 
 type RoleType =
   | "author"
@@ -21,7 +18,17 @@ type RoleType =
   | "publisher"
   ;
 
+type Title = TitleStructured | TitleString
+
+type TitleString = string; // plain or Djot?
+
 // Interfaces
+
+interface TitleStructured {
+    full: TitleString;
+    main: TitleString;
+    sub: TitleString[];
+}
 
 interface Reference {
     id: ID;
@@ -29,12 +36,6 @@ interface Reference {
     author?: Contributor[]; // fix
     title?: (Title|Title[]); // REVIEW is this too much flexibility?
     issued: CSLDate; // CSLDate
-}
-
-interface TitleStructured {
-    full: TitleString;
-    main: TitleString;
-    sub: TitleString[];
 }
 
 interface Contributor {

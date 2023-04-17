@@ -25,7 +25,7 @@ type TitleString = string; // plain or Djot?
 // Interfaces
 
 interface TitleStructured {
-    full: TitleString;
+    full?: TitleString;
     main: TitleString;
     sub: TitleString[];
 }

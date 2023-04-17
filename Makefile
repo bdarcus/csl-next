@@ -1,24 +1,24 @@
 VERSION=$(shell grep '\"version\":' package.json | sed -e 's/.*: \"\([^"]*\)".*/\1/')
 
-# test: build
-# 	npm test --noStackTrace
-# .PHONY: test
+.PHONY: schemas build watch clean
+default: schemas
 
-#node_modules:
-#	npm install
+schemas:
+	npx typescript-json-schema --required --noExtraProps src/style.ts Style -o schemas/csl-style-schema.json
+	npx typescript-json-schema --required --noExtraProps src/reference.ts Reference -o schemas/csl-reference-schema.json
 
-schemas/csl-style-schema.json: src/style.ts
-	# npm install -g typescript-json-schema
-	npx typescript-json-schema --required --noExtraProps $< Style -o $@
+build:
+	npx tsc
+
+watch:
+	npx tsc --watch
+
+node_modules:
+	npm install
+
+clean:
+	rm -rf dist
 
 src/version.ts: package.json
 	grep '^ *"version":' $< | \
 	  sed 's/^ *"version": "*\([^"]*\)",/export const version = "\1";/' > $@
-
-# build: ts/version.ts node_modules
-#	npx tsc
-#.PHONY: build
-
-clean:
-	rm -rf dist
-.PHONY: clean

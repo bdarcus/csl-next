@@ -42,11 +42,14 @@
                 },
                 "isDate": {
                     "description": "Is the item variable a date?\nTODO again, align.",
-                    "type": "boolean"
+                    "enum": [
+                        "issued"
+                    ],
+                    "type": "string"
                 },
                 "isNumber": {
-                    "description": "Is the item variable a number?\nTODO this doesn't align with the above.",
-                    "type": "boolean"
+                    "$ref": "#/definitions/LocatorType",
+                    "description": "Is the item variable a number?\nTODO this doesn't align with the above."
                 },
                 "isReftype": {
                     "description": "A list of reference item types; if one is true, then return true.",

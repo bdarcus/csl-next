@@ -122,12 +122,12 @@ interface Condition {
    * Is the item variable a number?
    * TODO this doesn't align with the above.
    */
-  isNumber?: boolean;
+  isNumber?: LocatorType;
   /**
    * Is the item variable a date?
    * TODO again, align.
    */
-  isDate?: boolean;
+  isDate?: DateType;
   /**
    * The local citation mode or style.
    */

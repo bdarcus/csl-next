@@ -1,18 +1,116 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "enum": [
-        "bigint",
-        "boolean",
-        "date",
-        "module",
-        "null",
-        "number",
-        "regexp",
-        "special",
-        "string",
-        "symbol",
-        "undefined"
+    "additionalProperties": false,
+    "definitions": {
+        "Contributor": {
+            "additionalProperties": false,
+            "properties": {
+                "affiliation": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                }
+            },
+            "required": [
+                "name",
+                "role"
+            ],
+            "type": "object"
+        },
+        "ReferenceType": {
+            "enum": [
+                "article",
+                "book",
+                "chapter"
+            ],
+            "type": "string"
+        },
+        "RoleType": {
+            "enum": [
+                "author",
+                "editor",
+                "publisher"
+            ],
+            "type": "string"
+        },
+        "Title": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/TitleStructured"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "TitleStructured": {
+            "additionalProperties": false,
+            "properties": {
+                "full": {
+                    "type": "string"
+                },
+                "main": {
+                    "type": "string"
+                },
+                "sub": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "main",
+                "sub"
+            ],
+            "type": "object"
+        }
+    },
+    "properties": {
+        "author": {
+            "items": {
+                "$ref": "#/definitions/Contributor"
+            },
+            "type": "array"
+        },
+        "id": {
+            "type": "string"
+        },
+        "issued": {
+            "type": "string"
+        },
+        "title": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/TitleStructured"
+                },
+                {
+                    "items": {
+                        "$ref": "#/definitions/Title"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "type": {
+            "$ref": "#/definitions/ReferenceType"
+        }
+    },
+    "required": [
+        "id",
+        "issued",
+        "type"
     ],
-    "type": "string"
+    "type": "object"
 }
 

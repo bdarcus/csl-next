@@ -31,53 +31,167 @@
             "type": "object"
         },
         "Condition": {
-            "additionalProperties": false,
-            "properties": {
-                "hasVariable": {
-                    "description": "A list of reference item variables; if one is true, then return true.",
-                    "items": {
-                        "$ref": "#/definitions/VariableType"
+            "anyOf": [
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "isNumber": {
+                            "$ref": "#/definitions/LocatorType",
+                            "description": "Is the item variable a number?"
+                        },
+                        "match": {
+                            "default": "all",
+                            "description": "A list of reference item types; if one is true, then return true.",
+                            "enum": [
+                                "all",
+                                "any",
+                                "none"
+                            ],
+                            "type": "string"
+                        },
+                        "templates": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        }
                     },
-                    "type": "array"
-                },
-                "isDate": {
-                    "description": "Is the item variable a date?\nTODO again, align.",
-                    "enum": [
-                        "issued"
+                    "required": [
+                        "isNumber"
                     ],
-                    "type": "string"
+                    "type": "object"
                 },
-                "isNumber": {
-                    "$ref": "#/definitions/LocatorType",
-                    "description": "Is the item variable a number?\nTODO this doesn't align with the above."
-                },
-                "isReftype": {
-                    "description": "A list of reference item types; if one is true, then return true.",
-                    "items": {
-                        "$ref": "#/definitions/RefType"
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "isEDTFDate": {
+                            "description": "Does the date conform to EDTF?",
+                            "enum": [
+                                "issued"
+                            ],
+                            "type": "string"
+                        },
+                        "match": {
+                            "default": "all",
+                            "description": "A list of reference item types; if one is true, then return true.",
+                            "enum": [
+                                "all",
+                                "any",
+                                "none"
+                            ],
+                            "type": "string"
+                        },
+                        "templates": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        }
                     },
-                    "type": "array"
+                    "required": [
+                        "isEDTFDate"
+                    ],
+                    "type": "object"
                 },
-                "match": {
-                    "$ref": "#/definitions/MatchType"
-                },
-                "mode": {
-                    "$ref": "#/definitions/ModeType",
-                    "description": "The local citation mode or style."
-                },
-                "templates": {
-                    "description": "When condition is met, run the template(s).\nREVIEW not sure about the details here.",
-                    "items": {
-                        "$ref": "#/definitions/TemplateModel"
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "isRefType": {
+                            "description": "Is the item reference type among the listed reference types?",
+                            "items": {
+                                "$ref": "#/definitions/RefType"
+                            },
+                            "type": "array"
+                        },
+                        "match": {
+                            "default": "all",
+                            "description": "A list of reference item types; if one is true, then return true.",
+                            "enum": [
+                                "all",
+                                "any",
+                                "none"
+                            ],
+                            "type": "string"
+                        },
+                        "templates": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        }
                     },
-                    "type": "array"
+                    "required": [
+                        "isRefType"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "hasVariable": {
+                            "description": "Does the item reference include one of the listed variables?",
+                            "items": {
+                                "$ref": "#/definitions/VariableType"
+                            },
+                            "type": "array"
+                        },
+                        "match": {
+                            "default": "all",
+                            "description": "A list of reference item types; if one is true, then return true.",
+                            "enum": [
+                                "all",
+                                "any",
+                                "none"
+                            ],
+                            "type": "string"
+                        },
+                        "templates": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "hasVariable"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "match": {
+                            "default": "all",
+                            "description": "A list of reference item types; if one is true, then return true.",
+                            "enum": [
+                                "all",
+                                "any",
+                                "none"
+                            ],
+                            "type": "string"
+                        },
+                        "mode": {
+                            "$ref": "#/definitions/ModeType",
+                            "description": "The citation mode."
+                        },
+                        "templates": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "mode"
+                    ],
+                    "type": "object"
                 }
-            },
-            "required": [
-                "match",
-                "templates"
-            ],
-            "type": "object"
+            ]
         },
         "ContributorType": {
             "enum": [
@@ -99,14 +213,6 @@
             "enum": [
                 "chapter",
                 "page"
-            ],
-            "type": "string"
-        },
-        "MatchType": {
-            "enum": [
-                "all",
-                "any",
-                "none"
             ],
             "type": "string"
         },

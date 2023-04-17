@@ -1,5 +1,7 @@
 // Experimental CSL NEXT typescript model
 
+import { CSLDate } from "./date";
+
 // Doesn't actually do anything ATM, other than generate a JSON Schema.
 // I don't ATM understand distinction between `interface` and `type`
 
@@ -97,6 +99,8 @@ type TemplateModel =
 // eg liquid or mustache option for dev?
 type StringTemplate = string;
 
+// Conditional definitions
+
 interface Cond {
   /**
    * For the first condition that is non-nil, format the children.
@@ -108,36 +112,66 @@ interface Cond {
   else?: TemplateModel[];
 }
 
-interface Condition {
-  match: MatchType;
+type Match = { 
   /**
    * A list of reference item types; if one is true, then return true.
+   * 
+   * @default all
    */
-  isReftype?: RefType[];
+  match?: "all" | "none" | "any";
   /**
-   * A list of reference item variables; if one is true, then return true.
+   * When a match, process these templates.
    */
-  hasVariable?: VariableType[];
-  /**
-   * Is the item variable a number?
-   * TODO this doesn't align with the above.
-   */
-  isNumber?: LocatorType;
-  /**
-   * Is the item variable a date?
-   * TODO again, align.
-   */
-  isDate?: DateType;
-  /**
-   * The local citation mode or style.
-   */
-  mode?: ModeType;
-  /**
-   * When condition is met, run the template(s).
-   * REVIEW not sure about the details here.
-   */
-  templates: TemplateModel[];
+  templates?: TemplateModel[];
 }
+
+type IsNumber = { 
+  /**
+   * Is the item variable a number?   
+   */
+  isNumber: LocatorType; 
+}
+
+type IsEDTFDate = { 
+  /**
+   * Does the date conform to EDTF?
+   */
+  isEDTFDate: DateType; 
+}
+
+type IsRefType = { 
+  /**
+   * Is the item reference type among the listed reference types?
+   */
+  isRefType: RefType[]; 
+}
+
+type HasVariable = { 
+  /**
+   * Does the item reference include one of the listed variables?
+   */
+  hasVariable: VariableType[]; 
+}
+
+type Mode = { 
+  /**
+   * The citation mode.
+   */
+  mode: ModeType; 
+}
+
+type MatchTemplates = {
+  /**
+   * When a match, process these templates.
+   */
+  templates?: TemplateModel[];
+}
+
+// REVIEW hould the below be an interface?
+type DataTypeMatch = IsNumber | IsEDTFDate | IsRefType | HasVariable | Mode;
+type Condition = Match & DataTypeMatch;
+
+// Style definition
 
 interface Style {
   /**

@@ -4,7 +4,7 @@
 
 import { CSLDate } from "./date";
 
-type ID = string; // needs to be a token
+type ID = string | number; // string needs to be a token
 
 type ReferenceType =
   | "book"
@@ -35,7 +35,7 @@ interface Reference {
     type: ReferenceType;
     author?: Contributor[]; // fix
     title?: (Title|Title[]); // REVIEW is this too much flexibility?
-    issued: CSLDate; // CSLDate
+    issued: CSLDate;
 }
 
 interface Contributor {

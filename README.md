@@ -6,12 +6,16 @@ I'm using `typescript` for the modeling, and automatic JSON Schema generation, b
 
 But I at least like the idea of aligning code and schema, and don't find manually creating and maintaining `JSON Schema` to be fun, even in `YAML`.
 
+Here is`VSCode`, with schema-backed validation and auto-complete.
+
+![Screenshot from 2023-04-16 10-22-25](https://user-images.githubusercontent.com/1134/232319672-88e96d95-1806-4d6b-9d27-6d0cc32d5033.png)
+
 ## How
 
-Currently, the only file that's worth looking at is `src/style.ts`. 
-It reflects the basic ideas in the earlier `RELAX NG` draft schema.
+Currently, the only files that's worth looking at are `src/style.ts` and `src/reference.ts`. 
+They reflect the basic ideas in the earlier `RELAX NG` draft schemas.
 
-To generate the JSON schema, run `make`.
+To generate the JSON schemas, run `npm install` and then `make`.
 
 ## Ideas/intentions/next steps/help needed
 

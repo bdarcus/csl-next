@@ -39,7 +39,7 @@ Possibilities:
 
 ### Why `typescript`?
 
-1. It's an elegant way to define a model, that can be converted to different output targets, including `JSON schema` (for other language targets see [quicktype](https://github.com/quicktype/quicktype)).
+1. It's an elegant way to define a model, that can be converted to different output targets, including `JSON schema` (for other language targets, see [quicktype](https://github.com/quicktype/quicktype)).
 2. I _hate_ hand authoring `JSON schema`, even in `YAML`.
 3. It's widely supported in the `JS` world, and `JS` widely supported more generally.
 4. Because the [djot](https://djot.net/) reference implementation uses it, I'd like to take advantage of that.
@@ -48,9 +48,9 @@ Possibilities:
 
 ### Why `JSON Schema`? What happened to `XML`?
 
-1. `JSON` (and `YAML`) is more boadly supported today.
+1. `JSON` (and `YAML`) is more broadly supported today.
 2. No decisions on whether or not `XML`, actually, but this is a test to see how much simpler the model can be, and ensure it maps well to standard programming languages (the first implementation of CSL was in XSLT!).
-3. It should be feasible to do both (if not clear the effort is worth it).
+3. It should be feasible to do both (though not clear the effort is worth it).
 
 ### Why isn't more functional code here now?
 

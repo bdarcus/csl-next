@@ -16,6 +16,7 @@
     "@typescript-eslint/parser": "^5.46.1",
     "benchmark": "^2.1.4",
     "edtf": "^4.4.1",
+    "json-schema-edtf": "^1.0.3",
     "eslint": "^8.29.0",
     "ts-jest": "^29.0.3",
     "ts-loader": "^9.4.2",

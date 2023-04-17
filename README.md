@@ -1,28 +1,63 @@
-## What
+## Introduction
 
-An experiment to create a new, simpler, but extensible CSL.
+An experiment to create a new, simpler, but extensible CSL. 
+The `JSON Schemas` here are automatically created from the `typescript` models.
 
-I'm using `typescript` for the modeling, and automatic JSON Schema generation, but it doesn't do anything else ATM, largely because I know nothing about `typescript` or `js`!
+Here is`VSCode`, with schema-backed validation and auto-complete.
 
-But I at least like the idea of aligning code and schema, and don't find manually creating and maintaining `JSON Schema` to be fun, even in `YAML`.
+![Screenshot from 2023-04-16 10-22-25](https://user-images.githubusercontent.com/1134/232319672-88e96d95-1806-4d6b-9d27-6d0cc32d5033.png)
 
-## How
+Currently, the only files that are worth looking at are `src/style.ts` and `src/reference.ts`. 
+They reflect the basic ideas in the earlier `RELAX NG` draft schemas.
 
-Currently, the only file that's worth looking at is `src/style.ts`. 
-It reflects the basic ideas in the earlier `RELAX NG` draft schema.
+To generate the JSON schemas, run `npm install` and then `make`.
 
-To generate the JSON schema, run `make`.
+## FAQ
 
-## Ideas/intentions/next steps/help needed
+### Why?
 
-We need working code. 
-If the basic idea here is sound, it should be much easier to do than a CSL 1.0 implementation. 
-And initial coding should quickly confirm that be true or not.
+At a high level CSL 1.0 is an XML DSL that sets some context-dependent parameters and provides templates for inline and block formatting of lists (citations and bibliographies respectively). 
 
-Keep in mind, I designed CSL almost 20 years ago, as a novice programmer learning XML and XSLT on the fly. 
-We also now have a tremendous amount of knowledge and experience wrapped up in the different code libraries, and thousands of styles. 
+But it has no method for extension, so any change in behavior requires changes in the XML model, and often, by extension, the styles, and the input schema. 
+Given the diversity of software implementations and thousands of styles, and the fact that much of the labor to maintain all this comes from time-strapped individuals, the lack of extensibility enforces a large degree of inertia that we need to address.
 
-But I'm a typescript/js newbie, and don't really have the time to do a full implementation given my generally inefficient coding, particularly in a new language. 
-So I need help. 
+This is one idea on how we might do that, then.
+
+### Why the name?
+
+It's a placeholder to call it something, without suggesting any particular future.
+
+### What could that future be?
+
+Hard to say, because that will depend on what kind of interest there is.
+
+Possibilities:
+
+1. It may be the basis for CSL 2.0.
+2. It may inform a path to iterate CSL 1.0.
+3. Nothing at all.
+
+### Why `typescript`?
+
+1. It's an elegant way to define a model, that can be converted to different output targets, including `JSON schema` (for other language targets see [quicktype](https://github.com/quicktype/quicktype)).
+2. I _hate_ hand authoring `JSON schema`, even in `YAML`.
+3. It's widely supported in the `JS` world, and `JS` widely supported more generally.
+4. Because the [djot](https://djot.net/) reference implementation uses it, I'd like to take advantage of that.
+5. There are two good `EDTF` libraries for date validation and formatting.
+6. It might be possible to incorporate some code from [citeproc-js](https://github.com/Juris-M/citeproc-js)?
+
+### Why `JSON Schema`? What happened to `XML`?
+
+1. `JSON` (and `YAML`) is more boadly supported today.
+2. No decisions on whether or not `XML`, actually, but this is a test to see how much simpler the model can be, and ensure it maps well to standard programming languages (the first implementation of CSL was in XSLT!).
+3. It should be feasible to do both (if not clear the effort is worth it).
+
+### Why isn't more functional code here now?
+
+1. I'm a `typescript` newbie, and an amateur programmer without much experience with it or `Javascript`.
+2. I'm pretty good at modeling these sorts of data, with strong domain knowledge, so that's what I started with.
+3. I'm busy, and didn't want to waste time going down a private rabbit hole without a broader interest check, and opportunity for collaboration.
+
+### Further questions, ideas, offers of support or help?
 
 See the issue tracker for details, particularly the priority task list in [#7](https://github.com/bdarcus/csl-next.js/issues/7).

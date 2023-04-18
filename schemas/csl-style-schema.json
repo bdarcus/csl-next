@@ -35,6 +35,13 @@
                 {
                     "additionalProperties": false,
                     "properties": {
+                        "format": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        },
                         "isNumber": {
                             "$ref": "#/definitions/LocatorType",
                             "description": "Is the item variable a number?"
@@ -48,24 +55,24 @@
                                 "none"
                             ],
                             "type": "string"
-                        },
-                        "templates": {
-                            "description": "When a match, process these templates.",
-                            "items": {
-                                "$ref": "#/definitions/TemplateModel"
-                            },
-                            "type": "array"
                         }
                     },
                     "required": [
-                        "isNumber",
-                        "templates"
+                        "format",
+                        "isNumber"
                     ],
                     "type": "object"
                 },
                 {
                     "additionalProperties": false,
                     "properties": {
+                        "format": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        },
                         "isEDTFDate": {
                             "description": "Does the date conform to EDTF?",
                             "enum": [
@@ -82,24 +89,24 @@
                                 "none"
                             ],
                             "type": "string"
-                        },
-                        "templates": {
-                            "description": "When a match, process these templates.",
-                            "items": {
-                                "$ref": "#/definitions/TemplateModel"
-                            },
-                            "type": "array"
                         }
                     },
                     "required": [
-                        "isEDTFDate",
-                        "templates"
+                        "format",
+                        "isEDTFDate"
                     ],
                     "type": "object"
                 },
                 {
                     "additionalProperties": false,
                     "properties": {
+                        "format": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        },
                         "isRefType": {
                             "description": "Is the item reference type among the listed reference types?",
                             "items": {
@@ -116,24 +123,24 @@
                                 "none"
                             ],
                             "type": "string"
-                        },
-                        "templates": {
-                            "description": "When a match, process these templates.",
-                            "items": {
-                                "$ref": "#/definitions/TemplateModel"
-                            },
-                            "type": "array"
                         }
                     },
                     "required": [
-                        "isRefType",
-                        "templates"
+                        "format",
+                        "isRefType"
                     ],
                     "type": "object"
                 },
                 {
                     "additionalProperties": false,
                     "properties": {
+                        "format": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        },
                         "hasVariable": {
                             "description": "Does the item reference include one of the listed variables?",
                             "items": {
@@ -150,26 +157,26 @@
                                 "none"
                             ],
                             "type": "string"
-                        },
-                        "templates": {
-                            "description": "When a match, process these templates.",
-                            "items": {
-                                "$ref": "#/definitions/TemplateModel"
-                            },
-                            "type": "array"
                         }
                     },
                     "required": [
-                        "hasVariable",
-                        "templates"
+                        "format",
+                        "hasVariable"
                     ],
                     "type": "object"
                 },
                 {
                     "additionalProperties": false,
                     "properties": {
+                        "format": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        },
                         "locale": {
-                            "description": "The target locale for output.",
+                            "description": "The item reference locale; to allow multilingual output.",
                             "type": "string"
                         },
                         "match": {
@@ -181,24 +188,24 @@
                                 "none"
                             ],
                             "type": "string"
-                        },
-                        "templates": {
-                            "description": "When a match, process these templates.",
-                            "items": {
-                                "$ref": "#/definitions/TemplateModel"
-                            },
-                            "type": "array"
                         }
                     },
                     "required": [
-                        "locale",
-                        "templates"
+                        "format",
+                        "locale"
                     ],
                     "type": "object"
                 },
                 {
                     "additionalProperties": false,
                     "properties": {
+                        "format": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        },
                         "match": {
                             "default": "all",
                             "description": "A list of reference item types; if one is true, then return true.",
@@ -212,18 +219,11 @@
                         "mode": {
                             "$ref": "#/definitions/ModeType",
                             "description": "The citation mode."
-                        },
-                        "templates": {
-                            "description": "When a match, process these templates.",
-                            "items": {
-                                "$ref": "#/definitions/TemplateModel"
-                            },
-                            "type": "array"
                         }
                     },
                     "required": [
-                        "mode",
-                        "templates"
+                        "format",
+                        "mode"
                     ],
                     "type": "object"
                 }

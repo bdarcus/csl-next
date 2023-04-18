@@ -124,7 +124,7 @@ type Match = {
   /**
    * When a match, process these templates.
    */
-  templates: TemplateModel[];
+  format: TemplateModel[];
 }
 
 type IsNumber = { 

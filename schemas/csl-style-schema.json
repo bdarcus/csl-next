@@ -812,6 +812,15 @@
             "description": "The machine-readable token that uniquely identifies the style.",
             "type": "string"
         },
+        "localization": {
+            "default": "global",
+            "description": "The scope to use for localized terms.",
+            "enum": [
+                "global",
+                "per-item"
+            ],
+            "type": "string"
+        },
         "templates": {
             "description": "Template definitions, for use elsewhere in the style.",
             "items": {

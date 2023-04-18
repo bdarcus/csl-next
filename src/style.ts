@@ -169,13 +169,6 @@ type Mode = {
   mode: ModeType; 
 }
 
-type MatchTemplates = {
-  /**
-   * When a match, process these templates.
-   */
-  templates?: TemplateModel[];
-}
-
 // REVIEW hould the below be an interface?
 type DataTypeMatch = IsNumber | IsEDTFDate | IsRefType | HasVariable | Locale | Mode;
 type Condition = Match & DataTypeMatch;

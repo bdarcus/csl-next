@@ -157,7 +157,7 @@ type HasVariable = {
 
 type Locale = { 
   /**
-   * The target locale for output.
+   * The item reference locale; to allow multilingual output.
    */
   locale: string; // REVIEW; best place for this? Define the locale type
 }

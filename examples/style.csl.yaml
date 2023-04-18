@@ -4,15 +4,14 @@ title: APA
 id: apa
 description: APA style
 citation:
-  inline: true
+  inline: true # shouldn't require, but assume as default
   sort: cs-author-year
   groupBy: cs-author-year
   delimiter: "; "
-  templates:
+  format:
     - when:
-        - match: all
-          mode: narrative
-          format: # is this needed?; also, confused on grouping in this case
+        - mode: narrative
+          format: # confused on grouping in this case
             - template: author-apa
               suffix: ", "
             - prefix: (
@@ -20,4 +19,5 @@ citation:
               variable: issued
       else:
         - template: author-apa
+          variable: issued
   

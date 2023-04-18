@@ -248,7 +248,7 @@ interface RefList extends HasFormatting {
    */
   inline?: boolean;
   delimiter?: string;
-  templates: TemplateModel[]; // REVIEW
+  format: TemplateModel[]; // REVIEW
 }
 
 interface RefListBlock extends RefList {

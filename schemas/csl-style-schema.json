@@ -291,6 +291,12 @@
                 "emph": {
                     "type": "boolean"
                 },
+                "format": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                },
                 "groupBy": {
                     "$ref": "#/definitions/GroupSortType",
                     "description": "How to group the list of reference items in a citation or bibliography."
@@ -319,18 +325,12 @@
                 "suffix": {
                     "description": "The string to insert after the content.",
                     "type": "string"
-                },
-                "templates": {
-                    "items": {
-                        "$ref": "#/definitions/TemplateModel"
-                    },
-                    "type": "array"
                 }
             },
             "required": [
+                "format",
                 "heading",
-                "listStyle",
-                "templates"
+                "listStyle"
             ],
             "type": "object"
         },
@@ -345,6 +345,12 @@
                 },
                 "emph": {
                     "type": "boolean"
+                },
+                "format": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
                 },
                 "groupBy": {
                     "$ref": "#/definitions/GroupSortType",
@@ -372,16 +378,10 @@
                 "suffix": {
                     "description": "The string to insert after the content.",
                     "type": "string"
-                },
-                "templates": {
-                    "items": {
-                        "$ref": "#/definitions/TemplateModel"
-                    },
-                    "type": "array"
                 }
             },
             "required": [
-                "templates"
+                "format"
             ],
             "type": "object"
         },
@@ -396,6 +396,12 @@
                 },
                 "emph": {
                     "type": "boolean"
+                },
+                "format": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
                 },
                 "groupBy": {
                     "$ref": "#/definitions/GroupSortType",
@@ -420,18 +426,12 @@
                     "description": "The string to insert after the content.",
                     "type": "string"
                 },
-                "templates": {
-                    "items": {
-                        "$ref": "#/definitions/TemplateModel"
-                    },
-                    "type": "array"
-                },
                 "variable": {
                     "$ref": "#/definitions/ContributorType"
                 }
             },
             "required": [
-                "templates",
+                "format",
                 "variable"
             ],
             "type": "object"
@@ -480,6 +480,12 @@
                 "emph": {
                     "type": "boolean"
                 },
+                "format": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                },
                 "groupBy": {
                     "$ref": "#/definitions/GroupSortType",
                     "description": "How to group the list of reference items in a citation or bibliography."
@@ -503,18 +509,12 @@
                     "description": "The string to insert after the content.",
                     "type": "string"
                 },
-                "templates": {
-                    "items": {
-                        "$ref": "#/definitions/TemplateModel"
-                    },
-                    "type": "array"
-                },
                 "variable": {
                     "$ref": "#/definitions/LocatorType"
                 }
             },
             "required": [
-                "templates",
+                "format",
                 "variable"
             ],
             "type": "object"
@@ -619,6 +619,12 @@
                 "emph": {
                     "type": "boolean"
                 },
+                "format": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                },
                 "groupBy": {
                     "$ref": "#/definitions/GroupSortType",
                     "description": "How to group the list of reference items in a citation or bibliography."
@@ -641,16 +647,10 @@
                 "suffix": {
                     "description": "The string to insert after the content.",
                     "type": "string"
-                },
-                "templates": {
-                    "items": {
-                        "$ref": "#/definitions/TemplateModel"
-                    },
-                    "type": "array"
                 }
             },
             "required": [
-                "templates"
+                "format"
             ],
             "type": "object"
         },

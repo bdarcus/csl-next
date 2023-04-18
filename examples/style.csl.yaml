@@ -4,9 +4,8 @@ title: APA
 id: apa
 description: APA style
 citation:
-  inline: true # shouldn't require, but assume as default
-  sort: cs-author-year
-  groupBy: cs-author-year
+  sort: cs-author
+  groupBy: cs-author
   delimiter: "; "
   format:
     - when:
@@ -18,6 +17,10 @@ citation:
               suffix: )
               variable: issued
       else:
-        - template: author-apa
-          variable: issued
+        - groupBy: cs-author-year # not sure this grouping is right
+          prefix: (
+          suffix: )
+          format:
+            - template: author-apa
+            - variable: issued
   

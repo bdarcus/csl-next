@@ -155,6 +155,13 @@ type HasVariable = {
   hasVariable: VariableType[]; 
 }
 
+type Locale = { 
+  /**
+   * The target locale for output.
+   */
+  locale: string; // REVIEW; best place for this? Define the locale type
+}
+
 type Mode = { 
   /**
    * The citation mode.
@@ -170,7 +177,7 @@ type MatchTemplates = {
 }
 
 // REVIEW hould the below be an interface?
-type DataTypeMatch = IsNumber | IsEDTFDate | IsRefType | HasVariable | Mode;
+type DataTypeMatch = IsNumber | IsEDTFDate | IsRefType | HasVariable | Locale | Mode;
 type Condition = Match & DataTypeMatch;
 
 // Style definition

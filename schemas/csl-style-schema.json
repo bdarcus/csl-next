@@ -168,6 +168,37 @@
                 {
                     "additionalProperties": false,
                     "properties": {
+                        "locale": {
+                            "description": "The target locale for output.",
+                            "type": "string"
+                        },
+                        "match": {
+                            "default": "all",
+                            "description": "A list of reference item types; if one is true, then return true.",
+                            "enum": [
+                                "all",
+                                "any",
+                                "none"
+                            ],
+                            "type": "string"
+                        },
+                        "templates": {
+                            "description": "When a match, process these templates.",
+                            "items": {
+                                "$ref": "#/definitions/TemplateModel"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "locale",
+                        "templates"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
                         "match": {
                             "default": "all",
                             "description": "A list of reference item types; if one is true, then return true.",

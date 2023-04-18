@@ -12,7 +12,7 @@ citation:
     - when:
         - match: all
           mode: narrative
-          templates: # is this needed?; also, confused on grouping in this case
+          format: # is this needed?; also, confused on grouping in this case
             - template: author-apa
               suffix: ", "
             - prefix: (

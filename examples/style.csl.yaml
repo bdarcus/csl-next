@@ -4,22 +4,24 @@ title: APA
 id: apa
 description: APA style
 citation:
-  sort: cs-author
-  groupBy: cs-author
-  delimiter: "; "
   format:
     - when:
         - mode: narrative
-          format: # confused on grouping in this case
-            - template: author-apa
-              suffix: ", "
-            - prefix: (
-              suffix: )
-              variable: issued
+          format:
+            - groupBy: cs-author
+              delimiter: ", "
+              andAs: symbol
+              format:
+                - groupBy: cs-year
+                  prefix: (
+                  suffix: )
+                  format:
+                    - variable: issued
       else:
         - groupBy: cs-author-year # not sure this grouping is right
           prefix: (
           suffix: )
+          delimiter: "; "
           format:
             - template: author-apa
             - variable: issued

@@ -282,6 +282,13 @@
         "RefItemBibliographyList": {
             "additionalProperties": false,
             "properties": {
+                "andAs": {
+                    "enum": [
+                        "symbol",
+                        "term"
+                    ],
+                    "type": "string"
+                },
                 "bold": {
                     "type": "boolean"
                 },
@@ -318,6 +325,12 @@
                 "quote": {
                     "type": "boolean"
                 },
+                "shortenMin": {
+                    "type": "number"
+                },
+                "shortenUse": {
+                    "type": "number"
+                },
                 "sort": {
                     "$ref": "#/definitions/GroupSortType",
                     "description": "How to sort the reference items in citation or bibliography."
@@ -337,6 +350,13 @@
         "RefItemCitationList": {
             "additionalProperties": false,
             "properties": {
+                "andAs": {
+                    "enum": [
+                        "symbol",
+                        "term"
+                    ],
+                    "type": "string"
+                },
                 "bold": {
                     "type": "boolean"
                 },
@@ -371,6 +391,12 @@
                 "quote": {
                     "type": "boolean"
                 },
+                "shortenMin": {
+                    "type": "number"
+                },
+                "shortenUse": {
+                    "type": "number"
+                },
                 "sort": {
                     "$ref": "#/definitions/GroupSortType",
                     "description": "How to sort the reference items in citation or bibliography."
@@ -388,6 +414,13 @@
         "RefItemContributorList": {
             "additionalProperties": false,
             "properties": {
+                "andAs": {
+                    "enum": [
+                        "symbol",
+                        "term"
+                    ],
+                    "type": "string"
+                },
                 "bold": {
                     "type": "boolean"
                 },
@@ -417,6 +450,12 @@
                 },
                 "quote": {
                     "type": "boolean"
+                },
+                "shortenMin": {
+                    "type": "number"
+                },
+                "shortenUse": {
+                    "type": "number"
                 },
                 "sort": {
                     "$ref": "#/definitions/GroupSortType",
@@ -471,6 +510,13 @@
         "RefItemLocatorList": {
             "additionalProperties": false,
             "properties": {
+                "andAs": {
+                    "enum": [
+                        "symbol",
+                        "term"
+                    ],
+                    "type": "string"
+                },
                 "bold": {
                     "type": "boolean"
                 },
@@ -500,6 +546,12 @@
                 },
                 "quote": {
                     "type": "boolean"
+                },
+                "shortenMin": {
+                    "type": "number"
+                },
+                "shortenUse": {
+                    "type": "number"
                 },
                 "sort": {
                     "$ref": "#/definitions/GroupSortType",
@@ -610,6 +662,13 @@
         "RefList": {
             "additionalProperties": false,
             "properties": {
+                "andAs": {
+                    "enum": [
+                        "symbol",
+                        "term"
+                    ],
+                    "type": "string"
+                },
                 "bold": {
                     "type": "boolean"
                 },
@@ -639,6 +698,12 @@
                 },
                 "quote": {
                     "type": "boolean"
+                },
+                "shortenMin": {
+                    "type": "number"
+                },
+                "shortenUse": {
+                    "type": "number"
                 },
                 "sort": {
                     "$ref": "#/definitions/GroupSortType",

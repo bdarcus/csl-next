@@ -241,6 +241,9 @@ interface RefList extends HasFormatting {
    */
   inline?: boolean;
   delimiter?: string;
+  shortenMin?: number; // integer
+  shortenUse?: number; // integer; TODO this and the above need to be coupled
+  andAs?: "symbol" | "term";
   format: TemplateModel[]; // REVIEW
 }
 

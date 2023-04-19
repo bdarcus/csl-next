@@ -31,6 +31,7 @@ type GroupSortType =
   | "cs-author"
   | "cs-year"
   | "cs-author-year"
+  | "cs-as-cited"
   ;
 
 type CategoryType =

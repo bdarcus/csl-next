@@ -239,6 +239,7 @@
         },
         "GroupSortType": {
             "enum": [
+                "cs-as-cited",
                 "cs-author",
                 "cs-author-year",
                 "cs-year"

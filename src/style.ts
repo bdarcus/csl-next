@@ -102,6 +102,16 @@ type TemplateModel =
   | Cond
   ;
 
+type GroupAffixType =
+  | "parentheses"
+  | "brackets"
+  ;
+
+type GroupAffixLevel =
+  | "primary"
+  | "secondary"
+  ;
+
 // eg liquid or mustache option for dev?
 type StringTemplate = string;
 
@@ -242,6 +252,18 @@ interface RefList extends HasFormatting {
    * How to group the list of reference items in a citation or bibliography.
    */
   groupBy?: GroupSortType;
+  /**
+   * The affix to use to enclose a group within a list; for example, a citation.
+   */
+  groupAffix?: GroupAffixType;
+  /**
+   * The group-level to apply groupAffix to.
+   * A standard citation, for example, would be the default "primary", since it applies to the citation as a whole.
+   * A narrative citation, by contrast, would be "secondary", because it applies to the "year" group.
+   * 
+   * @default primary
+   */
+  groupAffixLevel?: GroupAffixLevel;
   /**
    * How to sort the reference items in citation or bibliography.
    */

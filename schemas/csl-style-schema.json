@@ -237,6 +237,20 @@
             ],
             "type": "string"
         },
+        "GroupAffixLevel": {
+            "enum": [
+                "primary",
+                "secondary"
+            ],
+            "type": "string"
+        },
+        "GroupAffixType": {
+            "enum": [
+                "brackets",
+                "parentheses"
+            ],
+            "type": "string"
+        },
         "GroupSortType": {
             "enum": [
                 "cs-as-cited",
@@ -304,6 +318,15 @@
                         "$ref": "#/definitions/TemplateModel"
                     },
                     "type": "array"
+                },
+                "groupAffix": {
+                    "$ref": "#/definitions/GroupAffixType",
+                    "description": "The affix to use to enclose a group within a list; for example, a citation."
+                },
+                "groupAffixLevel": {
+                    "$ref": "#/definitions/GroupAffixLevel",
+                    "default": "primary",
+                    "description": "The group-level to apply groupAffix to.\nA standard citation, for example, would be the default \"primary\", since it applies to the citation as a whole.\nA narrative citation, by contrast, would be \"secondary\", because it applies to the \"year\" group."
                 },
                 "groupBy": {
                     "$ref": "#/definitions/GroupSortType",
@@ -373,6 +396,15 @@
                     },
                     "type": "array"
                 },
+                "groupAffix": {
+                    "$ref": "#/definitions/GroupAffixType",
+                    "description": "The affix to use to enclose a group within a list; for example, a citation."
+                },
+                "groupAffixLevel": {
+                    "$ref": "#/definitions/GroupAffixLevel",
+                    "default": "primary",
+                    "description": "The group-level to apply groupAffix to.\nA standard citation, for example, would be the default \"primary\", since it applies to the citation as a whole.\nA narrative citation, by contrast, would be \"secondary\", because it applies to the \"year\" group."
+                },
                 "groupBy": {
                     "$ref": "#/definitions/GroupSortType",
                     "description": "How to group the list of reference items in a citation or bibliography."
@@ -436,6 +468,15 @@
                         "$ref": "#/definitions/TemplateModel"
                     },
                     "type": "array"
+                },
+                "groupAffix": {
+                    "$ref": "#/definitions/GroupAffixType",
+                    "description": "The affix to use to enclose a group within a list; for example, a citation."
+                },
+                "groupAffixLevel": {
+                    "$ref": "#/definitions/GroupAffixLevel",
+                    "default": "primary",
+                    "description": "The group-level to apply groupAffix to.\nA standard citation, for example, would be the default \"primary\", since it applies to the citation as a whole.\nA narrative citation, by contrast, would be \"secondary\", because it applies to the \"year\" group."
                 },
                 "groupBy": {
                     "$ref": "#/definitions/GroupSortType",
@@ -532,6 +573,15 @@
                         "$ref": "#/definitions/TemplateModel"
                     },
                     "type": "array"
+                },
+                "groupAffix": {
+                    "$ref": "#/definitions/GroupAffixType",
+                    "description": "The affix to use to enclose a group within a list; for example, a citation."
+                },
+                "groupAffixLevel": {
+                    "$ref": "#/definitions/GroupAffixLevel",
+                    "default": "primary",
+                    "description": "The group-level to apply groupAffix to.\nA standard citation, for example, would be the default \"primary\", since it applies to the citation as a whole.\nA narrative citation, by contrast, would be \"secondary\", because it applies to the \"year\" group."
                 },
                 "groupBy": {
                     "$ref": "#/definitions/GroupSortType",
@@ -684,6 +734,15 @@
                         "$ref": "#/definitions/TemplateModel"
                     },
                     "type": "array"
+                },
+                "groupAffix": {
+                    "$ref": "#/definitions/GroupAffixType",
+                    "description": "The affix to use to enclose a group within a list; for example, a citation."
+                },
+                "groupAffixLevel": {
+                    "$ref": "#/definitions/GroupAffixLevel",
+                    "default": "primary",
+                    "description": "The group-level to apply groupAffix to.\nA standard citation, for example, would be the default \"primary\", since it applies to the citation as a whole.\nA narrative citation, by contrast, would be \"secondary\", because it applies to the \"year\" group."
                 },
                 "groupBy": {
                     "$ref": "#/definitions/GroupSortType",

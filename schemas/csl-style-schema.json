@@ -2,6 +2,82 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "definitions": {
+        "Bibliography": {
+            "additionalProperties": false,
+            "properties": {
+                "andAs": {
+                    "enum": [
+                        "symbol",
+                        "term"
+                    ],
+                    "type": "string"
+                },
+                "bold": {
+                    "type": "boolean"
+                },
+                "delimiter": {
+                    "type": "string"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "format": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                },
+                "groupAffix": {
+                    "$ref": "#/definitions/GroupAffixType",
+                    "description": "The affix to use to enclose a group within a list; for example, a citation."
+                },
+                "groupAffixLevel": {
+                    "$ref": "#/definitions/GroupAffixLevel",
+                    "default": "primary",
+                    "description": "The group-level to apply groupAffix to.\nA standard citation, for example, would be the default \"primary\", since it applies to the citation as a whole.\nA narrative citation, by contrast, would be \"secondary\", because it applies to the \"year\" group."
+                },
+                "groupBy": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to group the list of reference items in a citation or bibliography."
+                },
+                "heading": {
+                    "type": "string"
+                },
+                "inline": {
+                    "description": "Render the list inlne; otherwise block.",
+                    "type": "boolean"
+                },
+                "listStyle": {
+                    "type": "string"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "shortenMin": {
+                    "type": "number"
+                },
+                "shortenUse": {
+                    "type": "number"
+                },
+                "sort": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to sort the reference items in citation or bibliography."
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "heading",
+                "listStyle"
+            ],
+            "type": "object"
+        },
         "CategoryType": {
             "enum": [
                 "biology",
@@ -9,6 +85,93 @@
                 "social science"
             ],
             "type": "string"
+        },
+        "Citation": {
+            "additionalProperties": false,
+            "properties": {
+                "andAs": {
+                    "enum": [
+                        "symbol",
+                        "term"
+                    ],
+                    "type": "string"
+                },
+                "bold": {
+                    "type": "boolean"
+                },
+                "contexts": {
+                    "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "integral": {
+                                "$ref": "#/definitions/RefList",
+                                "description": "Integral citations are those where the author is printed inline in the text; aka \"in text\" or \"narrative\" citations."
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "delimiter": {
+                    "type": "string"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "format": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                },
+                "groupAffix": {
+                    "$ref": "#/definitions/GroupAffixType",
+                    "description": "The affix to use to enclose a group within a list; for example, a citation."
+                },
+                "groupAffixLevel": {
+                    "$ref": "#/definitions/GroupAffixLevel",
+                    "default": "primary",
+                    "description": "The group-level to apply groupAffix to.\nA standard citation, for example, would be the default \"primary\", since it applies to the citation as a whole.\nA narrative citation, by contrast, would be \"secondary\", because it applies to the \"year\" group."
+                },
+                "groupBy": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to group the list of reference items in a citation or bibliography."
+                },
+                "inline": {
+                    "description": "Render the list inlne; otherwise block.",
+                    "type": "boolean"
+                },
+                "placement": {
+                    "default": "inline",
+                    "enum": [
+                        "inline",
+                        "note"
+                    ],
+                    "type": "string"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "shortenMin": {
+                    "type": "number"
+                },
+                "shortenUse": {
+                    "type": "number"
+                },
+                "sort": {
+                    "$ref": "#/definitions/GroupSortType",
+                    "description": "How to sort the reference items in citation or bibliography."
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
         },
         "Cond": {
             "additionalProperties": false,
@@ -74,11 +237,8 @@
                             "type": "array"
                         },
                         "isEDTFDate": {
-                            "description": "Does the date conform to EDTF?",
-                            "enum": [
-                                "issued"
-                            ],
-                            "type": "string"
+                            "$ref": "#/definitions/DateType",
+                            "description": "Does the date conform to EDTF?"
                         },
                         "match": {
                             "default": "all",
@@ -237,214 +397,7 @@
             ],
             "type": "string"
         },
-        "GroupAffixLevel": {
-            "enum": [
-                "primary",
-                "secondary"
-            ],
-            "type": "string"
-        },
-        "GroupAffixType": {
-            "enum": [
-                "brackets",
-                "parentheses"
-            ],
-            "type": "string"
-        },
-        "GroupSortType": {
-            "enum": [
-                "cs-as-cited",
-                "cs-author",
-                "cs-author-year",
-                "cs-year"
-            ],
-            "type": "string"
-        },
-        "LocatorType": {
-            "enum": [
-                "chapter",
-                "page"
-            ],
-            "type": "string"
-        },
-        "ModeType": {
-            "enum": [
-                "default",
-                "narrative"
-            ],
-            "type": "string"
-        },
-        "NamedTemplate": {
-            "additionalProperties": false,
-            "properties": {
-                "name": {
-                    "description": "The name token for the template, for reference from other templates.",
-                    "type": "string"
-                },
-                "template": {
-                    "items": {
-                        "$ref": "#/definitions/TemplateModel"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": [
-                "name",
-                "template"
-            ],
-            "type": "object"
-        },
-        "RefItemBibliographyList": {
-            "additionalProperties": false,
-            "properties": {
-                "andAs": {
-                    "enum": [
-                        "symbol",
-                        "term"
-                    ],
-                    "type": "string"
-                },
-                "bold": {
-                    "type": "boolean"
-                },
-                "delimiter": {
-                    "type": "string"
-                },
-                "emph": {
-                    "type": "boolean"
-                },
-                "format": {
-                    "items": {
-                        "$ref": "#/definitions/TemplateModel"
-                    },
-                    "type": "array"
-                },
-                "groupAffix": {
-                    "$ref": "#/definitions/GroupAffixType",
-                    "description": "The affix to use to enclose a group within a list; for example, a citation."
-                },
-                "groupAffixLevel": {
-                    "$ref": "#/definitions/GroupAffixLevel",
-                    "default": "primary",
-                    "description": "The group-level to apply groupAffix to.\nA standard citation, for example, would be the default \"primary\", since it applies to the citation as a whole.\nA narrative citation, by contrast, would be \"secondary\", because it applies to the \"year\" group."
-                },
-                "groupBy": {
-                    "$ref": "#/definitions/GroupSortType",
-                    "description": "How to group the list of reference items in a citation or bibliography."
-                },
-                "heading": {
-                    "type": "string"
-                },
-                "inline": {
-                    "description": "Render the list inlne; otherwise block.",
-                    "type": "boolean"
-                },
-                "listStyle": {
-                    "type": "string"
-                },
-                "prefix": {
-                    "description": "The string to insert before the content.",
-                    "type": "string"
-                },
-                "quote": {
-                    "type": "boolean"
-                },
-                "shortenMin": {
-                    "type": "number"
-                },
-                "shortenUse": {
-                    "type": "number"
-                },
-                "sort": {
-                    "$ref": "#/definitions/GroupSortType",
-                    "description": "How to sort the reference items in citation or bibliography."
-                },
-                "suffix": {
-                    "description": "The string to insert after the content.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "format",
-                "heading",
-                "listStyle"
-            ],
-            "type": "object"
-        },
-        "RefItemCitationList": {
-            "additionalProperties": false,
-            "properties": {
-                "andAs": {
-                    "enum": [
-                        "symbol",
-                        "term"
-                    ],
-                    "type": "string"
-                },
-                "bold": {
-                    "type": "boolean"
-                },
-                "delimiter": {
-                    "type": "string"
-                },
-                "emph": {
-                    "type": "boolean"
-                },
-                "format": {
-                    "items": {
-                        "$ref": "#/definitions/TemplateModel"
-                    },
-                    "type": "array"
-                },
-                "groupAffix": {
-                    "$ref": "#/definitions/GroupAffixType",
-                    "description": "The affix to use to enclose a group within a list; for example, a citation."
-                },
-                "groupAffixLevel": {
-                    "$ref": "#/definitions/GroupAffixLevel",
-                    "default": "primary",
-                    "description": "The group-level to apply groupAffix to.\nA standard citation, for example, would be the default \"primary\", since it applies to the citation as a whole.\nA narrative citation, by contrast, would be \"secondary\", because it applies to the \"year\" group."
-                },
-                "groupBy": {
-                    "$ref": "#/definitions/GroupSortType",
-                    "description": "How to group the list of reference items in a citation or bibliography."
-                },
-                "inline": {
-                    "default": true,
-                    "description": "Render the list inlne; otherwise block.",
-                    "enum": [
-                        true
-                    ],
-                    "type": "boolean"
-                },
-                "prefix": {
-                    "description": "The string to insert before the content.",
-                    "type": "string"
-                },
-                "quote": {
-                    "type": "boolean"
-                },
-                "shortenMin": {
-                    "type": "number"
-                },
-                "shortenUse": {
-                    "type": "number"
-                },
-                "sort": {
-                    "$ref": "#/definitions/GroupSortType",
-                    "description": "How to sort the reference items in citation or bibliography."
-                },
-                "suffix": {
-                    "description": "The string to insert after the content.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "format"
-            ],
-            "type": "object"
-        },
-        "RefItemContributorList": {
+        "Contributors": {
             "additionalProperties": false,
             "properties": {
                 "andAs": {
@@ -512,44 +465,47 @@
                 }
             },
             "required": [
-                "format",
                 "variable"
             ],
             "type": "object"
         },
-        "RefItemDate": {
-            "additionalProperties": false,
-            "properties": {
-                "bold": {
-                    "type": "boolean"
-                },
-                "emph": {
-                    "type": "boolean"
-                },
-                "prefix": {
-                    "description": "The string to insert before the content.",
-                    "type": "string"
-                },
-                "quote": {
-                    "type": "boolean"
-                },
-                "suffix": {
-                    "description": "The string to insert after the content.",
-                    "type": "string"
-                },
-                "variable": {
-                    "enum": [
-                        "issued"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "variable"
+        "DateType": {
+            "enum": [
+                "issued"
             ],
-            "type": "object"
+            "type": "string"
         },
-        "RefItemLocatorList": {
+        "GroupAffixLevel": {
+            "enum": [
+                "primary",
+                "secondary"
+            ],
+            "type": "string"
+        },
+        "GroupAffixType": {
+            "enum": [
+                "brackets",
+                "parentheses"
+            ],
+            "type": "string"
+        },
+        "GroupSortType": {
+            "enum": [
+                "cs-as-cited",
+                "cs-author",
+                "cs-author-year",
+                "cs-year"
+            ],
+            "type": "string"
+        },
+        "LocatorType": {
+            "enum": [
+                "chapter",
+                "page"
+            ],
+            "type": "string"
+        },
+        "Locators": {
             "additionalProperties": false,
             "properties": {
                 "andAs": {
@@ -617,7 +573,62 @@
                 }
             },
             "required": [
-                "format",
+                "variable"
+            ],
+            "type": "object"
+        },
+        "ModeType": {
+            "enum": [
+                "default",
+                "narrative"
+            ],
+            "type": "string"
+        },
+        "NamedTemplate": {
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "description": "The name token for the template, for reference from other templates.",
+                    "type": "string"
+                },
+                "template": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateModel"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "name",
+                "template"
+            ],
+            "type": "object"
+        },
+        "RefItemDate": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "variable": {
+                    "$ref": "#/definitions/DateType"
+                }
+            },
+            "required": [
                 "variable"
             ],
             "type": "object"
@@ -678,35 +689,6 @@
             },
             "required": [
                 "template"
-            ],
-            "type": "object"
-        },
-        "RefItemTitle": {
-            "additionalProperties": false,
-            "properties": {
-                "bold": {
-                    "type": "boolean"
-                },
-                "emph": {
-                    "type": "boolean"
-                },
-                "prefix": {
-                    "description": "The string to insert before the content.",
-                    "type": "string"
-                },
-                "quote": {
-                    "type": "boolean"
-                },
-                "suffix": {
-                    "description": "The string to insert after the content.",
-                    "type": "string"
-                },
-                "variable": {
-                    "$ref": "#/definitions/TitleType"
-                }
-            },
-            "required": [
-                "variable"
             ],
             "type": "object"
         },
@@ -774,9 +756,6 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "format"
-            ],
             "type": "object"
         },
         "RefType": {
@@ -807,21 +786,50 @@
                     "$ref": "#/definitions/RefItemSimple"
                 },
                 {
-                    "$ref": "#/definitions/RefItemContributorList"
+                    "$ref": "#/definitions/Contributors"
                 },
                 {
-                    "$ref": "#/definitions/RefItemLocatorList"
+                    "$ref": "#/definitions/Locators"
                 },
                 {
                     "$ref": "#/definitions/RefItemDate"
                 },
                 {
-                    "$ref": "#/definitions/RefItemTitle"
+                    "$ref": "#/definitions/Title"
                 },
                 {
                     "$ref": "#/definitions/Cond"
                 }
             ]
+        },
+        "Title": {
+            "additionalProperties": false,
+            "properties": {
+                "bold": {
+                    "type": "boolean"
+                },
+                "emph": {
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "description": "The string to insert before the content.",
+                    "type": "string"
+                },
+                "quote": {
+                    "type": "boolean"
+                },
+                "suffix": {
+                    "description": "The string to insert after the content.",
+                    "type": "string"
+                },
+                "variable": {
+                    "$ref": "#/definitions/TitleType"
+                }
+            },
+            "required": [
+                "variable"
+            ],
+            "type": "object"
         },
         "TitleType": {
             "enum": [
@@ -850,7 +858,7 @@
     },
     "properties": {
         "bibliography": {
-            "$ref": "#/definitions/RefItemBibliographyList",
+            "$ref": "#/definitions/Bibliography",
             "description": "The bibliography specification."
         },
         "categories": {
@@ -861,7 +869,7 @@
             "type": "array"
         },
         "citation": {
-            "$ref": "#/definitions/RefItemCitationList",
+            "$ref": "#/definitions/Citation",
             "description": "The citation specification."
         },
         "description": {

@@ -95,10 +95,10 @@ type TemplateModel =
   | RefList  
   | RefItemTemplate
   | RefItemSimple 
-  | RefItemContributorList
-  | RefItemLocatorList
+  | Contributors
+  | Locators
   | RefItemDate
-  | RefItemTitle
+  | Title
   | Cond
   ;
 
@@ -219,11 +219,11 @@ interface Style {
   /**
    * The bibliography specification.
    */
-  bibliography?: RefItemBibliographyList;
+  bibliography?: Bibliography;
   /**
    * The citation specification.
    */
-  citation?: RefItemCitationList;
+  citation?: Citation;
 }
 
 interface NamedTemplate {
@@ -276,7 +276,7 @@ interface RefList extends HasFormatting {
   shortenMin?: number; // integer
   shortenUse?: number; // integer; TODO this and the above need to be coupled
   andAs?: "symbol" | "term";
-  format: TemplateModel[]; // REVIEW
+  format?: TemplateModel[]; // REVIEW
 }
 
 interface RefListBlock extends RefList {
@@ -325,27 +325,35 @@ interface RefItemDate extends HasFormatting {
   format?(date: string): string;
 }
 
-interface RefItemTitle extends HasFormatting {
+interface Title extends HasFormatting {
   variable: TitleType;
   main(title: string): string;
   sub(title: string): string;
 }
 
-interface RefItemContributorList extends RefList {
+interface Contributors extends RefList {
   variable: ContributorType;
 }
 
-interface RefItemLocatorList extends RefList {
+interface Locators extends RefList {
   variable: LocatorType;
 }
 
-interface RefItemCitationList extends RefList {
+interface Citation extends RefList {
   /**
-   * @default true
+   * @default inline
    */
-  inline?: true; // REVIEW idea is to set this as default, but this only allow one value
+  placement?: "inline" | "note";
+  contexts?: CitationContext[];
 }
 
-interface RefItemBibliographyList extends RefListBlock {
+type CitationContext = {
+  /**
+   * Integral citations are those where the author is printed inline in the text; aka "in text" or "narrative" citations.
+   */
+  integral?: RefList;
+}
+
+interface Bibliography extends RefListBlock {
   heading: string; // TODO
 }

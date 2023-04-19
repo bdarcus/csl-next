@@ -2,6 +2,9 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "definitions": {
+        "CSLDate": {
+            "type": "string"
+        },
         "Contributor": {
             "additionalProperties": false,
             "properties": {
@@ -56,14 +59,17 @@
                 }
             ]
         },
+        "TitleString": {
+            "type": "string"
+        },
         "TitleStructured": {
             "additionalProperties": false,
             "properties": {
                 "full": {
-                    "type": "string"
+                    "$ref": "#/definitions/TitleString"
                 },
                 "main": {
-                    "type": "string"
+                    "$ref": "#/definitions/TitleString"
                 },
                 "sub": {
                     "items": {
@@ -90,7 +96,7 @@
             "$ref": "#/definitions/ID"
         },
         "issued": {
-            "type": "string"
+            "$ref": "#/definitions/CSLDate"
         },
         "title": {
             "anyOf": [

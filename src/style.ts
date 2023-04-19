@@ -193,6 +193,12 @@ interface Style {
    */
   categories?: CategoryType[];
   /**
+   * The scope to use for localized terms.
+   * 
+   * @default global
+   */
+  localization?: "per-item" | "global";
+  /**
    * Template definitions, for use elsewhere in the style.
    */
   templates?: NamedTemplate[];

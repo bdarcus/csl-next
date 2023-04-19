@@ -5,6 +5,9 @@ import { CSLDate } from "./date";
 // Doesn't actually do anything ATM, other than generate a JSON Schema.
 // I don't ATM understand distinction between `interface` and `type`
 
+// JSON.parse(fs.readFileSync("examples/style.csl.json"));
+// How to deserialize these into these ts structures?
+
 interface HasFormatting {
   /**
    * The string to insert before the content.

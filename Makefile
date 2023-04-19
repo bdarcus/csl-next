@@ -4,8 +4,8 @@ VERSION=$(shell grep '\"version\":' package.json | sed -e 's/.*: \"\([^"]*\)".*/
 default: schemas
 
 schemas:
-	npx typescript-json-schema --required --noExtraProps src/style.ts Style -o schemas/csl-style-schema.json
-	npx typescript-json-schema --required --noExtraProps src/reference.ts Reference -o schemas/csl-reference-schema.json
+	npx typescript-json-schema --refs --aliasRefs --required --noExtraProps src/style.ts Style -o schemas/csl-style-schema.json
+	npx typescript-json-schema --refs --aliasRefs --required --noExtraProps src/reference.ts Reference -o schemas/csl-reference-schema.json
 
 build:
 	npx tsc

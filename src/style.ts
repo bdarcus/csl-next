@@ -273,8 +273,17 @@ interface RefList extends HasFormatting {
    */
   inline?: boolean;
   delimiter?: string;
+  /**
+   * The integer length of a list that turns on shortening.
+   */
   shortenMin?: number; // integer
+  /**
+   * The integer length of items to take from the list when shortening.
+   */
   shortenUse?: number; // integer; TODO this and the above need to be coupled
+  /**
+   * The string to join the last two items of a list; '&' vs 'and'.
+   */
   andAs?: "symbol" | "term";
   format?: TemplateModel[]; // REVIEW
 }

@@ -10,8 +10,6 @@ citation:
   groupBy: cs-author-year
   # again: another example where there are only a few options
   groupAffix: parentheses # maybe would need localizing though?
-  # andAs is a property of lists, in this case the citation
-  andAs: term
   delimiter: semi-colon
   contexts:
     - integral:
@@ -20,6 +18,8 @@ citation:
         # here we override andAs for this mode
         andAs: symbol
         delimiter: comma
+    - nonIntegral:
+        groupAffixLevel: primary
   format:
     # in this example, no need for conditional here
     # configure delimiters in parameters

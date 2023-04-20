@@ -1,6 +1,6 @@
 // Experimental CSL NEXT typescript model
 
-import { CSLDate } from "./date";
+import { CSLDate } from "./date.ts";
 
 // Doesn't actually do anything ATM, other than generate a JSON Schema.
 // I don't ATM understand distinction between `interface` and `type`
@@ -23,94 +23,85 @@ interface HasFormatting {
 }
 
 type ModeType =
-/**
- * @default "default"
- */
+  /**
+   * @default "default"
+   */
   | "default"
-  | "narrative"
-  ;
+  | "narrative";
 
 type GroupSortType =
   | "cs-author"
   | "cs-year"
   | "cs-author-year"
-  | "cs-as-cited"
-  ;
+  | "cs-as-cited";
 
 type CategoryType =
   | "science"
   | "social science"
-  | "biology"
-  ;
+  | "biology";
 
 // extract, so can reuse elsewhere
 type RefType =
   | "book"
   | "article"
-  | "chapter"
-  ;
+  | "chapter";
 
 type ContributorType =
   | "author"
   | "editor"
-  | "publisher"
-  ;
+  | "publisher";
 
-type DateType =
-  | "issued"
-  ;
+type DateType = "issued";
 
 type TitleType =
   | "title"
-  | "container-title"
-  ;
+  | "container-title";
 
 type LocatorType =
   | "page"
-  | "chapter"
-  ;
+  | "chapter";
 
 type SimpleType =
   | "volume"
   | "issue"
-  | "pages"
-  ;
+  | "pages";
 
 // extract, so can reuse elsewhere
-type VariableType = RefType | ContributorType | DateType | TitleType | SimpleType;
+type VariableType =
+  | RefType
+  | ContributorType
+  | DateType
+  | TitleType
+  | SimpleType;
 
 type MatchType =
   /**
    * Which of the match conditions must be satisfied for it be true?
-   * 
+   *
    * @default "all"
    */
   | "all"
   | "any"
-  | "none"
-  ;
+  | "none";
 
 // this is the structured template model
-type TemplateModel = 
-  | RefList  
+type TemplateModel =
+  | RefList
   | RefItemTemplate
-  | RefItemSimple 
+  | RefItemSimple
   | Contributors
   | Locators
   | RefItemDate
   | Title
-  | Cond
-  ;
+  | Cond;
 
 type GroupAffixType =
   | "parentheses"
-  | "brackets"
-  ;
+  | "brackets";
 
 type GroupAffixLevel =
   | "primary"
-  | "secondary"
-  ;
+  | "secondary";
 
 // eg liquid or mustache option for dev?
 type StringTemplate = string;
@@ -128,10 +119,10 @@ interface Cond {
   else?: TemplateModel[];
 }
 
-type Match = { 
+type Match = {
   /**
    * A list of reference item types; if one is true, then return true.
-   * 
+   *
    * @default all
    */
   match?: "all" | "none" | "any";
@@ -139,52 +130,58 @@ type Match = {
    * When a match, process these templates.
    */
   format: TemplateModel[];
-}
+};
 
-type IsNumber = { 
+type IsNumber = {
   /**
-   * Is the item variable a number?   
+   * Is the item variable a number?
    */
-  isNumber: LocatorType; 
-}
+  isNumber: LocatorType;
+};
 
-type IsEDTFDate = { 
+type IsEDTFDate = {
   /**
    * Does the date conform to EDTF?
    */
-  isEDTFDate: DateType; 
-}
+  isEDTFDate: DateType;
+};
 
-type IsRefType = { 
+type IsRefType = {
   /**
    * Is the item reference type among the listed reference types?
    */
-  isRefType: RefType[]; 
-}
+  isRefType: RefType[];
+};
 
-type HasVariable = { 
+type HasVariable = {
   /**
    * Does the item reference include one of the listed variables?
    */
-  hasVariable: VariableType[]; 
-}
+  hasVariable: VariableType[];
+};
 
-type Locale = { 
+type Locale = {
   /**
    * The item reference locale; to allow multilingual output.
    */
   locale: string; // REVIEW; best place for this? Define the locale type
-}
+};
 
-type Mode = { 
+type Mode = {
   /**
    * The citation mode.
    */
-  mode: ModeType; 
-}
+  mode: ModeType;
+};
 
 // REVIEW hould the below be an interface?
-type DataTypeMatch = IsNumber | IsEDTFDate | IsRefType | HasVariable | Locale | Mode;
+type DataTypeMatch =
+  | IsNumber
+  | IsEDTFDate
+  | IsRefType
+  | HasVariable
+  | Locale
+  | Mode;
 type Condition = Match & DataTypeMatch;
 
 // Style definition
@@ -208,7 +205,7 @@ interface Style {
   categories?: CategoryType[];
   /**
    * The scope to use for localized terms.
-   * 
+   *
    * @default global
    */
   localization?: "per-item" | "global";
@@ -260,7 +257,7 @@ interface RefList extends HasFormatting {
    * The group-level to apply groupAffix to.
    * A standard citation, for example, would be the default "primary", since it applies to the citation as a whole.
    * A narrative citation, by contrast, would be "secondary", because it applies to the "year" group.
-   * 
+   *
    * @default primary
    */
   groupAffixLevel?: GroupAffixLevel;
@@ -289,7 +286,7 @@ interface RefList extends HasFormatting {
 }
 
 interface RefListBlock extends RefList {
-  listStyle: string // TODO
+  listStyle: string; // TODO
 }
 
 // FUNCTIONS
@@ -299,7 +296,7 @@ interface RefListBlock extends RefList {
 type RoleType =
   | "author"
   | "editor"
-  | "publisher"
+  | "publisher";
 
 // contributor modeling needs more thought in general
 // really need to be extracted
@@ -315,11 +312,17 @@ interface PersonalContributor extends Contributor {
   givenName: string;
 }
 
-function formatContributor(contributor: PersonalContributor, role?: string): string {
+function formatContributor(
+  contributor: PersonalContributor,
+  role?: string,
+): string {
   return `${contributor.familyName} ${contributor.givenName}`;
 }
 
-function formatContributorWithRole(contributor: Contributor, role: string): string {
+function formatContributorWithRole(
+  contributor: Contributor,
+  role: string,
+): string {
   return `${contributor.name} ${contributor.role}`;
 }
 
@@ -353,15 +356,27 @@ interface Citation extends RefList {
    * @default inline
    */
   placement?: "inline" | "note";
+  /**
+   * Allows overriding citation parameters and formatting instructions.
+   */
   contexts?: CitationContext[];
 }
 
-type CitationContext = {
+type CitationContext = IntegralCitation | NonIntegralCitation;
+
+type IntegralCitation = {
   /**
    * Integral citations are those where the author is printed inline in the text; aka "in text" or "narrative" citations.
    */
-  integral?: RefList;
-}
+  integral: RefList;
+};
+
+type NonIntegralCitation = {
+  /**
+   * Non-integral citations are those where the author is incorporated in the citation, and not printed inline in the text.
+   */
+  nonIntegral: RefList;
+};
 
 interface Bibliography extends RefListBlock {
   heading: string; // TODO

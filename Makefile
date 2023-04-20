@@ -19,6 +19,9 @@ node_modules:
 clean:
 	rm -rf dist
 
+json:
+	yq -P -o json '.' examples/style.csl.yaml > examples/style.csl.json
+
 src/version.ts: package.json
 	grep '^ *"version":' $< | \
 	  sed 's/^ *"version": "*\([^"]*\)",/export const version = "\1";/' > $@

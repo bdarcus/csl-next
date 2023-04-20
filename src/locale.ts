@@ -48,7 +48,7 @@ type Lang =
   | "zh-CN"
   | "zh-TW";
 
-interface Locale {
+export interface Locale {
   translators?: string;
   rights?: string; // use enum here, and in style
   locale: Lang; // https://github.com/anton-bot/locale-enum
@@ -56,13 +56,13 @@ interface Locale {
   terms: Term[];
 }
 
-interface Term {
+export interface Term {
   name: string;
   form?: "short" | "symbol";
   single?: string;
   multiple?: string; // TODO this and above need to be coupled
 }
 
-interface DateTerm extends Term {
+export interface DateTerm extends Term {
   dateParts: string[]; // TODO
 }

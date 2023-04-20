@@ -5,10 +5,16 @@
   "engines": {
     "node": ">=17.0.0"
   },
+  "main": "./dist/csln.js",
+  "module": "./lib/index.js",
   "files": [
     "./lib/*.js",
     "./types/*.d.ts"
   ],
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "types": "./types/index.d.ts",
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.2.4",

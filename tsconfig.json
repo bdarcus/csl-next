@@ -8,15 +8,15 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "outDir": "dist",
+    "outDir": "lib",
     "declaration": true,
     "declarationDir": "types",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
     "isolatedModules": true
   },
   "include": [
     "src/style.ts",
+    "src/date.ts",
+    "src/locale.ts",
     "src/reference.ts",
     "src/citation.ts"
   ]

@@ -26,45 +26,24 @@ type ModeType =
   /**
    * @default "default"
    */
-  | "default"
-  | "narrative";
+  "default" | "narrative";
 
-type GroupSortType =
-  | "cs-author"
-  | "cs-year"
-  | "cs-author-year"
-  | "cs-as-cited";
+type GroupSortType = "cs-author" | "cs-year" | "cs-author-year" | "cs-as-cited";
 
-type CategoryType =
-  | "science"
-  | "social science"
-  | "biology";
+type CategoryType = "science" | "social science" | "biology";
 
 // extract, so can reuse elsewhere
-type RefType =
-  | "book"
-  | "article"
-  | "chapter";
+type RefType = "book" | "article" | "chapter";
 
-type ContributorType =
-  | "author"
-  | "editor"
-  | "publisher";
+type ContributorType = "author" | "editor" | "publisher";
 
 type DateType = "issued";
 
-type TitleType =
-  | "title"
-  | "container-title";
+type TitleType = "title" | "container-title";
 
-type LocatorType =
-  | "page"
-  | "chapter";
+type LocatorType = "page" | "chapter";
 
-type SimpleType =
-  | "volume"
-  | "issue"
-  | "pages";
+type SimpleType = "volume" | "issue" | "pages";
 
 // extract, so can reuse elsewhere
 type VariableType =
@@ -80,9 +59,7 @@ type MatchType =
    *
    * @default "all"
    */
-  | "all"
-  | "any"
-  | "none";
+  "all" | "any" | "none";
 
 // this is the structured template model
 type TemplateModel =
@@ -95,13 +72,9 @@ type TemplateModel =
   | Title
   | Cond;
 
-type GroupAffixType =
-  | "parentheses"
-  | "brackets";
+type GroupAffixType = "parentheses" | "brackets";
 
-type GroupAffixLevel =
-  | "primary"
-  | "secondary";
+type GroupAffixLevel = "primary" | "secondary";
 
 // eg liquid or mustache option for dev?
 type StringTemplate = string;
@@ -184,6 +157,16 @@ type DataTypeMatch =
   | Mode;
 type Condition = Match & DataTypeMatch;
 
+type Disambiguation = {
+  addYearSuffix: boolean;
+  addNames?:
+    | "all"
+    | "all-with-initials"
+    | "primary"
+    | "primary-with-initials"
+    | "by-cite";
+};
+
 // Style definition
 
 export interface Style {
@@ -203,6 +186,7 @@ export interface Style {
    * The categories the style belongs to; for purposes of indexing.
    */
   categories?: CategoryType[];
+  disambiguation?: Disambiguation;
   /**
    * The scope to use for localized terms.
    *
@@ -228,13 +212,12 @@ interface NamedTemplate {
    * The name token for the template, for reference from other templates.
    */
   name: string;
-  template:
-    /**
-     * The rendering instructions.
-     *
-     * @items.minimum 1
-     */
-    TemplateModel[]; // not converted to schema correctly
+  template: /**
+   * The rendering instructions.
+   *
+   * @items.minimum 1
+   */
+  TemplateModel[]; // not converted to schema correctly
 }
 
 interface RefItemTemplate extends HasFormatting {
@@ -293,10 +276,7 @@ interface RefListBlock extends RefList {
 // Not really sure here.
 
 // extract, to be used elsewhere
-type RoleType =
-  | "author"
-  | "editor"
-  | "publisher";
+type RoleType = "author" | "editor" | "publisher";
 
 // contributor modeling needs more thought in general
 // really need to be extracted
@@ -314,14 +294,14 @@ interface PersonalContributor extends Contributor {
 
 function formatContributor(
   contributor: PersonalContributor,
-  role?: string,
+  role?: string
 ): string {
   return `${contributor.familyName} ${contributor.givenName}`;
 }
 
 function formatContributorWithRole(
   contributor: Contributor,
-  role: string,
+  role: string
 ): string {
   return `${contributor.name} ${contributor.role}`;
 }

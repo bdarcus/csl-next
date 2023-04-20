@@ -6,6 +6,7 @@
             "additionalProperties": false,
             "properties": {
                 "andAs": {
+                    "description": "The string to join the last two items of a list; '&' vs 'and'.",
                     "enum": [
                         "symbol",
                         "term"
@@ -58,9 +59,11 @@
                     "type": "boolean"
                 },
                 "shortenMin": {
+                    "description": "The integer length of a list that turns on shortening.",
                     "type": "number"
                 },
                 "shortenUse": {
+                    "description": "The integer length of items to take from the list when shortening.",
                     "type": "number"
                 },
                 "sort": {
@@ -90,6 +93,7 @@
             "additionalProperties": false,
             "properties": {
                 "andAs": {
+                    "description": "The string to join the last two items of a list; '&' vs 'and'.",
                     "enum": [
                         "symbol",
                         "term"
@@ -100,15 +104,9 @@
                     "type": "boolean"
                 },
                 "contexts": {
+                    "description": "Allows overriding citation parameters and formatting instructions.",
                     "items": {
-                        "additionalProperties": false,
-                        "properties": {
-                            "integral": {
-                                "$ref": "#/definitions/RefList",
-                                "description": "Integral citations are those where the author is printed inline in the text; aka \"in text\" or \"narrative\" citations."
-                            }
-                        },
-                        "type": "object"
+                        "$ref": "#/definitions/CitationContext"
                     },
                     "type": "array"
                 },
@@ -157,9 +155,11 @@
                     "type": "boolean"
                 },
                 "shortenMin": {
+                    "description": "The integer length of a list that turns on shortening.",
                     "type": "number"
                 },
                 "shortenUse": {
+                    "description": "The integer length of items to take from the list when shortening.",
                     "type": "number"
                 },
                 "sort": {
@@ -172,6 +172,16 @@
                 }
             },
             "type": "object"
+        },
+        "CitationContext": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/IntegralCitation"
+                },
+                {
+                    "$ref": "#/definitions/NonIntegralCitation"
+                }
+            ]
         },
         "Cond": {
             "additionalProperties": false,
@@ -401,6 +411,7 @@
             "additionalProperties": false,
             "properties": {
                 "andAs": {
+                    "description": "The string to join the last two items of a list; '&' vs 'and'.",
                     "enum": [
                         "symbol",
                         "term"
@@ -447,9 +458,11 @@
                     "type": "boolean"
                 },
                 "shortenMin": {
+                    "description": "The integer length of a list that turns on shortening.",
                     "type": "number"
                 },
                 "shortenUse": {
+                    "description": "The integer length of items to take from the list when shortening.",
                     "type": "number"
                 },
                 "sort": {
@@ -475,6 +488,9 @@
             ],
             "type": "string"
         },
+        "Disambiguation": {
+            "$ref": "#/definitions/__type"
+        },
         "GroupAffixLevel": {
             "enum": [
                 "primary",
@@ -498,6 +514,9 @@
             ],
             "type": "string"
         },
+        "IntegralCitation": {
+            "$ref": "#/definitions/__type_1"
+        },
         "LocatorType": {
             "enum": [
                 "chapter",
@@ -509,6 +528,7 @@
             "additionalProperties": false,
             "properties": {
                 "andAs": {
+                    "description": "The string to join the last two items of a list; '&' vs 'and'.",
                     "enum": [
                         "symbol",
                         "term"
@@ -555,9 +575,11 @@
                     "type": "boolean"
                 },
                 "shortenMin": {
+                    "description": "The integer length of a list that turns on shortening.",
                     "type": "number"
                 },
                 "shortenUse": {
+                    "description": "The integer length of items to take from the list when shortening.",
                     "type": "number"
                 },
                 "sort": {
@@ -603,6 +625,9 @@
                 "template"
             ],
             "type": "object"
+        },
+        "NonIntegralCitation": {
+            "$ref": "#/definitions/__type_2"
         },
         "RefItemDate": {
             "additionalProperties": false,
@@ -696,6 +721,7 @@
             "additionalProperties": false,
             "properties": {
                 "andAs": {
+                    "description": "The string to join the last two items of a list; '&' vs 'and'.",
                     "enum": [
                         "symbol",
                         "term"
@@ -742,9 +768,11 @@
                     "type": "boolean"
                 },
                 "shortenMin": {
+                    "description": "The integer length of a list that turns on shortening.",
                     "type": "number"
                 },
                 "shortenUse": {
+                    "description": "The integer length of items to take from the list when shortening.",
                     "type": "number"
                 },
                 "sort": {
@@ -854,6 +882,54 @@
                 "volume"
             ],
             "type": "string"
+        },
+        "__type": {
+            "additionalProperties": false,
+            "properties": {
+                "addNames": {
+                    "enum": [
+                        "all",
+                        "all-with-initials",
+                        "by-cite",
+                        "primary",
+                        "primary-with-initials"
+                    ],
+                    "type": "string"
+                },
+                "addYearSuffix": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "addYearSuffix"
+            ],
+            "type": "object"
+        },
+        "__type_1": {
+            "additionalProperties": false,
+            "properties": {
+                "integral": {
+                    "$ref": "#/definitions/RefList",
+                    "description": "Integral citations are those where the author is printed inline in the text; aka \"in text\" or \"narrative\" citations."
+                }
+            },
+            "required": [
+                "integral"
+            ],
+            "type": "object"
+        },
+        "__type_2": {
+            "additionalProperties": false,
+            "properties": {
+                "nonIntegral": {
+                    "$ref": "#/definitions/RefList",
+                    "description": "Non-integral citations are those where the author is incorporated in the citation, and not printed inline in the text."
+                }
+            },
+            "required": [
+                "nonIntegral"
+            ],
+            "type": "object"
         }
     },
     "properties": {
@@ -875,6 +951,9 @@
         "description": {
             "description": "The description of the style.",
             "type": "string"
+        },
+        "disambiguation": {
+            "$ref": "#/definitions/Disambiguation"
         },
         "id": {
             "description": "The machine-readable token that uniquely identifies the style.",

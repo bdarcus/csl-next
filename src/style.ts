@@ -22,12 +22,6 @@ export interface HasFormatting {
   quote?: boolean;
 }
 
-type ModeType =
-  /**
-   * @default "default"
-   */
-  "default" | "narrative";
-
 type GroupSortType = "cs-author" | "cs-year" | "cs-author-year" | "cs-as-cited";
 
 type CategoryType = "science" | "social science" | "biology";
@@ -140,13 +134,6 @@ type Locale = {
   locale: string; // REVIEW; best place for this? Define the locale type
 };
 
-type Mode = {
-  /**
-   * The citation mode.
-   */
-  mode: ModeType;
-};
-
 // REVIEW hould the below be an interface?
 type DataTypeMatch =
   | IsNumber
@@ -154,7 +141,8 @@ type DataTypeMatch =
   | IsRefType
   | HasVariable
   | Locale
-  | Mode;
+  ;
+  
 type Condition = Match & DataTypeMatch;
 
 type Disambiguation = {

@@ -186,7 +186,7 @@ type Condition = Match & DataTypeMatch;
 
 // Style definition
 
-interface Style {
+export interface Style {
   /**
    * The human-readable name of the style.
    */

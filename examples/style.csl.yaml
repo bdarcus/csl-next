@@ -2,6 +2,9 @@
 ---
 # this is a flatter model, relying more heavily on parameters
 title: APA
+disambiguation:
+  addYearSuffix: true
+  addNames: all-with-initials
 citation:
   # in CSL 1.0, we have this global, but it's specific to citations
   placement: inline

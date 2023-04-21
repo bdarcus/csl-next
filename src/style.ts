@@ -1,7 +1,5 @@
 // Experimental CSL NEXT typescript model
 
-import { CSLDate } from "./date";
-
 // Doesn't actually do anything ATM, other than generate a JSON Schema.
 // I don't ATM understand distinction between `interface` and `type`
 
@@ -22,7 +20,7 @@ export interface HasFormatting {
   quote?: boolean;
 }
 
-type GroupSortType = "cs-author" | "cs-year" | "cs-author-year" | "cs-as-cited";
+export type GroupSortType = "author" | "year" | "as-cited";
 
 type CategoryType = "science" | "social science" | "biology";
 
@@ -215,11 +213,11 @@ interface RefItemTemplate extends HasFormatting {
   template: string;
 }
 
-interface RefList extends HasFormatting {
+export interface RefList extends HasFormatting {
   /**
    * How to group the list of reference items in a citation or bibliography.
    */
-  groupBy?: GroupSortType;
+  groupBy?: GroupSortType[];
   /**
    * The affix to use to enclose a group within a list; for example, a citation.
    */
@@ -235,7 +233,7 @@ interface RefList extends HasFormatting {
   /**
    * How to sort the reference items in citation or bibliography.
    */
-  sort?: GroupSortType;
+  sort?: GroupSortType[];
   /**
    * Render the list inlne; otherwise block.
    */

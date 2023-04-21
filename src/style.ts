@@ -135,14 +135,8 @@ type Locale = {
 };
 
 // REVIEW hould the below be an interface?
-type DataTypeMatch =
-  | IsNumber
-  | IsEDTFDate
-  | IsRefType
-  | HasVariable
-  | Locale
-  ;
-  
+type DataTypeMatch = IsNumber | IsEDTFDate | IsRefType | HasVariable | Locale;
+
 type Condition = Match & DataTypeMatch;
 
 type Disambiguation = {
@@ -280,19 +274,19 @@ interface PersonalContributor extends Contributor {
   givenName: string;
 }
 
-function formatContributor(
+const formatContributor = function (
   contributor: PersonalContributor,
   role?: string
 ): string {
   return `${contributor.familyName} ${contributor.givenName}`;
-}
+};
 
-function formatContributorWithRole(
+const formatContributorWithRole = function (
   contributor: Contributor,
   role: string
 ): string {
   return `${contributor.name} ${contributor.role}`;
-}
+};
 
 interface RefItemSimple extends HasFormatting {
   variable: SimpleType;

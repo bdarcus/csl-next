@@ -6,6 +6,8 @@ default: schemas
 schemas:
 	npx typescript-json-schema --refs --aliasRefs --required --noExtraProps src/style.ts Style -o schemas/csl-style-schema.json
 	npx typescript-json-schema --refs --aliasRefs --required --noExtraProps src/reference.ts Reference -o schemas/csl-reference-schema.json
+	npx typescript-json-schema --refs --aliasRefs --required --noExtraProps src/bibliography.ts Bibliography -o schemas/csl-bibliography-schema.json
+	npx typescript-json-schema --refs --aliasRefs --required --noExtraProps src/citation.ts Citation -o schemas/csl-citation-schema.json
 
 build:
 	npx tsc

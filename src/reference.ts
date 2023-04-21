@@ -2,33 +2,36 @@
 
 // Types
 
-import { CSLDate } from "./date";
+// How to do this, so it translates to the schema correctly?
+//   1. define as literal string, OR EDTF date
+//   2. for the latter, use https://github.com/retorquere/json-schema-edtf
+export type CSLDate = string;
 
-type ID = string | number; // string needs to be a token
+export type ID = string | number; // string needs to be a token
 
-type ReferenceType =
+export type ReferenceType =
   | "book"
   | "article"
   | "chapter";
 
-type RoleType =
+export type RoleType =
   | "author"
   | "editor"
   | "publisher";
 
-type Title = TitleStructured | TitleString;
+export type Title = TitleStructured | TitleString;
 
-type TitleString = string; // plain or Djot?
+export type TitleString = string; // plain or Djot?
 
 // Interfaces
 
-interface TitleStructured {
+export interface TitleStructured {
   full?: TitleString;
   main: TitleString;
   sub: TitleString[];
 }
 
-interface Reference {
+export interface Reference {
   id: ID;
   type: ReferenceType;
   author?: Contributor[]; // fix
@@ -36,14 +39,14 @@ interface Reference {
   issued: CSLDate;
 }
 
-interface Contributor {
+export interface Contributor {
   name: string;
   affiliation?: string;
   location?: string;
   role: RoleType;
 }
 
-interface PersonalContributor extends Contributor {
+export interface PersonalContributor extends Contributor {
   familyName: string;
   givenName: string;
 }

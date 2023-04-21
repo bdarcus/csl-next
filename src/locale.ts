@@ -49,11 +49,15 @@ type Lang =
   | "zh-TW";
 
 export interface Locale {
-  translators?: string;
-  rights?: string; // use enum here, and in style
   locale: Lang; // https://github.com/anton-bot/locale-enum
   punctuationInQuote: boolean;
   terms: Term[];
+}
+
+export interface StandaloneLocale extends Locale {
+  translators?: string;
+  description?: string;
+  rights?: string; // use enum here, and in style
 }
 
 export interface Term {

@@ -28,7 +28,7 @@ interface TitleStructured {
   sub: TitleString[];
 }
 
-interface Reference {
+export interface Reference {
   id: ID;
   type: ReferenceType;
   author?: Contributor[]; // fix

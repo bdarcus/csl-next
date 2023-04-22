@@ -7,7 +7,7 @@
 //   2. for the latter, use https://github.com/retorquere/json-schema-edtf
 export type CSLDate = string;
 
-export type ID = string | number; // string needs to be a token
+export type ID = string; // string needs to be a token
 
 export type ReferenceType =
   | "book"

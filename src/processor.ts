@@ -1,8 +1,45 @@
 
-import { Style, GroupSortType } from "./style";
-import { Reference } from "./reference";
+import { Style, SortType, GroupSortType } from "./style";
+import { Reference, ID } from "./reference";
 import { CiteRef } from "./citeref";
 import { Bibliography } from "./bibliography";
+
+export class Processor {
+  style: Style;
+  references: Reference[];
+  citeRefs: CiteRef[];
+  bibliography: Bibliography;
+
+  constructor(style: Style, references: Reference[]) {
+    this.style = style;
+    this.references = references;
+    this.citeRefs = [];
+    this.bibliography = new Bibliography();
+  }
+
+  addCiteRef(citeRef: CiteRef): void {
+    this.citeRefs.push(citeRef);
+  }
+
+  processCiteRefs(): void {
+    // 1. sort the references
+    // 2. add the references to the bibliography
+    // 3. add the citeRefs to the bibliography
+    // 4. process the bibliography
+    // 5. return the bibliography
+    // const sortedReferences = sortReferences(
+    //  this.style.sort,
+    //  this.references
+    // );
+   // this.bibliography.addReferences(sortedReferences);
+   // this.bibliography.addCiteRefs(this.citeRefs);
+   //  this.bibliography.process();
+  }
+
+  getBibliography(): Bibliography {
+    return this.bibliography;
+  }
+}
 
 const fs = require('fs');
 
@@ -16,29 +53,20 @@ function loadJSON(path: string): any {
   return(JSON.parse(rawdata));
 }
 
-// write a function that returns a Reference object
-//   for a given ID
-//   from a Bibliography object
-//   (use the Reference class)
-//   (use the Bibliography class)
 function getReference(
-  id: string, 
-  bibliography: Bibliography): 
-  Reference {
-    // Fix this; unassigned type error
-  return bibliography.references.find((ref) => ref.id === id);
+  id: ID, 
+  references: Reference[]): Reference[] {
+  // FIX why doesn't this work?
+ // return references.find((ref as Reference) => ref.id as ID === id);
+ return references;
 }
 
-
-
-
-
-  function normalizeString(str: string): string {
+function normalizeString(str: string): string {
   return str.replace(/ /g, "-").replace(/,/g, "").toLowerCase();
 }
 
 function sortReferences(
-  keys: GroupSortType[],
+  keys: SortType[],
   references: Reference[]
 ): Reference[] {
   // sort the references by keys
@@ -72,7 +100,7 @@ function sortReferences(
 // write a function that sorts a Reference object by a single key
 //   (use the normalizeString function to normalize strings)
 function sortReferencesByKey(
-  sorter: GroupSortType,
+  sorter: SortType,
   references: Reference[]
 ): Reference[] {
   // sort the references by key
@@ -172,16 +200,19 @@ function groupReferences(
   if (keys.length === 0) {
     return references;
   }
+  else {
+    return references;
+  }
 }
 
-function getSortKey(sort: GroupSortType, reference: Reference): string {
+function getSortKey(sort: SortType, reference: Reference): string {
   switch (sort.key) {
     case "author":
-      return reference.author.map(a => a.name).join('-');
-    case "issued":
+      if (reference.author !== undefined) {
+       return ""; // TODO
+      }
+    case "year":
       return reference.issued;
-    case "title":
-      return reference.title;
     case "as-cited":
       return reference.id; // FIX
     default:
@@ -196,22 +227,24 @@ function citedReferencePosition(citedRef: CiteRef): number {
 
 // TODO write a function that takes references and sorts and groups on keys
 function sortAndGroup(
-  keys: GroupSortType[],
+  groupBy: GroupSortType[],
+  sort: SortType[],
   references: Reference[]
 ): Reference[] {
-  const sortedReferences = sortReferences(keys, references);
-  const groupedReferences = groupReferences(keys, sortedReferences);
+  const sortedReferences = sortReferences(sort, references);
+  const groupedReferences = groupReferences(groupBy, sortedReferences);
   return groupedReferences;
 }
 
 // TODO write a function that takes references and sorts and groups on keys
 function sortAndGroupCited(
-  keys: GroupSortType[],
+  groupBy: GroupSortType[],
+  sort: SortType[],
   references: Reference[],
   citedRefs: CiteRef[]
 ): Reference[] {
-  const sortedReferences = sortReferences(keys, references);
-  const groupedReferences = groupReferences(keys, sortedReferences);
+  const sortedReferences = sortReferences(sort, references);
+  const groupedReferences = groupReferences(groupBy, sortedReferences);
   return groupedReferences;
 }
 

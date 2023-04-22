@@ -1,5 +1,7 @@
 // Typescript model for a CSL Reference
 
+import { Contributor } from "./contributor";
+
 // Types
 
 // How to do this, so it translates to the schema correctly?
@@ -39,14 +41,3 @@ export interface Reference {
   issued: CSLDate;
 }
 
-export interface Contributor {
-  name: string;
-  affiliation?: string;
-  location?: string;
-  role: RoleType;
-}
-
-export interface PersonalContributor extends Contributor {
-  familyName: string;
-  givenName: string;
-}

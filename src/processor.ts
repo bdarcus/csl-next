@@ -133,59 +133,6 @@ function sortReferencesByKey(
 //   (use the normalizeString function to normalize strings)
 
 
-// create some example Reference data
-const referenceb1: Reference = { 
-  id: "ref1",
-  type: "book",
-  author: [
-    { "name": "John Doe", "role": "author" }
-    ],
-  title: "The Book of Books",
-  issued: "2019"
-}
-
-const referenceb2: Reference = { 
-  id: "ref2",
-  type: "book",
-  author: [
-    { "name": "Jane Doe", "role": "author" }
-    ],
-  title: "The Book of Books",
-  issued: "2020"
-}
-
-const referenceb31: Reference = { 
-  id: "ref2",
-  type: "book",
-  author: [
-    { "name": "Jane Doe", "role": "author" }
-    ],
-  title: "The Book of Books",
-  issued: "2002"
-  }
-
-  const referenceb3: Reference = {
-  id: "ref3",
-  type: "book",
-  author: [
-    { "name": "John Smith", "role": "author" }
-    ],
-  title: "The Book of Books",
-  issued: "2021"
-}
-
-const referenceb4: Reference = {
-  id: "ref3",
-  type: "book",
-  author: [
-    { "name": "John Smith", "role": "author" }
-    ],
-  title: "The Other Book of Books",
-  issued: "2021"
-}
-
-const rl5 = [referenceb31, referenceb1, referenceb4, referenceb2, referenceb3];
-
 // TODO write a function that groups references by keys
 function groupReferences(
   keys: GroupSortType[],
@@ -209,7 +156,7 @@ function getSortKey(sort: SortType, reference: Reference): string {
   switch (sort.key) {
     case "author":
       if (reference.author !== undefined) {
-       return ""; // TODO
+       return reference.author[0].getSortName();
       }
     case "year":
       return reference.issued;

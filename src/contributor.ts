@@ -2,36 +2,40 @@
 
 // contributor modeling needs more thought in general
 
+export type Contributor = Person | Organization;
+
 export class Organization {
-  orgname: string;
+  name: string;
   location?: string;
 
-  constructor(orgname: string, location?: string) {
-    this.orgname = orgname;
+  constructor(name: string, location?: string) {
+    this.name = name;
     this.location = location;
+  }
+
+  getSortName(): string {
+    return this.name;
   }
 }
 
-export class Person {
+export class Person  {
     familyName: string;
     givenName: string;
 
     constructor(givenName: string, familyName: string) {
-        this.givenName = givenName;
-        this.familyName = familyName;
+      this.givenName = givenName;
+      this.familyName = familyName;
     }
 
     getFullName(): string {
-        return `${this.givenName} ${this.familyName}`;
+      return `${this.givenName} ${this.familyName}`;
     }
 
     getGivenInitial(): string {
-        return `${this.givenName[0]}`;
+      return `${this.givenName[0]}`;
     }
 
     getSortName(): string {
-        return `${this.familyName}, ${this.givenName}`;
+      return `${this.familyName}, ${this.givenName}`;
     }
   }
-
-export type Contributor = Person | Organization;

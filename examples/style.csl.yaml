@@ -10,8 +10,10 @@ citation:
   placement: inline
   # There's only so many ways to sort and group, so let's just itemize them
   sort:
-   - author
-   - year
+   - key: author
+     order: ascending
+   - key: year
+     order: descending
   groupBy:
    - author
    - year

@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-template-file.json 
+---
+title: Example template file
+description: This is an example of how we might bundle together widely used partial templates.
+templates:
+  - name: title-apa
+    template:
+      - when:
+          - hasVariable:
+              - volume
+              - issue
+            format:
+              - variable: title
+                # instead of using prefix and suffix strings for punctation, let's use
+                # easily-localized parameters
+                affixes: quotes
+        else:
+          - format:
+              - variable: title
+                emph: true

@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-style-schema.json 
+---
+# this is a flatter model, relying more heavily on parameters
+title: APA
+disambiguation:
+  addYearSuffix: true
+  addNames: all-with-initials
+citation:
+  # in CSL 1.0, we have this global, but it's specific to citations
+  placement: inline
+  # There's only so many ways to sort and group, so let's just itemize them
+  sort:
+   - key: author
+     order: ascending
+   - key: year
+     order: descending
+  groupBy:
+   - author
+   - year
+  # again: another example where there are only a few options
+  groupAffixes: parentheses # maybe would need localizing though?
+  delimiter: semi-colon
+  integral:
+  # maybe a little dicey, but to keep format simpler
+    groupAffixLevel: secondary
+    # here we override andAs for this mode
+    andAs: symbol
+    delimiter: comma
+  nonIntegral:
+    groupAffixLevel: primary
+  format:
+    # in this example, no need for conditional here
+    # configure delimiters in parameters
+    # author-date styles are such a hassle at this level!
+    - template: author-apa
+    - template: year
+    - template: locators-apa
+bibliography:
+  format:
+    - template: author-apa-full
+    - template: year
+      affixes: parentheses
+      suffix: " " # REVIEW must this be a string?
+    - template: title
+      suffix: comma
+    - template: container-apa
+    - template: howpublished-apa

@@ -1,0 +1,35 @@
+{
+  "name": "@csln/csln",
+  "sideEffects": false,
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=17.0.0"
+  },
+  "main": "./dist/csln.js",
+  "module": "./lib/index.js",
+  "files": [
+    "./lib/*.js",
+    "./types/*.d.ts"
+  ],
+  "scripts": {
+    "build": "npx tsc",
+    "test": "npx jest"
+  },
+  "types": "./types/index.d.ts",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^29.2.4",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "benchmark": "^2.1.4",
+    "edtf": "^4.4.1",
+    "json-schema-edtf": "^1.0.3",
+    "eslint": "^8.29.0",
+    "ts-jest": "^29.0.3",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.1",
+    "typescript-language-server": "^3.0.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}

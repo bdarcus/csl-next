@@ -20,15 +20,14 @@ citation:
   # again: another example where there are only a few options
   groupAffix: parentheses # maybe would need localizing though?
   delimiter: semi-colon
-  contexts:
-    - integral:
-        # maybe a little dicey, but to keep format simpler
-        groupAffixLevel: secondary
-        # here we override andAs for this mode
-        andAs: symbol
-        delimiter: comma
-    - nonIntegral:
-        groupAffixLevel: primary
+  integral:
+  # maybe a little dicey, but to keep format simpler
+    groupAffixLevel: secondary
+    # here we override andAs for this mode
+    andAs: symbol
+    delimiter: comma
+  nonIntegral:
+    groupAffixLevel: primary
   format:
     # in this example, no need for conditional here
     # configure delimiters in parameters

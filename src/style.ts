@@ -20,7 +20,18 @@ export interface HasFormatting {
   quote?: boolean;
 }
 
-export type GroupSortType = "author" | "year" | "as-cited";
+export type SortType = {
+  /**
+   * The order to sort the list.
+   * 
+   * @default ascending
+   */
+  order: "ascending" | "descending";
+  key: GroupSortType;
+}
+
+export type GroupSortType = 
+  "author" | "year" | "title" | "as-cited";
 
 type CategoryType = "science" | "social science" | "biology";
 
@@ -233,7 +244,7 @@ export interface RefList extends HasFormatting {
   /**
    * How to sort the reference items in citation or bibliography.
    */
-  sort?: GroupSortType[];
+  sort?: SortType[];
   /**
    * Render the list inlne; otherwise block.
    */
@@ -323,12 +334,14 @@ interface Citation extends RefList {
    */
   placement?: "inline" | "note";
   /**
-   * Allows overriding citation parameters and formatting instructions.
+   * Integral citations are those where the author is printed inline in the text; aka "in text" or "narrative" citations.
    */
-  contexts?: CitationContext[];
+  integral?: RefList;
+  /**
+   * Non-integral citations are those where the author is incorporated in the citation, and not printed inline in the text.
+   */
+  nonIntegral?: RefList;
 }
-
-type CitationContext = IntegralCitation | NonIntegralCitation;
 
 type IntegralCitation = {
   /**

@@ -3,14 +3,75 @@ import { GroupSortType } from "./style";
 import { Reference } from "./reference";
 import { CiteRef } from "./citeref";
 
-// TODO write a function that sorts references on keys
+
+function normalizeString(str: string): string {
+  return str.replace(/ /g, "-").replace(/,/g, "").toLowerCase();
+}
+
 function sortReferences(
   keys: GroupSortType[],
   references: Reference[]
 ): Reference[] {
-  // return references.sort((a, b)=> (a.author.localeCompare(b.author) || a.issued - b.issued));  
-  return references.sort((a, b) => (getSortKey(keys[0], a) > getSortKey(keys[0], b)) ? 1 : -1);
+  // sort the references by keys
+  //   1. sort by first key
+  //   2. sort by second key
+  //   3. etc.
+  //   4. return the sorted references
+  //   5. if no keys, return the references as-is
+  if (keys.length === 0) {
+    return references;
+  }
+  else {
+    const key = keys[0];
+    const sortedReferences = references.sort((a, b) => {
+      const aKey = getSortKey(key, a);
+      const bKey = getSortKey(key, b);
+      if (aKey < bKey) {
+        return -1;
+      }
+      else if (aKey > bKey) {
+        return 1;
+      }
+      else {
+        return 0;
+      }
+    });
+    return sortedReferences;
+  }
 }
+
+// create some example Reference data
+const referenceb1: Reference = { 
+  id: "ref1",
+  type: "book",
+  author: [
+    { "name": "John Doe", "role": "author" }
+    ],
+  title: "The Book of Books",
+  issued: "2019"
+}
+
+const referenceb2: Reference = { 
+  id: "ref2",
+  type: "book",
+  author: [
+    { "name": "Jane Doe", "role": "author" }
+    ],
+  title: "The Book of Books",
+  issued: "2020"
+}
+
+const referenceb3: Reference = {
+  id: "ref3",
+  type: "book",
+  author: [
+    { "name": "John Smith", "role": "author" }
+    ],
+  title: "The Book of Books",
+  issued: "2021"
+}
+
+const rl2 = [referenceb1, referenceb2, referenceb3];
 
 // TODO write a function that groups references by keys
 function groupReferences(
@@ -21,7 +82,7 @@ function groupReferences(
   return references;
 }
 
-function getSortKey(
+export function getSortKey(
   key: GroupSortType,
   reference: Reference
 ): string {
@@ -69,3 +130,7 @@ export {
   sortAndGroupCited,
   citedReferencePosition
 };
+  function a(a: Reference, b: Reference): number {
+    throw new Error("Function not implemented.");
+  }
+

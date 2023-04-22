@@ -9,20 +9,25 @@ citation:
   # in CSL 1.0, we have this global, but it's specific to citations
   placement: inline
   # There's only so many ways to sort and group, so let's just itemize them
-  sort: cs-author-year
-  groupBy: cs-author-year
+  sort:
+   - key: author
+     order: ascending
+   - key: year
+     order: descending
+  groupBy:
+   - author
+   - year
   # again: another example where there are only a few options
   groupAffix: parentheses # maybe would need localizing though?
   delimiter: semi-colon
-  contexts:
-    - integral:
-        # maybe a little dicey, but to keep format simpler
-        groupAffixLevel: secondary
-        # here we override andAs for this mode
-        andAs: symbol
-        delimiter: comma
-    - nonIntegral:
-        groupAffixLevel: primary
+  integral:
+  # maybe a little dicey, but to keep format simpler
+    groupAffixLevel: secondary
+    # here we override andAs for this mode
+    andAs: symbol
+    delimiter: comma
+  nonIntegral:
+    groupAffixLevel: primary
   format:
     # in this example, no need for conditional here
     # configure delimiters in parameters

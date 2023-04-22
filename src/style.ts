@@ -1,7 +1,5 @@
 // Experimental CSL NEXT typescript model
 
-import { CSLDate } from "./date";
-
 // Doesn't actually do anything ATM, other than generate a JSON Schema.
 // I don't ATM understand distinction between `interface` and `type`
 
@@ -22,7 +20,18 @@ export interface HasFormatting {
   quote?: boolean;
 }
 
-type GroupSortType = "cs-author" | "cs-year" | "cs-author-year" | "cs-as-cited";
+export type SortType = {
+  /**
+   * The order to sort the list.
+   * 
+   * @default ascending
+   */
+  order: "ascending" | "descending";
+  key: GroupSortType;
+}
+
+export type GroupSortType = 
+  "author" | "year" | "title" | "as-cited";
 
 type CategoryType = "science" | "social science" | "biology";
 
@@ -215,11 +224,11 @@ interface RefItemTemplate extends HasFormatting {
   template: string;
 }
 
-interface RefList extends HasFormatting {
+export interface RefList extends HasFormatting {
   /**
    * How to group the list of reference items in a citation or bibliography.
    */
-  groupBy?: GroupSortType;
+  groupBy?: GroupSortType[];
   /**
    * The affix to use to enclose a group within a list; for example, a citation.
    */
@@ -235,7 +244,7 @@ interface RefList extends HasFormatting {
   /**
    * How to sort the reference items in citation or bibliography.
    */
-  sort?: GroupSortType;
+  sort?: SortType[];
   /**
    * Render the list inlne; otherwise block.
    */
@@ -325,12 +334,14 @@ interface Citation extends RefList {
    */
   placement?: "inline" | "note";
   /**
-   * Allows overriding citation parameters and formatting instructions.
+   * Integral citations are those where the author is printed inline in the text; aka "in text" or "narrative" citations.
    */
-  contexts?: CitationContext[];
+  integral?: RefList;
+  /**
+   * Non-integral citations are those where the author is incorporated in the citation, and not printed inline in the text.
+   */
+  nonIntegral?: RefList;
 }
-
-type CitationContext = IntegralCitation | NonIntegralCitation;
 
 type IntegralCitation = {
   /**

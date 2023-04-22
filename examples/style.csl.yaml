@@ -35,3 +35,10 @@ citation:
     - template: author-apa
     - template: year
     - template: locators-apa
+bibliography:
+  format:
+    - template: author-apa-full
+    - template: year
+    - template: title
+    - template: container-apa
+    - template: howpublished-apa

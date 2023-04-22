@@ -266,41 +266,7 @@ export interface RefList extends HasFormatting {
 }
 
 interface RefListBlock extends RefList {
-  listStyle: string; // TODO
-}
-
-// FUNCTIONS
-// Not really sure here.
-
-// extract, to be used elsewhere
-type RoleType = "author" | "editor" | "publisher";
-
-// contributor modeling needs more thought in general
-// really need to be extracted
-interface Contributor {
-  name: string;
-  affiliation?: string;
-  location?: string;
-  role: RoleType;
-}
-
-interface PersonalContributor extends Contributor {
-  familyName: string;
-  givenName: string;
-}
-
-function formatContributor(
-  contributor: PersonalContributor,
-  role?: string
-): string {
-  return `${contributor.familyName} ${contributor.givenName}`;
-}
-
-function formatContributorWithRole(
-  contributor: Contributor,
-  role: string
-): string {
-  return `${contributor.name} ${contributor.role}`;
+  listStyle?: string; // TODO
 }
 
 interface RefItemSimple extends HasFormatting {
@@ -358,5 +324,5 @@ type NonIntegralCitation = {
 };
 
 interface Bibliography extends RefListBlock {
-  heading: string; // TODO
+  heading?: string; // TODO
 }

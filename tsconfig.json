@@ -18,6 +18,7 @@
     "src/style.ts",
     "src/date.ts",
     "src/locale.ts",
+    "src/processor.ts",
     "src/reference.ts",
     "src/citation.ts"
   ]

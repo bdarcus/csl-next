@@ -1,10 +1,39 @@
 
-import { GroupSortType } from "./style";
+import { Style, GroupSortType } from "./style";
 import { Reference } from "./reference";
 import { CiteRef } from "./citeref";
+import { Bibliography } from "./bibliography";
+
+const fs = require('fs');
+
+// import test data
+// import style from "examples/style.json"
+// import bibliography from "examples/bibliography.json"
 
 
-function normalizeString(str: string): string {
+function loadJSON(path: string): any {
+  let rawdata = fs.readFileSync(path);
+  return(JSON.parse(rawdata));
+}
+
+// write a function that returns a Reference object
+//   for a given ID
+//   from a Bibliography object
+//   (use the Reference class)
+//   (use the Bibliography class)
+function getReference(
+  id: string, 
+  bibliography: Bibliography): 
+  Reference {
+    // Fix this; unassigned type error
+  return bibliography.references.find((ref) => ref.id === id);
+}
+
+
+
+
+
+  function normalizeString(str: string): string {
   return str.replace(/ /g, "-").replace(/,/g, "").toLowerCase();
 }
 
@@ -40,6 +69,42 @@ function sortReferences(
   }
 }
 
+// write a function that sorts a Reference object by a single key
+//   (use the normalizeString function to normalize strings)
+function sortReferencesByKey(
+  sorter: GroupSortType,
+  references: Reference[]
+): Reference[] {
+  // sort the references by key
+  //   1. sort by key
+  //   2. return the sorted references
+  //   3. if no key, return the references as-is
+  if (sorter.key === undefined) {
+    return references;
+  }
+  else {
+    const sortedReferences = references.sort((a, b) => {
+      const aKey = getSortKey(sorter, a);
+      const bKey = getSortKey(sorter, b);
+      if (aKey < bKey) {
+        return -1;
+      }
+      else if (aKey > bKey) {
+        return 1;
+      }
+      else {
+        return 0;
+      }
+    });
+    return sortedReferences;
+  }
+}
+
+
+// write a function that sortsa list of Reference objects by a single key
+//   (use the normalizeString function to normalize strings)
+
+
 // create some example Reference data
 const referenceb1: Reference = { 
   id: "ref1",
@@ -61,7 +126,17 @@ const referenceb2: Reference = {
   issued: "2020"
 }
 
-const referenceb3: Reference = {
+const referenceb31: Reference = { 
+  id: "ref2",
+  type: "book",
+  author: [
+    { "name": "Jane Doe", "role": "author" }
+    ],
+  title: "The Book of Books",
+  issued: "2002"
+  }
+
+  const referenceb3: Reference = {
   id: "ref3",
   type: "book",
   author: [
@@ -71,35 +146,50 @@ const referenceb3: Reference = {
   issued: "2021"
 }
 
-const rl2 = [referenceb1, referenceb2, referenceb3];
+const referenceb4: Reference = {
+  id: "ref3",
+  type: "book",
+  author: [
+    { "name": "John Smith", "role": "author" }
+    ],
+  title: "The Other Book of Books",
+  issued: "2021"
+}
+
+const rl5 = [referenceb31, referenceb1, referenceb4, referenceb2, referenceb3];
 
 // TODO write a function that groups references by keys
 function groupReferences(
   keys: GroupSortType[],
   references: Reference[]
 ): Reference[] {
-  // placeholder; not sure how best to do this
-  return references;
+  // write the grouping logic by keys
+  //   1. group by first key  
+  //   2. group by second key
+  //   3. etc.
+  //   4. return the grouped references
+  //   5. if no keys, return the references as-is
+  if (keys.length === 0) {
+    return references;
+  }
 }
 
-export function getSortKey(
-  key: GroupSortType,
-  reference: Reference
-): string {
-  // placeholder; not sure how best to do this
-  let result;
-  if (key === "author") {
-    result = reference.author; // TODO join multiple authors into one downcased string
+function getSortKey(sort: GroupSortType, reference: Reference): string {
+  switch (sort.key) {
+    case "author":
+      return reference.author.map(a => a.name).join('-');
+    case "issued":
+      return reference.issued;
+    case "title":
+      return reference.title;
+    case "as-cited":
+      return reference.id; // FIX
+    default:
+      return "";
   }
-  else if (key === "year") {
-    result = reference.issued; // TODO need date function to extract year
-  }
-  else if (key === "as-cited") {
-    result = 1; // TODO need function to derive this
-  }
-  return result;
 }
 
+// TODO write a function that returns the position of a reference in a list of cited references
 function citedReferencePosition(citedRef: CiteRef): number {
   return 1; // placeholder
 }

@@ -169,6 +169,12 @@ type Disambiguation = {
     | "by-cite";
 };
 
+type SubstitutionType = 
+   | "editor" 
+   | "translator" 
+   | "title"
+   ;
+
 // Style definition
 
 export interface Style {
@@ -188,6 +194,13 @@ export interface Style {
    * The categories the style belongs to; for purposes of indexing.
    */
   categories?: CategoryType[];
+  /**
+   * When author is nil, substitute the first non-nil of the listed variables.
+   * For substitued variables, subsequent output is suppressed.
+   * 
+   * @default ["editor", "translator", "title"]
+   */
+  authorSubstition: SubstitutionType[];
   disambiguation?: Disambiguation;
   /**
    * The scope to use for localized terms.

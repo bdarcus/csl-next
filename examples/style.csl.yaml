@@ -21,6 +21,12 @@ options:
   # pave the way for multilingual support
   localization:
     scope: global
+  # again: put this on a parameter
+  substitute:
+    author:
+      - editor
+      - translator
+      - title # this still needs work
 citation:
   # in CSL 1.0, we have this global, but it's specific to citations
   placement: inline

@@ -6,4 +6,5 @@ schemas
 lib
 examples/*.json
 src/.vscode
-
+docs
+notes.md

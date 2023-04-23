@@ -159,7 +159,48 @@ type DataTypeMatch =
   
 type Condition = Match & DataTypeMatch;
 
-type Disambiguation = {
+type SubstitutionType =
+   | "editor" 
+   | "translator" 
+   | "title"
+   ;
+
+// OptionGroup
+
+export interface OptionGroup {
+  sort?: Sort[];
+  group?: GroupSortType[];
+  substitute?: SubstitutionType[];
+  disambiguate?: Disambiguation;
+  localization?: Localization;
+
+}
+
+// Localization
+
+export interface Localization {
+  /**
+   * @default global
+   */
+  scope?: "per-item" | "global";
+}
+
+// Grouping and Sorting
+
+export interface SortGroup {
+  key: GroupSortType;
+}
+
+export interface Sort extends SortGroup {
+  order: "ascending" | "descending";
+}
+
+export interface Group extends SortGroup {
+  affixes?: AffixType;
+  disambiguate?: Disambiguation; // REVIEW needs thought
+}
+
+export interface Disambiguation {
   addYearSuffix: boolean;
   addNames?:
     | "all"
@@ -169,11 +210,19 @@ type Disambiguation = {
     | "by-cite";
 };
 
-type SubstitutionType = 
-   | "editor" 
-   | "translator" 
-   | "title"
-   ;
+// Substitution
+
+export interface Substitution {
+  /**
+   * The token to substitute.
+   * 
+   * @default "editor"
+   * @default "translator"
+   * @default "title"
+   * 
+   */
+  author: SubstitutionType;
+}
 
 // Style definition
 
@@ -195,21 +244,12 @@ export interface Style {
    */
   categories?: CategoryType[];
   /**
-   * When author is nil, substitute the first non-nil of the listed variables.
-   * For substitued variables, subsequent output is suppressed.
+   * Global parameter options.
+   */
+  options?: OptionGroup;
+  /**
+   * The templates for rendering the bibliography and citations.
    * 
-   * @default ["editor", "translator", "title"]
-   */
-  authorSubstition: SubstitutionType[];
-  disambiguation?: Disambiguation;
-  /**
-   * The scope to use for localized terms.
-   *
-   * @default global
-   */
-  localization?: "per-item" | "global";
-  /**
-   * Template definitions, for use elsewhere in the style.
    */
   templates?: NamedTemplate[];
   /**

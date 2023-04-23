@@ -169,8 +169,8 @@ type SubstitutionType =
 
 export interface OptionGroup {
   sort?: Sort[];
-  group?: GroupSortType[];
-  substitute?: SubstitutionType[];
+  group?: Group[];
+  substitute?: Substitution;
   disambiguate?: Disambiguation;
   localization?: Localization;
 
@@ -201,7 +201,7 @@ export interface Group extends SortGroup {
 }
 
 export interface Disambiguation {
-  addYearSuffix: boolean;
+  addYearSuffix?: boolean;
   addNames?:
     | "all"
     | "all-with-initials"
@@ -216,12 +216,10 @@ export interface Substitution {
   /**
    * The token to substitute.
    * 
-   * @default "editor"
-   * @default "translator"
-   * @default "title"
+   * @default ["editor", "translator", "title"]
    * 
-   */
-  author: SubstitutionType;
+   */  
+  author: SubstitutionType[];
 }
 
 // Style definition

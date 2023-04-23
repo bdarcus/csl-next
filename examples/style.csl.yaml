@@ -28,29 +28,24 @@ options:
       - translator
       - title # this still needs work
 citation:
-  # in CSL 1.0, we have this global, but it's specific to citations
-  placement: inline
-  # There's only so many ways to sort and group, so let's just itemize them
-  sort:
-   - key: author
-     order: ascending
-   - key: year
-     order: descending
-  groupBy:
-   - author
-   - year
-  # again: another example where there are only a few options
-  groupAffixes: parentheses # maybe would need localizing though?
-  delimiter: semi-colon
+  options:
+    # There's only so many ways to sort and group, so let's just itemize them
+    sort:
+     - key: author
+       order: ascending
+     - key: year
+       order: descending  # in CSL 1.0, we have this global, but it's specific to citations
+    group:
+      - key: author
+        # again: another example where there are only a few options
+        affixes: parentheses # maybe would need localizing though? 
+        delimiter: semicolon
+      - key: year
   integral:
-    # aka narrative or in-text
-    groupAffixLevel: secondary
-    # here we override andAs for this mode
-    andAs: symbol
-    delimiter: comma
-  nonIntegral:
-    # what has been default in 1.0
-    groupAffixLevel: primary
+    options:
+      group:
+        - key: author
+          affixes: parentheses # REVIEW
   format:
     # in this example, no need for conditional here
     # configure delimiters in parameters

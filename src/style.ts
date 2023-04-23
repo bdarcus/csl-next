@@ -198,6 +198,7 @@ export interface Sort extends SortGroup {
 export interface Group extends SortGroup {
   affixes?: AffixType;
   disambiguate?: Disambiguation; // REVIEW needs thought
+  delimiter?: string;
 }
 
 export interface Disambiguation {
@@ -237,7 +238,7 @@ export interface Style {
    * The description of the style.
    */
   description?: string;
-  /**
+  /**r
    * The categories the style belongs to; for purposes of indexing.
    */
   categories?: CategoryType[];
@@ -281,44 +282,8 @@ interface RefItemTemplate extends HasFormatting {
 }
 
 export interface RefList extends HasFormatting {
-  /**
-   * How to group the list of reference items in a citation or bibliography.
-   */
-  groupBy?: GroupSortType[];
-  /**
-   * The affix to use to enclose a group within a list; for example, a citation.
-   */
-  groupAffixes?: AffixType;
-  /**
-   * The group-level to apply groupAffix to.
-   * A standard citation, for example, would be the default "primary", since it applies to the citation as a whole.
-   * A narrative citation, by contrast, would be "secondary", because it applies to the "year" group.
-   *
-   * @default primary
-   */
-  groupAffixLevel?: GroupAffixLevel;
-  /**
-   * How to sort the reference items in citation or bibliography.
-   */
-  sort?: SortType[];
-  /**
-   * Render the list inlne; otherwise block.
-   */
-  inline?: boolean;
-  delimiter?: string;
-  /**
-   * The integer length of a list that turns on shortening.
-   */
-  shortenMin?: number; // integer
-  /**
-   * The integer length of items to take from the list when shortening.
-   */
-  shortenUse?: number; // integer; TODO this and the above need to be coupled
-  /**
-   * The string to join the last two items of a list; '&' vs 'and'.
-   */
-  andAs?: "symbol" | "term";
-  format?: TemplateModel[]; // REVIEW
+  options?: OptionGroup;
+  format?: TemplateModel[];
 }
 
 interface RefListBlock extends RefList {

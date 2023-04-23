@@ -197,7 +197,6 @@ export interface Sort extends SortGroup {
 
 export interface Group extends SortGroup {
   affixes?: AffixType;
-  disambiguate?: Disambiguation; // REVIEW needs thought
   delimiter?: string;
 }
 

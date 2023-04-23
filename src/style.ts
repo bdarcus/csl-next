@@ -159,7 +159,7 @@ type DataTypeMatch =
   
 type Condition = Match & DataTypeMatch;
 
-type SubstitutionType = 
+type SubstitutionType =
    | "editor" 
    | "translator" 
    | "title"

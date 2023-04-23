@@ -2,9 +2,25 @@
 ---
 # this is a flatter model, relying more heavily on parameters
 title: APA
-disambiguation:
-  addYearSuffix: true
-  addNames: all-with-initials
+options:
+  sort:
+    - key: author
+      order: ascending
+    - key: year
+      order: ascending
+  group:
+    # be explicit about grouping, which is core logic
+    - key: author
+      # not sure on details here yet, but basic idea is disambiguation 
+      # is related to grouping
+      disambiguate:
+        addNames: all-with-initials
+    - key: year
+      disambiguate:
+        addYearSuffix: true
+  # pave the way for multilingual support
+  localization:
+    scope: global
 citation:
   # in CSL 1.0, we have this global, but it's specific to citations
   placement: inline
@@ -21,12 +37,13 @@ citation:
   groupAffixes: parentheses # maybe would need localizing though?
   delimiter: semi-colon
   integral:
-  # maybe a little dicey, but to keep format simpler
+    # aka narrative or in-text
     groupAffixLevel: secondary
     # here we override andAs for this mode
     andAs: symbol
     delimiter: comma
   nonIntegral:
+    # what has been default in 1.0
     groupAffixLevel: primary
   format:
     # in this example, no need for conditional here

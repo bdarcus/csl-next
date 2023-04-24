@@ -1,6 +1,6 @@
 VERSION=$(shell grep '\"version\":' package.json | sed -e 's/.*: \"\([^"]*\)".*/\1/')
 
-.PHONY: schemas build watch clean
+.PHONY: schemas build watch clean docs json
 default: schemas
 
 schemas:
@@ -20,6 +20,9 @@ node_modules:
 
 clean:
 	rm -rf dist
+	
+docs:
+	typedoc src/style.ts src/citation.ts src/bibliography
 
 json:
 	yq -P -o json '.' examples/style.csl.yaml > examples/style.csl.json

@@ -288,7 +288,8 @@ export interface RefList extends HasFormatting {
    * The rendering instructions.
    *
    * @items.minimum 1
-   */  
+   */
+  template?: string; // TODO needs to be a type here, and a choice of template or format  
   format?: TemplateModel[];
 }
 

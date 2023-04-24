@@ -84,8 +84,6 @@ type CalledTemplate = string; // REVIEW can we make this more useful?
 
 type AffixType = "parentheses" | "brackets" | "quotes";
 
-type GroupAffixLevel = "primary" | "secondary";
-
 // eg liquid or mustache option for dev?
 type StringTemplate = string;
 

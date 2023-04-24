@@ -22,7 +22,7 @@ clean:
 	rm -rf dist
 	
 docs:
-	typedoc src/style.ts src/citation.ts src/bibliography
+	npx typedoc src/style.ts src/citation.ts src/bibliography
 
 json:
 	yq -P -o json '.' examples/style.csl.yaml > examples/style.csl.json

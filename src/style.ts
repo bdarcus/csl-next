@@ -80,9 +80,9 @@ type TemplateModel =
   | Title
   | Cond;
 
-type AffixType = "parentheses" | "brackets" | "quotes";
+type CalledTemplate = string; // REVIEW can we make this more useful?
 
-type GroupAffixLevel = "primary" | "secondary";
+type AffixType = "parentheses" | "brackets" | "quotes";
 
 // eg liquid or mustache option for dev?
 type StringTemplate = string;
@@ -285,11 +285,9 @@ interface RefItemTemplate extends HasFormatting {
 export interface RefList extends HasFormatting {
   options?: OptionGroup;
   /** 
-   * The rendering instructions.
-   *
-   * @items.minimum 1
-   */  
-  format?: TemplateModel[];
+   * The rendering instructions; either called template name, or inline instructions.
+   */
+  format: CalledTemplate | TemplateModel[];
 }
 
 interface RefListBlock extends RefList {

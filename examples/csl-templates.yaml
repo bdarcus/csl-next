@@ -15,6 +15,22 @@ templates:
                 # easily-localized parameters
                 affixes: quotes
         else:
-          - format:
-              - variable: title
-                emph: true
+          - variable: title
+            emph: true
+  - name: citation-chicago-author-date
+    template:
+      - delimiter: ", "
+      - when:
+          - hasVariable:
+              - issued
+            match: any
+            format:
+              - delimiter: " "
+                format:
+                  - template: contributors-short
+                  - template: date-in-text
+        else:
+          - delimiter: ", "
+            format:
+              - template: contributors-short
+              - template: date-in-text

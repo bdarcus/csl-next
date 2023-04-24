@@ -23,14 +23,11 @@ export type CiteRef = {
    *
    * in the default CSL style.
    *
-   * The locator starts with a locator term, among "bk.", "bks.", "book", "chap.",
-   * "chaps.", "chapter", "col.", "cols.", "column", "figure", "fig.", "figs.",
-   * "folio", "fol.", "fols.", "number", "no.", "nos.", "line", "l.", "ll.",
-   * "note", "n.", "nn.", "opus", "op.", "opp.", "page", "p.", "pp.", "paragraph",
-   * "para.", "paras.", "¶", "¶¶", "§", "§§", "part", "pt.", "pts.", "section",
-   * "sec.", "secs.", "sub verbo", "s.v.", "s.vv.", "verse", "v.", "vv.",
-   * "volume", "vol.", and "vols.".  It ends with the last comma or digit in the
-   * suffix, whichever comes last, or runs till the end of the suffix.
+   * The locator starts with a locator term listed in the LocatorTerms type. 
+   * The locator term is followed by a space and then the locator value. 
+   * The locator value is a string of numbers and/or letters.  
+   * The locator value may be discontinuous, in which case it is separated by commas. For example, "23, 25-36" 
+   * is a discontinuous locator value.
    * 
    * The part of the suffix before the locator is appended to reference's prefix.
    * If no locator term is used, but a number is present, then "page" is assumed.

@@ -10,7 +10,16 @@ Here is`VSCode`, with schema-backed validation and auto-complete.
 Currently, the only files that are worth looking at are the `src/style.ts` and `src/reference.ts` model files, and the `examples`. 
 They reflect the basic ideas in the earlier `RELAX NG` draft schemas.
 
-To generate the JSON schemas, run `npm install` and then `make`.
+The Makefile includes some useful targets:
+
+<dl>
+  <dt>schemas</dt>
+  <dd>Generate the JSON schemas.</dd>
+  <dt>docs</dt>
+  <dd>Generate the documentation, which outputs to the docs directory, and can be browsed locally.</dd>
+  <dt>json</dt>
+  <dd>Converts the YAML example(s) to JSON.</dd>
+</dl>
 
 ## FAQ
 

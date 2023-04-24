@@ -23,12 +23,12 @@ export type CiteRef = {
    *
    * in the default CSL style.
    *
-   * The locator starts with a locator term listed in the LocatorTerms type. 
+   * The locator starts with a locator term listed in the LocatorTerms type.
    * The locator term is followed by a space and then the locator value. 
    * The locator value is a string of numbers and/or letters.  
    * The locator value may be discontinuous, in which case it is separated by commas. For example, "23, 25-36" 
    * is a discontinuous locator value.
-   * 
+   *
    * The part of the suffix before the locator is appended to reference's prefix.
    * If no locator term is used, but a number is present, then "page" is assumed.
    * 

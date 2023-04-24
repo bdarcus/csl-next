@@ -19,10 +19,10 @@ node_modules:
 	npm install
 
 clean:
-	rm -rf dist
+	rm -rf dist docs 
 	
 docs:
-	npx typedoc src/style.ts src/citation.ts src/bibliography.ts src/reference.ts src/locator.ts
+	npx typedoc --plugin typedoc-umlclass  --tsconfig typedoc.json 
 
 json:
 	yq -P -o json '.' examples/style.csl.yaml > examples/style.csl.json

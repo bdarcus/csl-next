@@ -5,11 +5,57 @@
 //   - page 23, 25-36
 //   - chapter IV
 
-type Locator = string | number | number[];
-
-// REVIEW this approach is more human-friendly, but maybe better to just have explicit type/value properties?
-// In any case, this is just a place holder ATM.
-interface Locators {
-  pages?: Locator;
-  chapter?: Locator;
-}
+type LocatorTerms = 
+  | "bk."
+  | "bks."
+  | "book"
+  | "chap."
+  | "chaps."
+  | "chapter"
+  | "col."
+  | "cols."
+  | "column"
+  | "figure"
+  | "fig."
+  | "figs."
+  | "folio"
+  | "fol."
+  | "fols."
+  | "number"
+  | "no."
+  | "nos."
+  | "line"
+  | "l."
+  | "ll."
+  | "note"
+  | "n."
+  | "nn."
+  | "opus"
+  | "op."
+  | "opp."
+  | "page"
+  | "p."
+  | "pp."
+  | "paragraph"
+  | "para."
+  | "paras."
+  | "¶"
+  | "¶¶"
+  | "§"
+  | "§§"
+  | "part"
+  | "pt."
+  | "pts."
+  | "section"
+  | "sec."
+  | "secs."
+  | "sub verbo"
+  | "s.v."
+  | "s.vv."
+  | "verse"
+  | "v."
+  | "vv."
+  | "volume"
+  | "vol."
+  | "vols."
+  ;

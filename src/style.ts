@@ -265,7 +265,9 @@ export interface NamedTemplate {
    * The name token for the template, for reference from other templates.
    */
   name: string;
-  template: /**
+  options?: OptionGroup;
+  template: 
+  /**
    * The rendering instructions.
    *
    * @items.minimum 1
@@ -282,6 +284,11 @@ interface RefItemTemplate extends HasFormatting {
 
 export interface RefList extends HasFormatting {
   options?: OptionGroup;
+  /** 
+   * The rendering instructions.
+   *
+   * @items.minimum 1
+   */  
   format?: TemplateModel[];
 }
 

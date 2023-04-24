@@ -1,7 +1,7 @@
 
 import { Style, SortType, GroupSortType } from "./style";
 import { Reference, ID } from "./reference";
-import { CiteRef } from "./citeref";
+import { CiteRef } from "./citation";
 import { Bibliography } from "./bibliography";
 
 export class Processor {

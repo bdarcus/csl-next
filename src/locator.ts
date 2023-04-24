@@ -5,7 +5,7 @@
 //   - page 23, 25-36
 //   - chapter IV
 
-type LocatorTerms = 
+type LocatorTerms =
   | "bk."
   | "bks."
   | "book"

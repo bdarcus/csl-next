@@ -80,7 +80,10 @@ type TemplateModel =
   | Title
   | Cond;
 
+ 
+type Template = CalledTemplate | InlineTemplate;  
 type CalledTemplate = string; // REVIEW can we make this more useful?
+type InlineTemplate = TemplateModel[];
 
 type AffixType = "parentheses" | "brackets" | "quotes";
 
@@ -97,7 +100,7 @@ interface Cond {
   /**
    * When all of the when conditions are nil, format the children.
    */
-  else?: TemplateModel[];
+  else?: InlineTemplate; // REVIEW
 }
 
 type Match = {
@@ -110,7 +113,7 @@ type Match = {
   /**
    * When a match, process these templates.
    */
-  format: TemplateModel[];
+  format: InlineTemplate; // REVIEW
 };
 
 type IsNumber = {
@@ -272,7 +275,7 @@ export interface NamedTemplate {
    *
    * @items.minimum 1
    */
-  TemplateModel[]; // not converted to schema correctly
+  InlineTemplate; // REVIEW
 }
 
 interface RefItemTemplate extends HasFormatting {
@@ -287,7 +290,7 @@ export interface RefList extends HasFormatting {
   /** 
    * The rendering instructions; either called template name, or inline instructions.
    */
-  format: CalledTemplate | TemplateModel[];
+  format: CalledTemplate | InlineTemplate;
 }
 
 interface RefListBlock extends RefList {

@@ -70,7 +70,7 @@ type MatchType =
   "all" | "any" | "none";
 
 // this is the structured template model
-type TemplateModel =
+export type TemplateModel =
   | RefList
   | RefItemTemplate
   | RefItemSimple
@@ -81,9 +81,9 @@ type TemplateModel =
   | Cond;
 
  
-type Template = CalledTemplate | InlineTemplate;  
-type CalledTemplate = string; // REVIEW can we make this more useful?
-type InlineTemplate = TemplateModel[];
+export type Template = CalledTemplate | InlineTemplate;  
+export type CalledTemplate = string; // REVIEW can we make this more useful?
+export type InlineTemplate = TemplateModel[];
 
 type AffixType = "parentheses" | "brackets" | "quotes";
 

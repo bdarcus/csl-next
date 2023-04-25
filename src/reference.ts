@@ -4,10 +4,20 @@ import { Contributor } from "./contributor";
 
 // Types
 
-// How to do this, so it translates to the schema correctly?
-//   1. define as literal string, OR EDTF date
-//   2. for the latter, use https://github.com/retorquere/json-schema-edtf
-export type CSLDate = string;
+/**
+ * A CSL date is an EDTF date; if not, it is a literal string.
+ */
+export type CSLDate = EDTFDATE | string;
+
+/**
+ * An EDTF level 0 or 1 date, with optional seasonal range.
+ * 
+ * See https://github.com/retorquere/json-schema-edtf
+ * 
+ * @format edtf/level-1+season-intervals
+ */
+export type EDTFDATE =
+  | string;
 
 export type ID = string; // string needs to be a token
 

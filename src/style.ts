@@ -178,13 +178,29 @@ type SubstitutionType =
    | "title"
    ;
 
-// OptionGroup
-
+/**
+ * Parameter groups.
+ */
 export interface OptionGroup {
+  /**
+   * Sorting configuration.
+   */
   sort?: Sort[];
+  /**
+   * Grouping configuration.
+   */ 
   group?: Group[];
+  /**
+   * Substitution configuration.
+   */
   substitute?: Substitution;
+  /**
+   * Disambiguation configuration.
+   */
   disambiguate?: Disambiguation;
+  /**
+   * Localization configuration.
+   */
   localization?: Localization;
 
 }
@@ -227,7 +243,8 @@ export interface Disambiguation {
 
 export interface Substitution {
   /**
-   * The token to substitute.
+   * When author is nil, substitute the first non-nil listed variable. 
+   * Once a substitution is made, the substituted variable shall be set to nil for purposes of later rendering.
    * 
    * @default ["editor", "translator", "title"]
    * 

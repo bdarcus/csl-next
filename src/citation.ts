@@ -65,5 +65,7 @@ export type CiteRef = {
    * 
    * See also https://pandoc.org/MANUAL.html#extension-citations   
    */
+  // REVIEW: the above will fail in some cases, with pandoc syntax offering a fail safe of sorts.
+  // An alernative, more robust, approach is to use a structured array, as in the v1.1 branch.
   suffix?: string;
 }

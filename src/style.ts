@@ -80,9 +80,19 @@ export type TemplateModel =
   | Title
   | Cond;
 
- 
-export type Template = CalledTemplate | InlineTemplate;  
+/**
+ * The rendering of style templates can be specified by reference to a template name or by inline definition.
+ */
+export type Template = CalledTemplate | InlineTemplate;
+
+/**
+ * A template is called by name.
+ */
 export type CalledTemplate = string; // REVIEW can we make this more useful?
+
+/**
+ * A template that is defined inline.
+ */
 export type InlineTemplate = TemplateModel[];
 
 type AffixType = "parentheses" | "brackets" | "quotes";

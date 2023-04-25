@@ -205,10 +205,15 @@ export interface OptionGroup {
 
 }
 
-// Localization
-
+/**
+ * Terms and data localization configuration.
+ */
 export interface Localization {
   /**
+   * The scope to use for localization.
+   * 
+   * "per-item" uses the locale of the reference item, and "global" uses the target language across all references.
+   * 
    * @default global
    */
   scope?: "per-item" | "global";
@@ -220,15 +225,25 @@ export interface SortGroup {
   key: GroupSortType;
 }
 
+
+/**
+ * Reference sorting configuration.
+ */
 export interface Sort extends SortGroup {
   order: "ascending" | "descending";
 }
 
+/**
+ * Reference grouping of configuration.
+ */
 export interface Group extends SortGroup {
   affixes?: AffixType;
   delimiter?: string;
 }
 
+/**
+ * Disambiguation of rendered group display name configuration.
+ */
 export interface Disambiguation {
   addYearSuffix?: boolean;
   addNames?:
@@ -239,8 +254,9 @@ export interface Disambiguation {
     | "by-cite";
 };
 
-// Substitution
-
+/**
+ * Substitution of variable configuration.
+ */
 export interface Substitution {
   /**
    * When author is nil, substitute the first non-nil listed variable. 
@@ -252,8 +268,9 @@ export interface Substitution {
   author: SubstitutionType[];
 }
 
-// Style definition
-
+/**
+ * A CSL Style.
+ */
 export interface Style {
   /**
    * The human-readable name of the style.

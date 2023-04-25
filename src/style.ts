@@ -195,7 +195,7 @@ export interface OptionGroup {
    */
   substitute?: Substitution;
   /**
-   * Disambiguation configuration.
+   * Disambiguation configuration of rendererd group display names.
    */
   disambiguate?: Disambiguation;
   /**

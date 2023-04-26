@@ -3,6 +3,8 @@
 # this is a flatter model, relying more heavily on parameters
 title: APA
 options:
+  dateFormatting:
+    month: short # all are optional, and set reasonable defaults
   sort:
     - key: author
       order: ascending
@@ -11,16 +13,13 @@ options:
   group:
     # be explicit about grouping, which is core logic
     - key: author
-      # not sure on details here yet, but basic idea is disambiguation 
-      # is related to grouping
-      disambiguate:
-        addNames: all-with-initials
     - key: year
-      disambiguate:
-        addYearSuffix: true
   # pave the way for multilingual support
   localization:
     scope: global
+  disambiguate:
+    addNames: all-with-initials
+    addYearSuffix: true
   # again: put this on a parameter
   substitute:
     author:

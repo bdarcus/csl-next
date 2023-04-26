@@ -1,41 +1,39 @@
+export abstract class Agent {
+	constructor(public name: string) {}
 
-
-// contributor modeling needs more thought in general
-
-export type Contributor = Person | Organization;
-
-export class Organization {
-  name: string;
-  location?: string;
-
-  constructor(name: string, location?: string) {
-    this.name = name;
-    this.location = location;
-  }
-
-  getSortName(): string {
-    return this.name;
-  }
+	getSortName(): string {
+		return `${this.name}`;
+	}
 }
 
-export class Person  {
-    familyName: string;
-    givenName: string;
+export class Person extends Agent {
+	givenName: string;
+	familyName: string;
+	constructor(name: string, gname: string, fname: string) {
+		super(name);
+		this.givenName = gname;
+		this.familyName = fname;
+	}
 
-    constructor(givenName: string, familyName: string) {
-      this.givenName = givenName;
-      this.familyName = familyName;
-    }
+	public override getSortName() {
+		return `${this.familyName}, ${this.givenName}`;
+	}
+}
 
-    getFullName(): string {
-      return `${this.givenName} ${this.familyName}`;
-    }
+export class Organization extends Agent {}
 
-    getGivenInitial(): string {
-      return `${this.givenName[0]}`;
-    }
+const p1 = new Person("Jane Doe", "Jane", "Doe");
+const a1 = new Organization("United Nations");
 
-    getSortName(): string {
-      return `${this.familyName}, ${this.givenName}`;
-    }
-  }
+function contributorKind(x: Person | Organization) {
+	// x is type Person or Organization here
+	if (x instanceof Person) {
+		// x is type Person here
+		x.familyName;
+	} else {
+		x.name;
+	}
+}
+
+contributorKind(p1);
+contributorKind(a1);

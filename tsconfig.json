@@ -8,8 +8,12 @@
     "noUnusedLocals": true,
     "removeComments": true,
     "strict": true,
-    "typeRoots": ["node_modules/@types"],
-    "useDefineForClassFields": false
+    "skipLibCheck": true,
+    "outDir": "lib",
+    "declaration": true,
+    "declarationDir": "types",
+    "isolatedModules": true,
+    "allowImportingTsExtensions": true,
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

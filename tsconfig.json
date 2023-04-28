@@ -1,25 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "lib": [],
-    "jsx": "preserve",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "node",
+    "lib": ["dom", "es2022"],
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "removeComments": true,
     "strict": true,
-    "skipLibCheck": true,
-    "outDir": "lib",
-    "declaration": true,
-    "declarationDir": "types",
-    "isolatedModules": true
+    "typeRoots": ["node_modules/@types"],
+    "useDefineForClassFields": false
   },
-  "include": [
-    "src/style.ts",
-    "src/date.ts",
-    "src/locale.ts",
-    "src/processor.ts",
-    "src/reference.ts",
-    "src/citation.ts"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

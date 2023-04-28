@@ -33,8 +33,9 @@ export type TitleString = string; // plain or Djot?
 // Interfaces
 
 export interface TitleStructured {
+	full?: TitleString;
 	main: TitleString;
-	sub: TitleString[];
+	sub?: TitleString[];
 }
 
 export class Reference {

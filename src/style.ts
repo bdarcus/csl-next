@@ -311,6 +311,7 @@ type MonthStyle =
 /**
  * A CSL Style.
  */
+
 export class Style {
 	/**
 	 * The human-readable name of the style.

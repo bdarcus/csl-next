@@ -53,8 +53,4 @@ export class Bibliography {
 	addReference(reference: Reference): void {
 		this.references.push(reference);
 	}
-
-	addReferences(references: Reference[]): void {
-		this.references = this.references.concat(references);
-	}
 }

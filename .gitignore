@@ -1,6 +1,6 @@
 node_modules
 types
-package-lock.json
+build
 dist
 schemas
 lib

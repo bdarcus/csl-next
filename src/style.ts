@@ -191,6 +191,10 @@ export interface OptionGroup {
 	 * Localization configuration.
 	 */
 	localization?: Localization;
+	/**
+	 * Date formatting configuration.
+	 */
+	dateFormatting?: DateFormatting;
 }
 
 /**
@@ -255,6 +259,54 @@ export interface Substitution {
 	author: SubstitutionType[];
 }
 
+/**
+ * Date formatting configuration.
+ */
+export interface DateFormatting {
+	// REVIEW not sure on details ATM
+	// the model is a subset of JS Intl.DateTimeFormatOptions
+	/**
+	 * @default long
+	 */
+	date?: DateStyle;
+	/**
+	 * @default long
+	 */
+	time?: TimeStyle;
+	/**
+	 * @default numeric
+	 */
+	year?: YearStyle;
+	/**
+	 * @default long
+	 */
+	month?: MonthStyle;
+}
+
+type DateStyle =
+	| "full" // 'Thursday, April 27, 2023'
+	| "long" // 'April 27, 2023'
+	| "medium" // 'Apr 27, 2023'
+	| "short"; // '4/27/23'
+
+type YearStyle =
+	// The representation of the year. Possible values are:
+	| "numeric" // (e.g., 2012)
+	| "2-digit"; // (e.g., 12)
+
+type TimeStyle =
+	| "full" // '8:04:49 AM Eastern Daylight Time'
+	| "long" // '8:04:49 AM EDT'
+	| "medium" // '8:04:49 AM'
+	| "short"; // '8:04 AM'
+
+type MonthStyle =
+	// The representation of the month. Possible values are:
+	| "numeric" // (e.g., 3)
+	| "2-digit" // (e.g., 03)
+	| "long" // (e.g., March)
+	| "short" // (e.g., Mar)
+	| "narrow"; // (e.g., M).
 /**
  * A CSL Style.
  */

@@ -1,4 +1,3 @@
-import { Locale } from "./locale";
 import { ID } from "./reference";
 
 type CitationModeType = "integral" | "nonIntegral";

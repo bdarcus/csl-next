@@ -40,17 +40,6 @@ export class Processor {
 	}
 }
 
-const fs = require("fs");
-
-// import test data
-// import style from "examples/style.json"
-// import bibliography from "examples/bibliography.json"
-
-function loadJSON(path: string): object {
-	const rawdata = fs.readFileSync(path);
-	return JSON.parse(rawdata);
-}
-
 function getReference(id: ID, references: Reference[]): Reference[] {
 	// FIX why doesn't this work?
 	// return references.find((ref as Reference) => ref.id as ID === id);

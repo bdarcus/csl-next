@@ -36,10 +36,20 @@ export interface TitleStructured {
 	sub: TitleString[];
 }
 
-export interface Reference {
+export class Reference {
 	id: ID;
 	type: ReferenceType;
-	author?: Contributor[]; // fix
-	title?: Title | Title[]; // REVIEW is this too much flexibility?
-	issued: CSLDate;
+	title: Title;
+	author?: Contributor[];
+	editor?: Contributor[];
+	publisher?: Contributor[];
+	issued?: CSLDate;
+	abstract?: string;
+	accessed?: CSLDate;
+
+	constructor(id: ID, type: ReferenceType, title: Title) {
+		this.id = id;
+		this.type = type;
+		this.title = title;
+	}
 }

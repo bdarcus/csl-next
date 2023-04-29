@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { Type } from "class-transformer";
 import { Reference } from "./reference";
 
@@ -41,7 +42,7 @@ export class Bibliography {
 	 *
 	 * @items.minimum 1
 	 */
-	//@Type(() => Reference) // FIX getting an area; seems a bug elsewhere
+	@Type(() => Reference) // FIX getting an area; seems a bug elsewhere
 	references: Reference[];
 
 	constructor(title?: string, description?: string) {

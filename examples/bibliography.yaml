@@ -1,0 +1,39 @@
+title: My Bibliography
+description: A collection of references.
+references:
+  - id: doe1
+    type: book
+    title: The Title
+    author:
+      - familyName: Doe
+        givenName: Jane
+    issued: "2023"
+  - id: smith1
+    type: book
+    title: The Title
+    author:
+      - familyName: Smith
+        givenName: Sam
+    issued: "2023"
+  - id: doe2
+    type: book
+    title: The Title
+    author:
+      - familyName: Doe
+        givenName: Jane
+    issued: "2023"
+  - id: doe3
+    type: article
+    title: The Title
+    author:
+      - type: person
+        familyName: Doe
+        givenName: Jane
+    issued: "2022"
+  - id: un
+    type: article
+    title: The Title
+    author:
+      - type: organization
+        name: United Nations
+    issued: "2020"

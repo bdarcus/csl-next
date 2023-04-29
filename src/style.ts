@@ -70,12 +70,12 @@ type MatchType =
 
 // this is the structured template model
 export type TemplateModel =
-	| RefList
-	| RefItemTemplate
-	| RefItemSimple
+	| RenderList
+	| RenderItemTemplate
+	| RenderItemSimple
 	| Contributors
 	| Locators
-	| RefItemDate
+	| RenderItemDate
 	| Title
 	| Cond;
 
@@ -360,14 +360,14 @@ export interface NamedTemplate {
 	InlineTemplate; // REVIEW
 }
 
-interface RefItemTemplate extends HasFormatting {
+interface RenderItemTemplate extends HasFormatting {
 	/**
 	 * The template name to use for partial formatting.
 	 */
 	template: string;
 }
 
-export interface RefList extends HasFormatting {
+export interface RenderList extends HasFormatting {
 	options?: OptionGroup;
 	/**
 	 * The rendering instructions; either called template name, or inline instructions.
@@ -375,15 +375,15 @@ export interface RefList extends HasFormatting {
 	format: CalledTemplate | InlineTemplate;
 }
 
-interface RefListBlock extends RefList {
+interface RenderListBlock extends RenderList {
 	listStyle?: string; // TODO
 }
 
-interface RefItemSimple extends HasFormatting {
+interface RenderItemSimple extends HasFormatting {
 	variable: SimpleType;
 }
 
-interface RefItemDate extends HasFormatting {
+interface RenderItemDate extends HasFormatting {
 	variable: DateType;
 	year?(date: string): string; // CSLDate
 	month?(date: string): string;
@@ -396,15 +396,15 @@ interface Title extends HasFormatting {
 	sub(title: string): string;
 }
 
-interface Contributors extends RefList {
+interface Contributors extends RenderList {
 	variable: ContributorType;
 }
 
-interface Locators extends RefList {
+interface Locators extends RenderList {
 	variable: LocatorType;
 }
 
-interface Citation extends RefList {
+interface Citation extends RenderList {
 	/**
 	 * @default inline
 	 */
@@ -412,13 +412,13 @@ interface Citation extends RefList {
 	/**
 	 * Integral citations are those where the author is printed inline in the text; aka "in text" or "narrative" citations.
 	 */
-	integral?: RefList;
+	integral?: RenderList;
 	/**
 	 * Non-integral citations are those where the author is incorporated in the citation, and not printed inline in the text.
 	 */
-	nonIntegral?: RefList;
+	nonIntegral?: RenderList;
 }
 
-interface Bibliography extends RefListBlock {
+interface Bibliography extends RenderListBlock {
 	heading?: string; // TODO
 }

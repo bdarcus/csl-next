@@ -1,0 +1,11 @@
+---
+# a lefthook config for a pre-commit hook that formats staged files so the CI doesn't complain
+#
+# lefthook add pre-commit
+
+pre-commit:
+  commands:
+    format:
+      glob: "*.ts"
+      run: npx rome format --write {staged_files}
+

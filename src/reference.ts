@@ -1,6 +1,6 @@
 // Typescript model for a CSL Reference
 
-import { Type } from "class-transformer";
+//import { Type } from "class-transformer";
 import { Contributor } from "./contributor";
 
 // Types
@@ -8,7 +8,7 @@ import { Contributor } from "./contributor";
 /**
  * A CSL date is an EDTF date; if not, it is a literal string.
  */
-export type CSLDate = EDTFDATE | string;
+export type CSLDate = EDTFDATE;
 
 /**
  * An EDTF level 0 or 1 date, with optional seasonal range.
@@ -17,7 +17,7 @@ export type CSLDate = EDTFDATE | string;
  *
  * @format edtf/level-1+season-intervals
  */
-export type EDTFDATE = string;
+export type EDTFDATE = string | null | undefined;
 
 export type ID = string; // string needs to be a token
 

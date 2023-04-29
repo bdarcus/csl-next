@@ -9,7 +9,7 @@
     ],
     "outDir": "lib",
     "experimentalDecorators": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false, // change this later, when things stabilize
     "removeComments": true,
     "strict": true,
     "typeRoots": [

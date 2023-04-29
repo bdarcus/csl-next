@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { Bibliography } from "./bibliography";
-import { Reference } from "./reference";
+//import { Reference } from "./reference";
 import { loadJSON, loadYAML } from "./utils";
 import { plainToClass } from "class-transformer";
 

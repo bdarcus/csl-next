@@ -40,12 +40,6 @@ export class Processor {
 	}
 }
 
-function getReference(id: ID, references: Reference[]): Reference[] {
-	// FIX why doesn't this work?
-	// return references.find((ref as Reference) => ref.id as ID === id);
-	return references;
-}
-
 function normalizeString(str: string): string {
 	return str.replace(/ /g, "-").replace(/,/g, "").toLowerCase();
 }
@@ -135,7 +129,7 @@ function getSortKey(sort: SortType, reference: Reference): string {
 				return reference.author[0].getSortName();
 			}
 		case "year":
-			return reference.issued;
+			return ""; // TODO
 		case "as-cited":
 			return reference.id; // FIX
 		default:

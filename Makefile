@@ -22,7 +22,7 @@ clean:
 	rm -rf dist docs 
 	
 docs:
-	npx typedoc --plugin typedoc-umlclass  --tsconfig typedoc.json 
+	npx typedoc --plugin typedoc-umlclass 
 
 json:
 	yq -P -o json '.' examples/style.csl.yaml > examples/style.csl.json

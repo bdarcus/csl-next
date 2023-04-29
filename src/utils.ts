@@ -1,12 +1,12 @@
-import fs from "fs";
+import * as fs from "fs";
 import { parse } from "yaml";
 
 export function loadJSON(path: string): object {
-	const rawdata = fs.readFileSync(path);
-	return JSON.parse(rawdata);
+	const jdata = fs.readFileSync(path, "utf8");
+	return JSON.parse(jdata);
 }
 
 export function loadYAML(path: string): object {
-	const rawdata = fs.readFileSync(path);
-	return parse(rawdata);
+	const ydata = fs.readFileSync(path, "utf8");
+	return parse(ydata);
 }

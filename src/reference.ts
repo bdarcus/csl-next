@@ -1,5 +1,6 @@
 // Typescript model for a CSL Reference
 
+import { Type } from "class-transformer";
 import { Contributor } from "./contributor";
 
 // Types
@@ -40,6 +41,8 @@ export class Reference {
 	id: ID;
 	type: ReferenceType;
 	title: Title;
+
+	// @Type(() => Person) // should work, but does not
 	author?: Contributor[];
 	editor?: Contributor[];
 	publisher?: Contributor[];
@@ -51,5 +54,11 @@ export class Reference {
 		this.id = id;
 		this.type = type;
 		this.title = title;
+		this.author = [];
+		this.editor = [];
+		this.publisher = [];
+		this.issued = "";
+		this.abstract = "";
+		this.accessed = "";
 	}
 }

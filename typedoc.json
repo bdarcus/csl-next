@@ -1,12 +1,9 @@
 {
-  "entryPoints": [
-    "./src/citation.ts",
-    "./src/bibliography.ts",
-    "./src/style.ts",
-    "./src/locator.ts",
-    "./src/reference.ts"
-  ],
-  "umlClassDiagram": {
-    "arrowColor": "gray"
-  }
+	"entryPoints": [
+		"./src/citation.ts", "./src/bibliography.ts", "./src/style.ts",
+		"./src/locator.ts", "./src/reference.ts"
+	],
+	"umlClassDiagram": {
+		"arrowColor": "gray"
+	}
 }

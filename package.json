@@ -14,14 +14,13 @@
     "start:ci": "node ./build/esbuild.js --run",
     "start:prod": "node ./build/esbuild.js --watch --run"
   },
-  "prettier": "./.prettierrc.json",
   "devDependencies": {
     "@es-exec/esbuild-plugin-start": "^0.0.4",
     "@types/node": "^18.14.1",
     "class-transformer": "^0.5.1",
-    "edtf": "^4.4.1",
     "esbuild": "^0.17.10",
     "minimist": "^1.2.8",
+    "reflect-metadata": "^0.1.13",
     "rome": "^12.0.0",
     "typedoc": "^0.24.6",
     "typedoc-umlclass": "^0.7.1",
@@ -29,6 +28,7 @@
     "typescript-json-schema": "^0.56.0"
   },
   "dependencies": {
+    "edtf": "^4.4.1",
     "yaml": "^2.2.2"
   }
 }

@@ -1,7 +1,8 @@
 // Typescript model for a CSL Reference
 
-//import { Type } from "class-transformer";
-import { Contributor } from "./contributor";
+import { Type } from "class-transformer";
+import "reflect-metadata";
+import { Contributor, Person } from "./contributor";
 
 // Types
 
@@ -42,8 +43,8 @@ export class Reference {
 	type: ReferenceType;
 	title: Title;
 
-	// @Type(() => Person) // should work, but does not
-	author?: Contributor[];
+	@Type(() => Person) // should work, but does not
+	author?: Person[];
 	editor?: Contributor[];
 	publisher?: Contributor[];
 	issued?: CSLDate;

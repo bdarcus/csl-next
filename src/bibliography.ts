@@ -1,6 +1,6 @@
-import "reflect-metadata";
-//import { Type } from "class-transformer";
 import { Reference, ID } from "./reference";
+import { Type, plainToClass } from "class-transformer";
+import "reflect-metadata";
 
 /**
  * A bibliography is a collection of references.
@@ -42,7 +42,8 @@ export class Bibliography {
 	 *
 	 * @items.minimum 1
 	 */
-	// @Type(() => Reference) // FIX getting an area; seems a bug elsewhere
+
+	@Type(() => Reference) // FIX getting an error; seems a bug elsewhere
 	references: Reference[];
 
 	constructor(title?: string, description?: string) {

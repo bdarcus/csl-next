@@ -97,7 +97,7 @@ export type InlineTemplate = TemplateModel[];
 type AffixType = "parentheses" | "brackets" | "quotes";
 
 // eg liquid or mustache option for dev?
-type StringTemplate = string;
+//type StringTemplate = string;
 
 // Conditional definitions
 
@@ -118,7 +118,7 @@ type Match = {
 	 *
 	 * @default all
 	 */
-	match?: "all" | "none" | "any";
+	match?: MatchType;
 	/**
 	 * When a match, process these templates.
 	 */
@@ -418,20 +418,6 @@ interface Citation extends RefList {
 	 */
 	nonIntegral?: RefList;
 }
-
-type IntegralCitation = {
-	/**
-	 * Integral citations are those where the author is printed inline in the text; aka "in text" or "narrative" citations.
-	 */
-	integral: RefList;
-};
-
-type NonIntegralCitation = {
-	/**
-	 * Non-integral citations are those where the author is incorporated in the citation, and not printed inline in the text.
-	 */
-	nonIntegral: RefList;
-};
 
 interface Bibliography extends RefListBlock {
 	heading?: string; // TODO

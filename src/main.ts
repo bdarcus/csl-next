@@ -1,11 +1,17 @@
+import "reflect-metadata";
 import { Bibliography } from "./bibliography";
+import { Reference } from "./reference";
 import { loadJSON, loadYAML } from "./utils";
+import { plainToClass } from "class-transformer";
 
 const bibj = loadJSON("examples/bibliography.json");
-const biby = loadYAML("examples/bibliography.yaml"); // why error?
+const biby = loadYAML("examples/bibliography.yaml");
 
-console.log("The JSON bibliography is:\n", bibj);
+const bibjts = plainToClass(Bibliography, bibj);
+const bibyts = plainToClass(Bibliography, biby);
 
-console.log("The YAML bibliography converted to JS is:\n", biby);
+console.log("The JSON bibliography is:\n", bibjts);
+
+console.log("The YAML bibliography converted to JS is:\n", bibyts);
 
 console.log("The rest is ... TODO!");

@@ -1,16 +1,30 @@
-## Introduction
+## The Idea
 
-An experiment to create a new, simpler, but extensible CSL. 
-The `JSON Schemas` here are automatically created from the `typescript` models.
+An experiment to create a new, simpler, but extensible CSL.
 
-Here is`VSCode`, with schema-backed validation and auto-complete.
+The idea is to simplify and generalize the template model, and move more of the logic to extensible parameter groups.
+
+From the beginning, it is designed to add new features even while simplifying the model; notably:
+
+1. multilingual
+2. different citations modes
+
+## Details
+
+The code here is a `typescript` project that:
+
+1. defines a model that is programatically-converted to `JSON Schema` files.
+2. provides a proof-of-concept processor implementation.
+
+The first is maybe 70% or so complete, while the second is barely-started.
+
+Here is`VSCode`, with schema-backed validation of a YAML style, auto-complete.
 
 ![Screenshot from 2023-04-16 10-22-25](https://user-images.githubusercontent.com/1134/232319672-88e96d95-1806-4d6b-9d27-6d0cc32d5033.png)
 
-Currently, the only files that are worth looking at are the `src/style.ts` and `src/reference.ts` model files, and the `examples`. 
-They reflect the basic ideas in the earlier `RELAX NG` draft schemas.
+To see the state of the model, see the `examples` directory, or do `make docs`. 
 
-The Makefile includes some useful targets:
+The Makefile targets include:
 
 <dl>
   <dt>schemas</dt>
@@ -21,13 +35,19 @@ The Makefile includes some useful targets:
   <dd>Converts the YAML example(s) to JSON.</dd>
 </dl>
 
+See also `package.json`, for other options.
+
 ## FAQ
 
 ### Why?
 
 At a high level CSL 1.0 is an XML DSL that sets some context-dependent parameters and provides templates for inline and block formatting of lists (citations and bibliographies respectively). 
 
-But it has no method for extension, so any change in behavior requires changes in the XML model, and often, by extension, the styles, and the input schema. 
+But it has two limitations.
+
+First, the template model is pretty complex, and so difficult for users and developers alike.
+
+Second, it has no method for extension, so any change in behavior requires changes in the XML model, and often, by extension, the styles, and the input schema. 
 Given the diversity of software implementations and thousands of styles, and the fact that much of the labor to maintain all this comes from time-strapped individuals, the lack of extensibility enforces a large degree of inertia that we need to address.
 
 This is one idea on how we might do that, then.

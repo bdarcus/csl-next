@@ -126,7 +126,7 @@ function getSortKey(sort: SortType, reference: Reference): string {
 	switch (sort.key) {
 		case "author":
 			if (reference.author !== undefined) {
-				return reference.author[0].getSortName();
+				return reference.author[0].sortName();
 			}
 		case "year":
 			return ""; // TODO

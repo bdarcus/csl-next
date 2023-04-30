@@ -2,14 +2,14 @@
 
 export abstract class Contributor {
 	name: string;
-    
-    constructor(name: string) {
-        this.name = name;
-    }
 
-    display(): string {
-        return this.name;
-    }
+	constructor(name: string) {
+		this.name = name;
+	}
+
+	display(): string {
+		return this.name;
+	}
 }
 
 export class Organization extends Contributor {

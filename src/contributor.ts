@@ -7,8 +7,8 @@ export abstract class Contributor {
         this.name = name;
     }
 
-    display(): void{
-        console.log(this.name);
+    display(): string {
+        return this.name;
     }
 }
 
@@ -18,6 +18,7 @@ export class Organization extends Contributor {
 
 	constructor(name: string, location?: string) {
 		super(name);
+		this.name = name;
 		this.location = location;
 	}
 
@@ -33,6 +34,7 @@ export class Person extends Contributor {
 
 	constructor(name: string, givenName: string, familyName: string) {
 		super(name);
+		this.name = name;
 		this.givenName = givenName;
 		this.familyName = familyName;
 	}

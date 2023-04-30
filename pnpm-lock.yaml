@@ -10,8 +10,8 @@ dependencies:
 
 devDependencies:
   '@es-exec/esbuild-plugin-start':
-    specifier: ^0.0.4
-    version: 0.0.4
+    specifier: ^0.0.5
+    version: 0.0.5
   '@types/node':
     specifier: ^18.16.3
     version: 18.16.3
@@ -52,21 +52,21 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@es-exec/esbuild-plugin-start@0.0.4:
-    resolution: {integrity: sha512-FOV4p6sbDz87IYsVU2MPNiVCABOLgoS8xsKpjYmjznM2xPAehGdoAdjGm9HQXKaquQiBeplFOCGnmz6KBRqBKA==}
+  /@es-exec/esbuild-plugin-start@0.0.5:
+    resolution: {integrity: sha512-x7o0RNRqqET9xGezuhs8eUnDmm3LiAiwYY4qBtGGQ9+bn7711ce/ZGpseh/OjSFIgXxnyLLcTyOQQie02qP0qg==}
     dependencies:
-      '@es-exec/plugins-shared': 0.0.4
-      '@es-exec/utils': 0.0.4
+      '@es-exec/plugins-shared': 0.0.5
+      '@es-exec/utils': 0.0.5
     dev: true
 
-  /@es-exec/plugins-shared@0.0.4:
-    resolution: {integrity: sha512-F6sOXsXtgk/VenrOts0OVGBUL85aJ0HC05IhiTLo3pZxnv2z7xcKBPKUJn2Bl+E9aSzeCoCXNIiaz/tLgEWMRg==}
+  /@es-exec/plugins-shared@0.0.5:
+    resolution: {integrity: sha512-ikrYz1dOmtLbK4lCCEWpAACXxVmsaq1qCtAClAej1RgConcwk2s4fSlin0u50RD43gyL7iE0a0hqDnnR+Q460A==}
     dependencies:
-      '@es-exec/utils': 0.0.4
+      '@es-exec/utils': 0.0.5
     dev: true
 
-  /@es-exec/utils@0.0.4:
-    resolution: {integrity: sha512-8eGzCh/kayYGW1v1SnebV6FVC2e49luA256bWqJUz1QMcEU6U8nauy2QxLMCTE4RG0R7KeN8Tn9IGr1yMsaF4Q==}
+  /@es-exec/utils@0.0.5:
+    resolution: {integrity: sha512-1hr7c/wgiFaBxsuaDBmZ1gef3he5UTU3uywsby3RtuwMvye1010KYm0Frb50iiS80Lq5wslqe/N7IUjcPoBU0g==}
     dependencies:
       chalk: 4.1.2
     dev: true

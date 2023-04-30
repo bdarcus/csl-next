@@ -2,7 +2,7 @@
 
 import { Type } from "class-transformer";
 import "reflect-metadata";
-import { Contributor, Person } from "./contributor";
+import { Contributor, Organization, Person } from "./contributor";
 
 // Types
 
@@ -43,8 +43,15 @@ export class Reference {
 	type: ReferenceType;
 	title: Title;
 
-	@Type(() => Person) // should work, but does not
-	author?: Person[];
+	@Type(() => Contributor, {
+    discriminator: {
+      property: 'type',
+      subTypes: [
+        { value: Person, name: 'person' },
+        { value: Organization, name: 'organization' },  ],
+    },
+  })
+	author?: (Person | Organization)[];
 	editor?: Contributor[];
 	publisher?: Contributor[];
 	issued?: CSLDate;

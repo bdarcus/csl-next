@@ -15,7 +15,7 @@
     "start:prod": "node ./build/esbuild.js --watch --run"
   },
   "devDependencies": {
-    "@es-exec/esbuild-plugin-start": "^0.0.4",
+    "@es-exec/esbuild-plugin-start": "^0.0.5",
     "@types/node": "^18.16.3",
     "class-transformer": "^0.5.1",
     "esbuild": "^0.17.18",

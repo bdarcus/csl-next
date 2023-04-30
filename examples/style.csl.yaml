@@ -3,6 +3,16 @@
 # this is a flatter model, relying more heavily on parameters
 title: APA
 options:
+  # localized date formatting config
+  dateFormatting:
+    date: long
+    month: long
+    time: long
+    year: numeric
+  # REVIEW: I think this belongs in `group`
+  disambiguate:
+    addNames: all-with-initials
+    addYearSuffix: true
   sort:
     - key: author
       order: ascending
@@ -13,11 +23,7 @@ options:
     - key: author
       # not sure on details here yet, but basic idea is disambiguation 
       # is related to grouping
-      disambiguate:
-        addNames: all-with-initials
     - key: year
-      disambiguate:
-        addYearSuffix: true
   # pave the way for multilingual support
   localization:
     scope: global

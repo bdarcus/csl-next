@@ -27,7 +27,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run format:ci
+      - run: npm i -g pnpm
+      - run: pnpm install
+      - run: pnpm lint
+      - run: pnpm format:ci
       #  - run: npm run build:prod

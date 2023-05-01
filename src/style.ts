@@ -18,9 +18,9 @@ export interface HasFormatting {
 	 */
 	suffix?: string;
 	/**
-	 * What to surround the content with.
+	 * The punctuation to wrap the content with.
 	 */
-	affixes?: AffixType; // REVIEW
+	wrap?: WrapType;
 	bold?: boolean;
 	emph?: boolean;
 }
@@ -94,7 +94,7 @@ export type CalledTemplate = string; // REVIEW can we make this more useful?
  */
 export type InlineTemplate = TemplateModel[];
 
-type AffixType = "parentheses" | "brackets" | "quotes";
+type WrapType = "parentheses" | "brackets" | "quotes";
 
 // eg liquid or mustache option for dev?
 //type StringTemplate = string;
@@ -228,7 +228,7 @@ export interface Sort extends SortGroup {
  * Reference grouping of configuration.
  */
 export interface Group extends SortGroup {
-	affixes?: AffixType;
+	wrap?: WrapType;
 	delimiter?: string;
 }
 

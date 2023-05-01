@@ -228,7 +228,14 @@ export interface Sort extends SortGroup {
  * Reference grouping of configuration.
  */
 export interface Group extends SortGroup {
+	/**
+	 * The symbol pair to wrap around one or more rendering components.
+	 * Interaction with surrounding punctuation is localized.
+	 */
 	wrap?: WrapType;
+	/**
+	 * The string with which to join two or more rendering comnponents.
+	 */
 	delimiter?: string;
 }
 

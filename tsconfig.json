@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2022",
-    "module": "es2022",
+    "module": "NodeNext",
     "moduleResolution": "node",
     "lib": [
       "dom",
@@ -9,7 +9,8 @@
     ],
     "outDir": "lib",
     "experimentalDecorators": true,
-    "noUnusedLocals": false, // change this later, when things stabilize
+    "allowImportingTsExtensions": true,
+    "noUnusedLocals": false,
     "removeComments": true,
     "strict": true,
     "typeRoots": [
@@ -18,7 +19,8 @@
     "useDefineForClassFields": false
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "tests/*.ts"
   ],
   "exclude": [
     "node_modules"

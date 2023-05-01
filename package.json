@@ -6,14 +6,14 @@
   "scripts": {
     "build": "node ./build/esbuild.js --dev",
     "build:meta": "node ./build/esbuild.js --dev --meta",
-    "build:meta:prod": "node ./build/esbuild.js --meta",
-    "build:prod": "node ./build/esbuild.js",
+    "build:meta:prod": "node ./build/esbuild.cjs --meta",
+    "build:prod": "node ./build/esbuild.cjs",
     "lint": "rome check ./src/**.ts",
     "format": "rome format ./src/**.ts --write .",
     "format:ci": "rome ci ./src/**.ts",
-    "start": "node ./build/esbuild.js --dev --watch --run",
-    "start:ci": "node ./build/esbuild.js --run",
-    "start:prod": "node ./build/esbuild.js --watch --run",
+    "start": "node ./build/esbuild.cjs --dev --watch --run",
+    "start:ci": "node ./build/esbuild.cjs --run",
+    "start:prod": "node ./build/esbuild.cjs --watch --run",
     "test": "glob -c \"node --loader tsx --no-warnings --test\" \"./tests/**/*.test.ts\""
   },
   "devDependencies": {

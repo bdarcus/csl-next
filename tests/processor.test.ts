@@ -15,7 +15,7 @@ describe("grouping", () => {
 
 	it.todo("groups references by author, year");
 
-	it.todo("sorts references as cited");
+	it.todo("groups references as cited");
 });
 
 describe("contributor formatting", () => {

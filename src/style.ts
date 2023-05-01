@@ -8,17 +8,11 @@ export interface TemplateFile {
 	templates: NamedTemplate[];
 }
 
+type WrapType = "parentheses" | "brackets" | "quotes";
 export interface HasFormatting {
 	/**
-	 * The string to insert before the content.
-	 */
-	prefix?: string;
-	/**
-	 * The string to insert after the content.
-	 */
-	suffix?: string;
-	/**
-	 * The punctuation to wrap the content with.
+	 * The symbol pair to wrap around one or more rendering components.
+	 * Interaction with surrounding punctuation is localized.
 	 */
 	wrap?: WrapType;
 	bold?: boolean;
@@ -73,10 +67,10 @@ export type TemplateModel =
 	| RenderList
 	| RenderItemTemplate
 	| RenderItemSimple
-	| Contributors
-	| Locators
+	| RenderContributors
+	| RenderLocators
 	| RenderItemDate
-	| Title
+	| RenderTitle
 	| Cond;
 
 /**
@@ -93,8 +87,6 @@ export type CalledTemplate = string; // REVIEW can we make this more useful?
  * A template that is defined inline.
  */
 export type InlineTemplate = TemplateModel[];
-
-type WrapType = "parentheses" | "brackets" | "quotes";
 
 // eg liquid or mustache option for dev?
 //type StringTemplate = string;
@@ -228,11 +220,6 @@ export interface Sort extends SortGroup {
  * Reference grouping of configuration.
  */
 export interface Group extends SortGroup {
-	/**
-	 * The symbol pair to wrap around one or more rendering components.
-	 * Interaction with surrounding punctuation is localized.
-	 */
-	wrap?: WrapType;
 	/**
 	 * The string with which to join two or more rendering comnponents.
 	 */
@@ -377,9 +364,13 @@ interface RenderItemTemplate extends HasFormatting {
 export interface RenderList extends HasFormatting {
 	options?: OptionGroup;
 	/**
+	 * The string with which to join two or more rendering comnponents.
+	 */
+	delimiter?: string;
+	/**
 	 * The rendering instructions; either called template name, or inline instructions.
 	 */
-	format: CalledTemplate | InlineTemplate;
+	format?: CalledTemplate | InlineTemplate;
 }
 
 interface RenderListBlock extends RenderList {
@@ -397,17 +388,17 @@ interface RenderItemDate extends HasFormatting {
 	format?(date: string): string;
 }
 
-interface Title extends HasFormatting {
-	variable: TitleType;
-	main(title: string): string;
+interface RenderTitle extends HasFormatting {
+	variable: TitleType; // REVIEW title instead?
+	main(title: string): string; // REVIEW
 	sub(title: string): string;
 }
 
-interface Contributors extends RenderList {
+interface RenderContributors extends RenderList {
 	variable: ContributorType;
 }
 
-interface Locators extends RenderList {
+interface RenderLocators extends RenderList {
 	variable: LocatorType;
 }
 

@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-style-schema.json 
+# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-style-schema.json
 ---
 # this is a flatter model, relying more heavily on parameters
 title: APA
@@ -21,8 +21,6 @@ options:
   group:
     # be explicit about grouping, which is core logic
     - key: author
-      # not sure on details here yet, but basic idea is disambiguation 
-      # is related to grouping
     - key: year
   # pave the way for multilingual support
   localization:
@@ -37,35 +35,35 @@ citation:
   options:
     # There's only so many ways to sort and group, so let's just itemize them
     sort:
-     - key: author
-       order: ascending
-     - key: year
-       order: descending  # in CSL 1.0, we have this global, but it's specific to citations
+      - key: author
+        order: ascending
+      - key: year
+        order: descending # in CSL 1.0, we have this global, but it's specific to citations
     group:
       - key: author
-        # again: another example where there are only a few options
-        affixes: parentheses # maybe would need localizing though? 
-        delimiter: semicolon
       - key: year
   integral:
     options:
       group:
         - key: author
-          affixes: parentheses # REVIEW
-  format:
-    # in this example, no need for conditional here
-    # configure delimiters in parameters
-    # author-date styles are such a hassle at this level!
-    - template: author-apa
-    - template: year
-    - template: locators-apa
+    format:
+      - template: author-apa
+      - wrap: parentheses
+        format:
+          - template: year
+          - template: locators-apa
+  nonIntegral:
+    format:
+      - wrap: parentheses
+        delimiter: ": "
+        format:
+          - template: year
+          - template: locators-apa
 bibliography:
   format:
     - template: author-apa-full
     - template: year
-      affixes: parentheses
-      suffix: " " # REVIEW must this be a string?
+      wrap: parentheses
     - template: title
-      suffix: comma
     - template: container-apa
     - template: howpublished-apa

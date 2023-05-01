@@ -14,7 +14,7 @@
     "start": "node ./build/esbuild.cjs --dev --watch --run",
     "start:ci": "node ./build/esbuild.cjs --run",
     "start:prod": "node ./build/esbuild.cjs --watch --run",
-    "test": "glob -c \"node --loader tsx --no-warnings --test\" \"./tests/**/*.test.ts\""
+    "test": "glob -c \"node --loader tsx --no-warnings --test --test-reporter spec\" \"./tests/**/*.test.ts\""
   },
   "devDependencies": {
     "@es-exec/esbuild-plugin-start": "^0.0.5",

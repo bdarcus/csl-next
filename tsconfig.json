@@ -10,6 +10,7 @@
     "outDir": "lib",
     "experimentalDecorators": true,
     "allowImportingTsExtensions": true,
+    "noEmit": true,
     "noUnusedLocals": false,
     "removeComments": true,
     "strict": true,

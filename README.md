@@ -18,7 +18,7 @@ The code here is a `typescript` project that:
 
 The first is maybe 70% or so complete, while the second is barely-started.
 
-Here is`VSCode`, with schema-backed validation of a YAML style, auto-complete.
+Here is`VSCode`, with schema-backed validation and auto-completion of a YAML style.
 
 ![Screenshot from 2023-04-16 10-22-25](https://user-images.githubusercontent.com/1134/232319672-88e96d95-1806-4d6b-9d27-6d0cc32d5033.png)
 
@@ -72,7 +72,7 @@ Possibilities:
 2. I _hate_ hand authoring `JSON schema`, even in `YAML`.
 3. It's widely supported in the `JS` world, and `JS` widely supported more generally.
 4. Because the [djot](https://djot.net/) reference implementation uses it, I'd like to take advantage of that.
-5. There are two good `EDTF` libraries for date validation and formatting.
+5. There are two good `EDTF` JavaScript libraries for date validation and formatting.
 6. It might be possible to incorporate some code from [citeproc-js](https://github.com/Juris-M/citeproc-js)?
 
 ### Why `JSON Schema`? What happened to `XML`?

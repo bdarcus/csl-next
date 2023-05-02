@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node ./build/esbuild.cjs --dev",
-    "build:meta": "node ./build/esbuild.js --dev --meta",
+    "build:meta": "node ./build/esbuild.cjs --dev --meta",
     "build:meta:prod": "node ./build/esbuild.cjs --meta",
     "build:prod": "node ./build/esbuild.cjs",
     "lint": "rome check ./src/**.ts",

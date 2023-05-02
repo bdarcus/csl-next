@@ -170,7 +170,7 @@ export interface OptionGroup {
 	/**
 	 * Grouping configuration.
 	 */
-	group?: Group[];
+	group?: GroupSortType[];
 	/**
 	 * Substitution configuration.
 	 */

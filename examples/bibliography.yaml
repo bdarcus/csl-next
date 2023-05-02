@@ -1,28 +1,32 @@
 title: My Bibliography
 description: A collection of references.
 references:
-  - id: doe1
+  doc1: 
+    id: doe1
     type: book
     title: The Title
     author:
       - familyName: Doe
         givenName: Jane
     issued: "2023"
-  - id: smith1
+  smith1:
+    id: smith1
     type: book
     title: The Title
     author:
       - familyName: Smith
         givenName: Sam
     issued: "2023"
-  - id: doe2
+  doe2:
+    id: doe2
     type: book
     title: The Title
     author:
       - familyName: Doe
         givenName: Jane
     issued: "2023"
-  - id: doe3
+  doe3:
+    id: doe3
     type: article
     title: The Title
     author:
@@ -30,7 +34,8 @@ references:
         familyName: Doe
         givenName: Jane
     issued: "2022"
-  - id: un
+  un:
+    id: un
     type: article
     title: The Title
     author:

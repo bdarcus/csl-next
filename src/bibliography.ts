@@ -42,19 +42,24 @@ export class Bibliography {
 	 *
 	 * @items.minimum 1
 	 */
+	// TODO get this working with class-transformer
+	//@Type(() => Reference) // FIX getting an error; seems a bug elsewhere
+	// https://stackoverflow.com/a/65206867/13860420
+	references: Record<string, Reference>;
 
-	@Type(() => Reference) // FIX getting an error; seems a bug elsewhere
-	references: Reference[];
-
-	constructor(title?: string, description?: string) {
+	constructor(
+		references: Record<string, Reference>,
+		title?: string,
+		description?: string,
+	) {
 		this.title = title;
 		this.description = description;
-		this.references = [];
+		this.references = references;
 	}
 
-	addReference(reference: Reference): void {
-		this.references.push(reference);
-	}
+	// addReference(reference: Reference): void {
+	// 	this.references.push(reference);
+	// }
 
 	getReference(id: ID, references: Reference[]): Reference[] {
 		// FIX why doesn't this work?

@@ -13,5 +13,5 @@ const bibyts = plainToClass(Bibliography, biby);
 console.log("The JSON bibliography is:\n", bibjts);
 
 console.log("The YAML bibliography converted to JS is:\n", bibyts);
-console.log("A nested contributor:\n", bibyts.references.doe1.author);
+console.log("A nested contributor:\n", bibyts.references.un.author);
 console.log("The rest is ... TODO!");

@@ -11,21 +11,6 @@ import "reflect-metadata";
  * {
  * "title": "My Bibliography",
  * "description": "A collection of references.",
- * "references": [
- *   {
- *     "id": "doe1",
- *     "type": "book",
- *    "title": "The Title",
- *     "author": [
- *       {
- *         "family": "Doe",
- *         "given": "Jane"
- *       }
- *     ],
- *     "issued": "2023"
- *   }
- * ]
- *}
  */
 export class Bibliography {
 	/**

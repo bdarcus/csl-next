@@ -5,15 +5,13 @@ import { Bibliography } from "./bibliography";
 
 export class Processor {
 	style: Style;
-	references: Reference[];
 	citeRefs: CiteRef[];
 	bibliography: Bibliography;
 
-	constructor(style: Style, references: Reference[]) {
+	constructor(style: Style, bibliography: Bibliography) {
 		this.style = style;
-		this.references = references;
 		this.citeRefs = [];
-		this.bibliography = new Bibliography();
+		this.bibliography = new Bibliography({});
 	}
 
 	addCiteRef(citeRef: CiteRef): void {

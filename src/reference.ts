@@ -1,6 +1,6 @@
 // Typescript model for a CSL Reference
 
-import { Type } from "class-transformer";
+import { Expose, Type } from "class-transformer";
 import "reflect-metadata";
 import { Contributor, Organization, Person } from "./contributor";
 
@@ -21,6 +21,8 @@ export type CSLDate = EDTFDATE;
 export type EDTFDATE = string | null | undefined;
 
 export type ID = string; // string needs to be a token
+
+export type IDReference = Record<ID, Reference>;
 
 export type ReferenceType = "book" | "article" | "chapter";
 
@@ -43,6 +45,7 @@ export class Reference {
 	type: ReferenceType;
 	title: Title;
 
+	@Expose
 	@Type(() => Contributor, {
     discriminator: {
       property: 'type',

@@ -1,6 +1,8 @@
-import { ID, IDReference, Reference } from "./reference";
+import { IDReference, Reference } from "./reference";
 import { Type, plainToClass } from "class-transformer";
 import "reflect-metadata";
+
+type BibliographyFile = string; // is there a path type I can use?
 
 /**
  * A bibliography is a collection of references.
@@ -19,7 +21,7 @@ export class Bibliography {
 	 * @items.minimum 1
 	 */
 	// TODO get this working with class-transformer
-	// @Type(() => IDReference) // TODO causes and error
+	//@Type(() => IDReference) // TODO this confusing error
 	references: IDReference;
 	/**
 	 * The title of the bibliography.
@@ -30,11 +32,7 @@ export class Bibliography {
 	 */
 	description?: string;
 
-	constructor(
-		references: Record<string, Reference>,
-		title?: string,
-		description?: string,
-	) {
+	constructor(references: IDReference, title?: string, description?: string) {
 		this.references = references;
 		this.title = title;
 		this.description = description;

@@ -45,7 +45,6 @@ export class Reference {
 	type: ReferenceType;
 	title: Title;
 
-	@Expose
 	@Type(() => Contributor, {
     discriminator: {
       property: 'type',
@@ -61,15 +60,25 @@ export class Reference {
 	abstract?: string;
 	accessed?: CSLDate;
 
-	constructor(id: ID, type: ReferenceType, title: Title) {
+	constructor(
+		id: ID,
+		type: ReferenceType,
+		title: Title,
+		author?: (Person | Organization)[],
+		editor?: Contributor[],
+		publisher?: Contributor[],
+		issued?: CSLDate,
+		abstract?: string,
+		accessed?: CSLDate,
+	) {
 		this.id = id;
 		this.type = type;
 		this.title = title;
-		this.author = [];
-		this.editor = [];
-		this.publisher = [];
-		this.issued = "";
-		this.abstract = "";
-		this.accessed = "";
+		this.author = author;
+		this.editor = editor;
+		this.publisher = publisher;
+		this.issued = issued;
+		this.abstract = abstract;
+		this.accessed = accessed;
 	}
 }

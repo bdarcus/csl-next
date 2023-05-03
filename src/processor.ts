@@ -2,27 +2,23 @@ import { Style, SortType, GroupSortType } from "./style";
 import { Reference, ID } from "./reference";
 import { CiteRef } from "./citation";
 import { Bibliography } from "./bibliography";
-import { plainToClass } from "class-transformer";
+import { Type, plainToClass } from "class-transformer";
 import "reflect-metadata";
 
 export class Processor {
 	style: Style;
-	citeRefs: CiteRef[];
+	//citeRefs: CiteRef[];
 	bibliography: Bibliography;
-	// convert to array, and then to class instances
-	// TODO this seems to work, but linter is saying it shouldn't
-	//   also, this should only load from the CiteKeys in the CiteRefs
-	private _references: plainToClass(Reference[], Object.values(this.bibliography.references));
 
 	constructor(style: Style, bibliography: Bibliography) {
 		this.style = style;
-		this.citeRefs = [];
-		this.bibliography = new Bibliography({});
+		//	this.citeRefs = CiteRef;
+		this.bibliography = bibliography;
 	}
 
-	addCiteRef(citeRef: CiteRef): void {
-		this.citeRefs.push(citeRef);
-	}
+	// addCiteRef(citeRef: CiteRef): void {
+	// 	this.citeRefs.push(citeRef);
+	// }
 
 	processCiteRefs(): void {
 		// 1. sort the references
@@ -39,9 +35,13 @@ export class Processor {
 		//  this.bibliography.process();
 	}
 
-	// private referencesArray = Object.values(this.bibliography);
-
-
+	getReferences(): Reference[] {
+		const refs = Object.values(this.bibliography.references);
+		const refsObjs = refs.map((ref) => {
+			return plainToClass(Reference, ref);
+		});
+		return refsObjs;
+	}
 }
 
 function normalizeString(str: string): string {

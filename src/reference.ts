@@ -1,8 +1,6 @@
 // Typescript model for a CSL Reference
 
-import { Expose, Type } from "class-transformer";
-import "reflect-metadata";
-import { Contributor, Organization, Person } from "./contributor";
+import { Contributor } from "./contributor";
 
 // Types
 
@@ -41,44 +39,17 @@ export interface TitleStructured {
 }
 
 export class Reference {
-	id: ID;
-	type: ReferenceType;
-	title: Title;
-
-	@Type(() => Contributor, {
-    discriminator: {
-      property: 'type',
-      subTypes: [
-        { value: Person, name: 'person' },
-        { value: Organization, name: 'organization' },  ],
-    },
-  })
-	author?: (Person | Organization)[];
-	editor?: Contributor[];
-	publisher?: Contributor[];
-	issued?: CSLDate;
-	abstract?: string;
-	accessed?: CSLDate;
-
 	constructor(
-		id: ID,
-		type: ReferenceType,
-		title: Title,
-		author?: (Person | Organization)[],
-		editor?: Contributor[],
-		publisher?: Contributor[],
-		issued?: CSLDate,
-		abstract?: string,
-		accessed?: CSLDate,
+		public id: ID,
+		public type: ReferenceType,
+		public title: Title,
+		public author: Contributor[],
+		public editor?: Contributor[],
 	) {
 		this.id = id;
 		this.type = type;
 		this.title = title;
 		this.author = author;
 		this.editor = editor;
-		this.publisher = publisher;
-		this.issued = issued;
-		this.abstract = abstract;
-		this.accessed = accessed;
 	}
 }

@@ -1,49 +1,14 @@
 // contributor modeling needs more thought in general
 
-export abstract class Contributor {
-	name: string;
-
-	constructor(name: string) {
+// keep this simple for now
+export class Contributor {
+	constructor(
+		public name: string,
+		public role: string = "author",
+		public parse: boolean = true,
+	) {
 		this.name = name;
-	}
-
-	display(): string {
-		return this.name;
-	}
-}
-
-export class Organization extends Contributor {
-	name: string;
-	location?: string;
-
-	constructor(name: string, location?: string) {
-		super(name);
-		this.name = name;
-		this.location = location;
-	}
-
-	sortName(): string {
-		return this.name;
-	}
-}
-
-export class Person extends Contributor {
-	name: string;
-	familyName: string;
-	givenName: string;
-
-	constructor(name: string, givenName: string, familyName: string) {
-		super(name);
-		this.name = name;
-		this.givenName = givenName;
-		this.familyName = familyName;
-	}
-
-	displayName(initialize: boolean): string {
-		return `${this.givenName} ${this.familyName}`;
-	}
-
-	sortName(): string {
-		return `${this.familyName}, ${this.givenName}`;
+		this.role = role;
+		this.parse = parse;
 	}
 }

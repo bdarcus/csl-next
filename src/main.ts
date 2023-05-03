@@ -1,20 +1,17 @@
-import "reflect-metadata";
-import { Bibliography } from "./bibliography";
+import { InputBibliography } from "./bibliography";
 import { Style } from "./style";
 import { Processor } from "./processor";
 //import { Reference } from "./reference";
 import { loadJSON, loadYAML } from "./utils";
-import { plainToClass } from "class-transformer";
 
 const bibj = loadJSON("examples/bibliography.json");
 const biby = loadYAML("examples/bibliography.yaml");
 
 const csly = loadYAML("examples/style.csl.yaml");
 
-const bibjts = plainToClass(Bibliography, bibj);
-const bibyts = plainToClass(Bibliography, biby);
+const CiteProc = new Processor(csly, biby);
+const refs = CiteProc.getProcReferences();
 
-const CiteProc = new Processor(csly, bibyts);
-
-console.log(CiteProc.getReferences());
-console.log(CiteProc.getReferences()[4].author);
+console.log(CiteProc);
+console.log(CiteProc.getProcReferences());
+console.log(refs[2].formatAuthors());

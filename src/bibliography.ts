@@ -1,64 +1,13 @@
-import { Reference, ID } from "./reference";
-import { Type, plainToClass } from "class-transformer";
+import { Reference } from "./reference";
 import "reflect-metadata";
+import { plainToClass } from "class-transformer";
 
-/**
- * A bibliography is a collection of references.
- *
- * It is the input of a citation processor.
- *
- * @examples
- * {
- * "title": "My Bibliography",
- * "description": "A collection of references.",
- * "references": [
- *   {
- *     "id": "doe1",
- *     "type": "book",
- *    "title": "The Title",
- *     "author": [
- *       {
- *         "family": "Doe",
- *         "given": "Jane"
- *       }
- *     ],
- *     "issued": "2023"
- *   }
- * ]
- *}
- */
-export class Bibliography {
-	/**
-	 * The title of the bibliography.
-	 */
-	title?: string;
-	/**
-	 * The description of the bibliography.
-	 */
-	description?: string;
+type BibliographyFile = string; // is there a path type I can use?
 
-	/**
-	 * The references array.
-	 *
-	 * @items.minimum 1
-	 */
+interface IInputBibliography {
+	[key: string]: Reference;
+}
 
-	@Type(() => Reference) // FIX getting an error; seems a bug elsewhere
-	references: Reference[];
-
-	constructor(title?: string, description?: string) {
-		this.title = title;
-		this.description = description;
-		this.references = [];
-	}
-
-	addReference(reference: Reference): void {
-		this.references.push(reference);
-	}
-
-	getReference(id: ID, references: Reference[]): Reference[] {
-		// FIX why doesn't this work?
-		// return references.find((ref as Reference) => ref.id as ID === id);
-		return references;
-	}
+export class InputBibliography implements IInputBibliography {
+	[key: string]: Reference;
 }

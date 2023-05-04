@@ -28,7 +28,23 @@ export class Processor {
 	}
 }
 
-export class ProcReference extends Reference {
+/**
+ * Data provided during processing to facilitate sorting and disambiguation.
+ */
+interface ProcHints {
+	citekey: ID;
+	disambCondition?: boolean;
+	sortKeys?: string[];
+	disambYearSuffix?: number;
+	disambEtAlNames?: boolean;
+}
+
+export class ProcReference implements ProcHints, Reference {
+	type: ReferenceType;
+	title: Title;
+	author: Contributor[];
+	editor: Contributor[];
+	// REVIEW maybe put the below in a common object instead?
 	citekey: ID;
 	disambCondition?: boolean;
 	sortKeys?: string[];
@@ -45,7 +61,10 @@ export class ProcReference extends Reference {
 		disambYearSuffix?: number,
 		disambEtAlNames?: boolean,
 	) {
-		super(type, title, author, editor);
+		this.type = type;
+		this.title = title;
+		this.author = author;
+		this.editor = editor;
 		this.citekey = this.citekey;
 		this.disambCondition = disambCondition;
 		this.sortKeys = sortKeys;

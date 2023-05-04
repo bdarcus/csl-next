@@ -18,22 +18,24 @@ export class Processor {
 	}
 
 	getProcReferences(): ProcReference[] {
-		const refs = Object.values(this.bibliography);
-		const refsObjs = refs.map((ref) => {
-			return plainToClass(ProcReference, ref);
+		const citekeys = Object.keys(this.bibliography);
+		const refsObjs = citekeys.map((citekey) => {
+			const pref = plainToClass(ProcReference, this.bibliography[citekey]);
+			pref.citekey = citekey;
+			return pref;
 		});
 		return refsObjs;
 	}
 }
 
 export class ProcReference extends Reference {
+	citekey: ID;
 	disambCondition?: boolean;
 	sortKeys?: string[];
 	disambYearSuffix?: number;
 	disambEtAlNames?: boolean;
 
 	constructor(
-		id: ID,
 		type: ReferenceType,
 		title: Title,
 		author: Contributor[],
@@ -43,7 +45,8 @@ export class ProcReference extends Reference {
 		disambYearSuffix?: number,
 		disambEtAlNames?: boolean,
 	) {
-		super(id, type, title, author, editor);
+		super(type, title, author, editor);
+		this.citekey = this.citekey;
 		this.disambCondition = disambCondition;
 		this.sortKeys = sortKeys;
 		this.disambYearSuffix = disambYearSuffix;

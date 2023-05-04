@@ -40,13 +40,11 @@ export interface TitleStructured {
 
 export class Reference {
 	constructor(
-		public id: ID,
 		public type: ReferenceType,
 		public title: Title,
 		public author: Contributor[],
 		public editor?: Contributor[],
 	) {
-		this.id = id;
 		this.type = type;
 		this.title = title;
 		this.author = author;

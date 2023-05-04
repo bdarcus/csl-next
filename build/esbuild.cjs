@@ -15,7 +15,7 @@ const prodConfig = {
 /** @type esbuild.BuildOptions */
 const config = {
 	entryPoints: ["src/main.ts"],
-	outfile: "dist/main.js",
+	outfile: "dist/main.cjs",
 	bundle: true,
 	platform: "node",
 	logLevel: "info",
@@ -34,7 +34,7 @@ const config = {
 if (argv.run)
 	config.plugins.push(
 		require("@es-exec/esbuild-plugin-start").default({
-			script: "node dist/main.js",
+			script: "node dist/main.cjs",
 		}),
 	);
 

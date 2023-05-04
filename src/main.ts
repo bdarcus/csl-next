@@ -1,11 +1,10 @@
-import { InputBibliography } from "./bibliography";
+import { IInputBibliography } from "./bibliography";
 import { Style } from "./style";
 import { Processor } from "./processor";
 //import { Reference } from "./reference";
 import { loadJSON, loadYAML } from "./utils";
 
-const bibj = loadJSON("examples/bibliography.json");
-const biby = loadYAML("examples/bibliography.yaml");
+const biby = loadYAML("examples/bibliography.yaml") as IInputBibliography;
 
 const csly = loadYAML("examples/style.csl.yaml");
 

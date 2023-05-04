@@ -1,7 +1,7 @@
 import { Style, SortType, GroupSortType } from "./style";
-import { Reference, ReferenceType, Title, ID } from "./reference";
+import { InputReference, ReferenceType, Title, ID } from "./reference";
 import { CiteRef } from "./citation";
-import { InputBibliography } from "./bibliography";
+import { IInputBibliography } from "./bibliography";
 import { Contributor } from "./contributor";
 import "reflect-metadata";
 import { plainToClass } from "class-transformer";
@@ -9,12 +9,12 @@ import { plainToClass } from "class-transformer";
 export class Processor {
 	style: Style;
 	//citeRefs: CiteRef[];
-	bibliography: InputBibliography;
+	bibliography: IInputBibliography;
 
-	constructor(style: Style, bibliography: InputBibliography) {
+	constructor(style: Style, bibliography: IInputBibliography) {
 		this.style = style;
 		//	this.citeRefs = CiteRef;
-		this.bibliography = plainToClass(InputBibliography, bibliography);
+		this.bibliography = bibliography;
 	}
 
 	getProcReferences(): ProcReference[] {
@@ -39,7 +39,7 @@ interface ProcHints {
 	disambEtAlNames?: boolean;
 }
 
-export class ProcReference implements ProcHints, Reference {
+export class ProcReference implements ProcHints, InputReference {
 	type: ReferenceType;
 	title: Title;
 	author: Contributor[];
@@ -56,6 +56,7 @@ export class ProcReference implements ProcHints, Reference {
 		title: Title,
 		author: Contributor[],
 		editor: Contributor[],
+		citekey: ID,
 		disambCondition?: boolean,
 		sortKeys?: string[],
 		disambYearSuffix?: number,
@@ -65,7 +66,7 @@ export class ProcReference implements ProcHints, Reference {
 		this.title = title;
 		this.author = author;
 		this.editor = editor;
-		this.citekey = this.citekey;
+		this.citekey = citekey;
 		this.disambCondition = disambCondition;
 		this.sortKeys = sortKeys;
 		this.disambYearSuffix = disambYearSuffix;

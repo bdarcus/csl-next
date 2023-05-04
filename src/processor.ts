@@ -1,7 +1,7 @@
 import { Style, SortType, GroupSortType } from "./style";
 import { InputReference, ReferenceType, Title, ID } from "./reference";
 import { CiteRef } from "./citation";
-import { IInputBibliography } from "./bibliography";
+import { InputBibliography } from "./bibliography";
 import { Contributor } from "./contributor";
 import "reflect-metadata";
 import { plainToClass } from "class-transformer";
@@ -9,9 +9,9 @@ import { plainToClass } from "class-transformer";
 export class Processor {
 	style: Style;
 	//citeRefs: CiteRef[];
-	bibliography: IInputBibliography;
+	bibliography: InputBibliography;
 
-	constructor(style: Style, bibliography: IInputBibliography) {
+	constructor(style: Style, bibliography: InputBibliography) {
 		this.style = style;
 		//	this.citeRefs = CiteRef;
 		this.bibliography = bibliography;

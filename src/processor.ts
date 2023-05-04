@@ -6,6 +6,9 @@ import { Contributor } from "./contributor";
 import "reflect-metadata";
 import { plainToClass } from "class-transformer";
 
+/**
+ * Takes citatons, bibliography, and style, and produces a formatted bibliography.
+ */
 export class Processor {
 	style: Style;
 	//citeRefs: CiteRef[];
@@ -39,6 +42,9 @@ interface ProcHints {
 	disambEtAlNames?: boolean;
 }
 
+/**
+ * A reference sorted and processed before final rendering, with methods that provide such rendering.
+ */
 export class ProcReference implements ProcHints, InputReference {
 	type: ReferenceType;
 	title: Title;

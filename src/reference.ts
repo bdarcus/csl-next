@@ -20,8 +20,6 @@ export type EDTFDATE = string | null | undefined;
 
 export type ID = string; // string needs to be a token
 
-export type IDReference = Record<ID, Reference>;
-
 export type ReferenceType = "book" | "article" | "chapter";
 
 export type RoleType = "author" | "editor" | "publisher";
@@ -41,7 +39,7 @@ export interface TitleStructured {
 /**
  * Input reference data.
  */
-export interface Reference {
+export interface InputReference {
 	type?: ReferenceType;
 	title?: Title;
 	author?: Contributor[];

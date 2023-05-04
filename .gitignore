@@ -6,3 +6,5 @@ lib
 src/.vscode
 docs
 notes.md
+example/*.json
+

@@ -25,7 +25,9 @@ docs:
 	npx typedoc --plugin typedoc-umlclass 
 
 json:
-	yq -P -o json '.' examples/style.csl.yaml > examples/style.csl.json
+	# should be smarter and more flexible, integrate into package.json
+	pnpm yaml-convert --input examples/style.csl.yaml --output examples/style.csl.json
+	pnpm yaml-convert --input examples/bibliography.yaml --output examples/bibliography.json
 
 src/version.ts: package.json
 	grep '^ *"version":' $< | \

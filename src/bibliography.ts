@@ -4,8 +4,7 @@ import { plainToClass } from "class-transformer";
 
 type BibliographyFile = string; // is there a path type I can use?
 
-export type IInputBibliography = Record<ID, InputReference>;
-
-// export class InputBibliography implements IInputBibliography {
-// 	[key: string]: Reference;
-// }
+/**
+ * A bibliography is a map of references.
+ */
+export type InputBibliography = Record<ID, InputReference>;

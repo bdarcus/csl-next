@@ -11,6 +11,8 @@ From the beginning, it is designed to add new features even while simplifying th
 
 ## Details
 
+### Contents and Status
+
 The code here is a `typescript` project that:
 
 1. defines a model that is programatically-converted to `JSON Schema` files, and can from there generate different language code via [quicktype](https://quicktype.io).
@@ -18,9 +20,13 @@ The code here is a `typescript` project that:
 
 The first is maybe 70% or so complete, while the second currently just reads and serializes data and styles.
 
+### Schema-backed Editing
+
 Here is `VSCode`, with schema-backed validation and auto-completion of a YAML style.
 
 ![Screenshot from 2023-04-16 10-22-25](https://user-images.githubusercontent.com/1134/232319672-88e96d95-1806-4d6b-9d27-6d0cc32d5033.png)
+
+### Makefile and Node Tasks
 
 To see the state of the model, see the `examples` directory, or do `make docs`. 
 
@@ -37,11 +43,13 @@ The Makefile targets include:
 
 See also `package.json`, for other options.
 
+### Code Generation from Schemas
+
 To convert the schemas to other languages, try this (in this case Rust):
 
 ```console
-> npm install -g quicktype
-> quicktype schemas/csl-style-schema.json -o style.rs
+$ npm install -g quicktype
+$ quicktype schemas/csl-style-schema.json -o style.rs
 ```
 
 Note that the generated code will include a model definition, that should mostly match the typescript model, _and_ serialization and deserialization code. 

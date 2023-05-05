@@ -1,6 +1,6 @@
 ## The Idea
 
-An experiment to create a new, simpler, but extensible CSL.
+An experiment to create a new, simpler, more featureful, but extensible CSL.
 
 The idea is to simplify and generalize the template model, and move more of the logic to extensible parameter groups.
 
@@ -13,12 +13,12 @@ From the beginning, it is designed to add new features even while simplifying th
 
 The code here is a `typescript` project that:
 
-1. defines a model that is programatically-converted to `JSON Schema` files.
+1. defines a model that is programatically-converted to `JSON Schema` files, and can from there generate different language code via [quicktype](https://quicktype.io).
 2. provides a proof-of-concept processor implementation.
 
-The first is maybe 70% or so complete, while the second is barely-started.
+The first is maybe 70% or so complete, while the second currently just reads and serializes data and styles.
 
-Here is`VSCode`, with schema-backed validation and auto-completion of a YAML style.
+Here is `VSCode`, with schema-backed validation and auto-completion of a YAML style.
 
 ![Screenshot from 2023-04-16 10-22-25](https://user-images.githubusercontent.com/1134/232319672-88e96d95-1806-4d6b-9d27-6d0cc32d5033.png)
 
@@ -36,6 +36,16 @@ The Makefile targets include:
 </dl>
 
 See also `package.json`, for other options.
+
+To convert the schemas to other languages, try this (in this case Rust):
+
+```console
+> npm install -g quicktype
+> quicktype schemas/csl-style-schema.json -o style.rs
+```
+
+Note that the generated code will include a model definition, that should mostly match the typescript model, _and_ serialization and deserialization code. 
+Feel free to experiment with your language of choice and report your experience!
 
 ## FAQ
 

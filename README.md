@@ -53,6 +53,18 @@ $ quicktype schemas/csl-style-schema.json -o style.rs
 ```
 
 Note that the generated code will include a model definition, that should mostly match the typescript model, _and_ serialization and deserialization code. 
+
+Here’s some minimal rust code to deserialize and serialize the JSON example style file to Rust Style struct, with result `APA`:
+
+```rust
+fn main() {
+   let json = fs::read_to_string("src/style.csl.json")
+       .expect("Unable to read file");
+   let style: Style = serde_json::from_str(&json).unwrap();
+   println!("{}", serde_json::to_string(&style.title).unwrap());
+}
+```
+
 Feel free to experiment with your language of choice and report your experience!
 
 ## FAQ

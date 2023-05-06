@@ -307,22 +307,73 @@ type MonthStyle =
 	| "narrow"; // (e.g., M).
 
 export type AndAsType = "text" | "symbol";
-export interface ContributorListFormatting {
-	/**
-	 * The delimiter between last and second-to-last item.
-	 *
-	 * The default "text" value produces:
-	 *
-	 * >  Doe, Johnson and Smith
-	 *
-	 * The "symbol" value produces:
-	 *
-	 * >  Doe, Johnson & Smith
-	 *
-	 * @default text
-	 */
-	andAs?: AndAsType;
 
+/**
+ * Which of the contributor names in a list to apply the transformation.
+ */
+export type ContributorScope = "first" | "all" | "none";
+
+/**
+ * Contributor role configuration.
+ */
+export interface RoleOption extends HasFormatting {
+	/**
+	 * The display form of the role.
+	 *
+	 * ### `long`
+	 *
+	 * The full name of the role.
+	 *
+	 * > Jane Smith (editor)
+	 *
+	 * ### `short`
+	 *
+	 * > Jane Smith (ed.)
+	 *
+	 * ### `verb`
+	 *
+	 * > edited by Jane Smith
+	 *
+	 * ### `verb-short`
+	 *
+	 * > ed. Jane Smith
+	 *
+	 * @default short
+	 */
+	form?: "long" | "short" | "verb" | "verb-short";
+	/**
+	 * Contributor roles for which to omit the role description.
+	 *
+	 * The default value is `["author"]`, which omits the role for authors, including for any author substitutions.
+	 *
+	 * @default author
+	 */
+	omit?: ContributorType[];
+}
+
+export interface ContributorListShortening {
+	/**
+	 * The minimum length of the before acitvating shortening
+	 *
+	 * @default 3
+	 */
+	min?: number;
+	/**
+	 * When shortening, use the first number of contributors.
+	 */
+	useFirst?: number;
+	/**
+	 * When shortening, replace omitted names with this term form.
+	 *
+	 * ### `short`
+	 *
+	 * > Doe, Johnson, et al.
+	 *
+	 * ### `long`
+	 *
+	 * > Doe, Johnson, and others
+	 */
+	atAl?: "short" | "long";
 	/**
 	 * Determines when the delimiter is used to separate the second to last and the last
 	 * item in contributor lists (if `and` is not set, the name delimiter is always used,
@@ -397,6 +448,38 @@ export interface ContributorListFormatting {
 	 * @default contextual
 	 */
 	delimiterPrecedesEtAl?: "always" | "never" | "contextual";
+}
+export interface ContributorListFormatting extends HasFormatting {
+	/**
+	 * Format a contributor name as sorted.
+	 *
+	 * @default none
+	 */
+	displayAsSort?: ContributorScope;
+	/**
+	 * The delimiter between last and second-to-last item.
+	 *
+	 * The default "text" value produces:
+	 *
+	 * >  Doe, Johnson and Smith
+	 *
+	 * The "symbol" value produces:
+	 *
+	 * >  Doe, Johnson & Smith
+	 *
+	 * @default text
+	 */
+	andAs?: AndAsType;
+	/**
+	 * Configuring of the display of contributor rolee annotations.
+	 *
+	 * @default short
+	 */
+	role?: RoleOption;
+	/**
+	 * Configuration for contributor list shortening.
+	 */
+	shorten?: ContributorListShortening;
 }
 
 /**

@@ -10,9 +10,13 @@ options:
     time: long
     year: numeric
   contributors:
-    andAnd: text
-    delimiterPrecedesEtAl: contextual
-    delimiterPrecedesLast: contextual
+    andAs: text
+    role:
+      form: short
+      wrap: parentheses
+    shorten:
+      delimiterPrecedesEtAl: contextual
+      delimiterPrecedesLast: contextual
   # REVIEW: I think this belongs in `group`
   disambiguate:
     addNames: all-with-initials

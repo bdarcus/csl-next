@@ -20,8 +20,8 @@ options:
       order: ascending
   group:
     # be explicit about grouping, which is core logic
-    - key: author
-    - key: year
+    - author
+    - year
   # pave the way for multilingual support
   localization:
     scope: global
@@ -40,12 +40,12 @@ citation:
       - key: year
         order: descending # in CSL 1.0, we have this global, but it's specific to citations
     group:
-      - key: author
-      - key: year
+      - author
+      - year
   integral:
     options:
       group:
-        - key: author
+        - author
     format:
       - template: author-apa
       - wrap: parentheses

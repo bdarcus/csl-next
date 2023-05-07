@@ -1,5 +1,5 @@
-import { Style, SortType, GroupSortType } from "./style";
-import { InputReference, ReferenceType, Title, ID } from "./reference";
+import { Style, ReferenceTypes, SortRules, GroupSortKeys } from "./style";
+import { InputReference, Title, ID } from "./reference";
 import { CiteRef } from "./citation";
 import { InputBibliography } from "./bibliography";
 import { Contributor } from "./contributor";
@@ -46,7 +46,7 @@ interface ProcHints {
  * A reference sorted and processed before final rendering, with methods that provide such rendering.
  */
 export class ProcReference implements ProcHints, InputReference {
-	type: ReferenceType;
+	type: ReferenceTypes;
 	title: Title;
 	author: Contributor[];
 	editor: Contributor[];
@@ -58,7 +58,7 @@ export class ProcReference implements ProcHints, InputReference {
 	disambEtAlNames?: boolean;
 
 	constructor(
-		type: ReferenceType,
+		type: ReferenceTypes,
 		title: Title,
 		author: Contributor[],
 		editor: Contributor[],

@@ -1,6 +1,7 @@
 // Typescript model for a CSL Reference
 
 import { Contributor } from "./contributor";
+import { ReferenceTypes, ContributorRoles } from "./style";
 
 // Types
 
@@ -20,10 +21,6 @@ export type EDTFDATE = string | null | undefined;
 
 export type ID = string; // string needs to be a token
 
-export type ReferenceType = "book" | "article" | "chapter";
-
-export type RoleType = "author" | "editor" | "publisher";
-
 export type Title = TitleStructured | TitleString;
 
 export type TitleString = string; // plain or Djot?
@@ -40,7 +37,7 @@ export interface TitleStructured {
  * Input reference data.
  */
 export interface InputReference {
-	type?: ReferenceType;
+	type?: ReferenceTypes;
 	title?: Title;
 	author?: Contributor[];
 	editor?: Contributor[];

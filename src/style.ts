@@ -8,7 +8,7 @@ export interface TemplateFile {
 	templates: NamedTemplate[];
 }
 
-type WrapType = "parentheses" | "brackets" | "quotes";
+export type WrapType = "parentheses" | "brackets" | "quotes";
 export interface HasFormatting {
 	/**
 	 * The symbol pair to wrap around one or more rendering components.

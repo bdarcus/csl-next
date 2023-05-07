@@ -8,55 +8,54 @@ export interface TemplateFile {
 	templates: NamedTemplate[];
 }
 
-export type WrapType = "parentheses" | "brackets" | "quotes";
+export type WrapPunctuation = "parentheses" | "brackets" | "quotes";
 export interface HasFormatting {
 	/**
 	 * The symbol pair to wrap around one or more rendering components.
 	 * Interaction with surrounding punctuation is localized.
 	 */
-	wrap?: WrapType;
+	wrap?: WrapPunctuation;
 	bold?: boolean;
 	emph?: boolean;
 }
 
-export type SortType = {
+export type SortRules = {
 	/**
 	 * The order to sort the list.
 	 *
 	 * @default ascending
 	 */
 	order: "ascending" | "descending";
-	key: GroupSortType;
+	key: GroupSortKeys;
 };
 
-export type GroupSortType = "author" | "year" | "title" | "as-cited";
+export type GroupSortKeys = "author" | "year" | "title" | "as-cited";
 
-type CategoryType = "science" | "social science" | "biology";
+type StyleCategory = "science" | "social science" | "biology";
 
-// extract, so can reuse elsewhere
-type RefType = "book" | "article" | "chapter";
+export type ReferenceTypes = "book" | "article" | "chapter";
 
-type ContributorType = "author" | "editor" | "publisher";
+export type ContributorRoles = "author" | "editor" | "publisher";
 
-type DateType = "issued";
+export type Dates = "issued" | "accessed";
 
-type TitleType = "title" | "container-title";
+export type Titles = "title" | "container-title";
 
-type LocatorType = "page" | "chapter";
+export type Locators = "page" | "chapter";
 
-type SimpleType = "volume" | "issue" | "pages";
+// REVIEW
+export type SimpleTypes = "volume" | "issue" | "pages";
 
-// extract, so can reuse elsewhere
-type VariableType =
-	| RefType
-	| ContributorType
-	| DateType
-	| TitleType
-	| SimpleType;
+export type Variables =
+	| ReferenceTypes
+	| ContributorRoles
+	| Dates
+	| Titles
+	| SimpleTypes;
 
-type MatchType =
+type MatchWhich =
 	/**
-	 * Which of the match conditions must be satisfied for it be true?
+	 * The conditions that must be true for the templates to render.
 	 *
 	 * @default "all"
 	 */
@@ -110,7 +109,7 @@ type Match = {
 	 *
 	 * @default all
 	 */
-	match?: MatchType;
+	match?: MatchWhich;
 	/**
 	 * When a match, process these templates.
 	 */
@@ -121,28 +120,28 @@ type IsNumber = {
 	/**
 	 * Is the item variable a number?
 	 */
-	isNumber: LocatorType;
+	isNumber: Locators;
 };
 
 type IsEDTFDate = {
 	/**
 	 * Does the date conform to EDTF?
 	 */
-	isEDTFDate: DateType;
+	isEDTFDate: Dates;
 };
 
 type IsRefType = {
 	/**
 	 * Is the item reference type among the listed reference types?
 	 */
-	isRefType: RefType[];
+	isRefType: ReferenceTypes[];
 };
 
 type HasVariable = {
 	/**
 	 * Does the item reference include one of the listed variables?
 	 */
-	hasVariable: VariableType[];
+	hasVariable: Variables[];
 };
 
 type Locale = {
@@ -153,11 +152,11 @@ type Locale = {
 };
 
 // REVIEW hould the below be an interface?
-type DataTypeMatch = IsNumber | IsEDTFDate | IsRefType | HasVariable | Locale;
+type DataMatch = IsNumber | IsEDTFDate | IsRefType | HasVariable | Locale;
 
-type Condition = Match & DataTypeMatch;
+type Condition = Match & DataMatch;
 
-type SubstitutionType = "editor" | "translator" | "title";
+type Substitute = "editor" | "translator" | "title";
 
 /**
  * Parameter groups.
@@ -170,7 +169,7 @@ export interface OptionGroup {
 	/**
 	 * Grouping configuration.
 	 */
-	group?: GroupSortType[];
+	group?: GroupSortKeys[];
 	/**
 	 * Substitution configuration.
 	 */
@@ -210,7 +209,7 @@ export interface Localization {
 // Grouping and Sorting
 
 export interface SortGroup {
-	key: GroupSortType;
+	key: GroupSortKeys;
 }
 
 /**
@@ -254,7 +253,7 @@ export interface Substitution {
 	 * @default ["editor", "translator", "title"]
 	 *
 	 */
-	author: SubstitutionType[];
+	author: Substitute[];
 }
 
 /**
@@ -306,7 +305,7 @@ type MonthStyle =
 	| "short" // (e.g., Mar)
 	| "narrow"; // (e.g., M).
 
-export type AndAsType = "text" | "symbol";
+export type AndAsString = "text" | "symbol";
 
 /**
  * Which of the contributor names in a list to apply the transformation.
@@ -348,7 +347,7 @@ export interface RoleOption extends HasFormatting {
 	 *
 	 * @default author
 	 */
-	omit?: ContributorType[];
+	omit?: ContributorRoles[];
 }
 
 export interface ContributorListShortening {
@@ -469,7 +468,7 @@ export interface ContributorListFormatting extends HasFormatting {
 	 *
 	 * @default text
 	 */
-	andAs?: AndAsType;
+	andAs?: AndAsString;
 	/**
 	 * Configuring of the display of contributor rolee annotations.
 	 *
@@ -501,7 +500,7 @@ export interface Style {
 	/**r
 	 * The categories the style belongs to; for purposes of indexing.
 	 */
-	categories?: CategoryType[];
+	categories?: StyleCategory[];
 	/**
 	 * Global parameter options.
 	 */
@@ -514,11 +513,11 @@ export interface Style {
 	/**
 	 * The bibliography specification.
 	 */
-	bibliography?: Bibliography;
+	bibliography?: BibliographyStyle;
 	/**
 	 * The citation specification.
 	 */
-	citation?: Citation;
+	citation?: CitationStyle;
 }
 
 export interface NamedTemplate {
@@ -559,31 +558,31 @@ interface RenderListBlock extends RenderList {
 }
 
 interface RenderItemSimple extends HasFormatting {
-	variable: SimpleType;
+	variable: SimpleTypes;
 }
 
 interface RenderItemDate extends HasFormatting {
-	variable: DateType;
+	variable: Dates;
 	year?(date: string): string; // CSLDate
 	month?(date: string): string;
 	format?(date: string): string;
 }
 
 interface RenderTitle extends HasFormatting {
-	variable: TitleType; // REVIEW title instead?
+	variable: Titles; // REVIEW title instead?
 	main(title: string): string; // REVIEW
 	sub(title: string): string;
 }
 
 interface RenderContributors extends RenderList {
-	variable: ContributorType;
+	variable: ContributorRoles;
 }
 
 interface RenderLocators extends RenderList {
-	variable: LocatorType;
+	variable: Locators;
 }
 
-interface Citation extends RenderList {
+interface CitationStyle extends RenderList {
 	/**
 	 * @default inline
 	 */
@@ -598,6 +597,6 @@ interface Citation extends RenderList {
 	nonIntegral?: RenderList;
 }
 
-interface Bibliography extends RenderListBlock {
+interface BibliographyStyle extends RenderListBlock {
 	heading?: string; // TODO
 }

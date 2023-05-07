@@ -1,4 +1,4 @@
-import { ID } from "./reference";
+import { ID } from "./reference.ts";
 
 type CitationModeType = "integral" | "nonIntegral";
 

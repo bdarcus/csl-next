@@ -1,8 +1,8 @@
-import { Style, ReferenceTypes, SortRules, GroupSortKeys } from "./style";
-import { InputReference, Title, ID } from "./reference";
-import { CiteRef } from "./citation";
-import { InputBibliography } from "./bibliography";
-import { Contributor } from "./contributor";
+import { Style, ReferenceTypes, SortRules, GroupSortKeys } from "./style.ts";
+import { InputReference, Title, ID } from "./reference.ts";
+import { CiteRef } from "./citation.ts";
+import { InputBibliography } from "./bibliography.ts";
+import { Contributor } from "./contributor.ts";
 import "reflect-metadata";
 import { plainToClass } from "class-transformer";
 

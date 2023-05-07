@@ -4,25 +4,25 @@ VERSION=$(shell grep '\"version\":' package.json | sed -e 's/.*: \"\([^"]*\)".*/
 default: schemas
 
 schemas:
-	npx typescript-json-schema --refs --aliasRefs --required --noExtraProps src/style.ts Style -o schemas/csl-style-schema.json
-	npx typescript-json-schema --refs --aliasRefs --required --noExtraProps src/reference.ts InputReference -o schemas/csl-reference-schema.json
-	npx typescript-json-schema --refs --aliasRefs --required --noExtraProps src/bibliography.ts InputBibliography -o schemas/csl-bibliography-schema.json
-	npx typescript-json-schema --refs --aliasRefs --required --noExtraProps src/citation.ts Citation -o schemas/csl-citation-schema.json
+	pnpm ts-json-schema-generator --path 'src/style.ts' --type 'Style' -o schemas/csl-style-schema.json
+	pnpm ts-json-schema-generator --path 'src/reference.ts' --type 'InputReference' -o schemas/csl-reference-schema.json
+	pnpm ts-json-schema-generator --path 'src/bibliography.ts' --type 'InputBibliography' -o schemas/csl-bibliography-schema.json
+	pnpm ts-json-schema-generator --path 'src/citation.ts' --type 'Citation' -o schemas/csl-citation-schema.json
 
 build:
-	npx tsc
+	pnpm tsc
 
 watch:
-	npx tsc --watch
+	pnpm tsc --watch
 
 node_modules:
-	npm install
+	pnpm install
 
 clean:
 	rm -rf dist docs 
 	
 docs:
-	npx typedoc --plugin typedoc-umlclass 
+	pnpm typedoc --plugin typedoc-umlclass 
 
 json:
 	# should be smarter and more flexible, integrate into package.json

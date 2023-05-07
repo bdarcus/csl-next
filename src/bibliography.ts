@@ -1,4 +1,4 @@
-import { InputReference, ID } from "./reference";
+import { InputReference, ID } from "./reference.ts";
 import "reflect-metadata";
 import { plainToClass } from "class-transformer";
 

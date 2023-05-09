@@ -4,6 +4,7 @@ import { build, emptyDir } from "https://deno.land/x/dnt/mod.ts";
 await emptyDir("./npm");
 
 await build({
+  packageManager: "pnpm",
   typeCheck: false,
   test: false,
   entryPoints: [
@@ -27,7 +28,11 @@ await build({
     name: "csl-next",
     version: Deno.args[0],
     description: "A reimagining of CSL.",
-
+    devDependencies: {
+      "ts-json-schema-generator": "^1.2.0",
+      "typedoc": "^0.24.6",
+      "yaml-convert": "^1.0.1"
+    },
     license: "MIT",
     repository: {
       type: "git",
@@ -41,5 +46,7 @@ await build({
     // steps to run after building and before running the tests
     Deno.copyFileSync("LICENSE", "npm/LICENSE");
     Deno.copyFileSync("README.md", "npm/README.md");
+    Deno.copyFileSync("typedoc.json", "npm/typedoc.json");
+    Deno.copyFileSync("tsconfig.json", "npm/tsconfig.json");
   },
 });

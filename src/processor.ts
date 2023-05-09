@@ -1,7 +1,7 @@
-import { ReferenceTypes, Style } from "./lib/style.ts";
-import { ID, InputReference, Title } from "./lib/reference.ts";
-import { InputBibliography } from "./lib/bibliography.ts";
-import { Contributor } from "./lib/contributor.ts";
+import { ReferenceTypes, Style } from "./style.ts";
+import { ID, InputReference, Title } from "./reference.ts";
+import { InputBibliography } from "./bibliography.ts";
+import { Contributor } from "./contributor.ts";
 import "npm:reflect-metadata";
 import { plainToClass } from "npm:class-transformer";
 

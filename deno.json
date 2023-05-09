@@ -1,7 +1,7 @@
 {
   "lock": false,
   "tasks": {
-    "cli": "deno run --allow-read --allow-env cli.ts",
+    "cli": "deno run --allow-read --allow-env ./src/cli.ts",
     "make_npm": "deno run -A scripts/build_npm.ts 0.1.0"
   },
   "imports": {

@@ -1,5 +1,5 @@
-import { Style } from "./lib/style.ts";
-import { InputBibliography } from "./lib/bibliography.ts";
+import { Style } from "./style.ts";
+import { InputBibliography } from "./bibliography.ts";
 import * as fs from "node:fs";
 import { parse } from "npm:yaml";
 

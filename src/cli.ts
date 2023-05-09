@@ -1,6 +1,6 @@
-import { InputBibliography } from "./lib/bibliography.ts";
+import { InputBibliography } from "./bibliography.ts";
 import { Processor } from "./processor.ts";
-import { loadYAML } from "./lib/utils.ts";
+import { loadYAML } from "./utils.ts";
 
 const biby = loadYAML("examples/bibliography.yaml") as InputBibliography;
 

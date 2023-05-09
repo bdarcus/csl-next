@@ -8,6 +8,7 @@
   },
   "lock": false,
   "tasks": {
+    "clean": "rm -rf npm docs",
     "cli": "deno run --allow-read --allow-env ./src/cli.ts",
     "npm": "deno run -A scripts/build_npm.ts 0.1.0",
     "schemas": "deno run -A scripts/make_schemas.ts",

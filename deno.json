@@ -1,8 +1,17 @@
 {
+  "compilerOptions": {
+    "allowJs": true,
+    "lib": [
+      "deno.window"
+    ],
+    "strict": true
+  },
   "lock": false,
   "tasks": {
     "cli": "deno run --allow-read --allow-env ./src/cli.ts",
-    "make_npm": "deno run -A scripts/build_npm.ts 0.1.0"
+    "npm": "deno run -A scripts/build_npm.ts 0.1.0",
+    "schemas": "deno task npm && deno run -A scripts/make_schemas.ts",
+    "docs": "deno task npm && typedoc --tsconfig tsconfig.json --plugin typedoc-umlclass npm/src/style.ts"
   },
   "imports": {
     "edtf": "https://esm.sh/edtf@4.4.1",

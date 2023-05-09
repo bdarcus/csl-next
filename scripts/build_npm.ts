@@ -47,6 +47,5 @@ await build({
     Deno.copyFileSync("LICENSE", "npm/LICENSE");
     Deno.copyFileSync("README.md", "npm/README.md");
     Deno.copyFileSync("typedoc.json", "npm/typedoc.json");
-    Deno.copyFileSync("tsconfig.json", "npm/tsconfig.json");
   },
 });

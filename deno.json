@@ -10,7 +10,7 @@
   "tasks": {
     "cli": "deno run --allow-read --allow-env ./src/cli.ts",
     "npm": "deno run -A scripts/build_npm.ts 0.1.0",
-    "schemas": "deno task npm && deno run -A scripts/make_schemas.ts",
+    "schemas": "deno run -A scripts/make_schemas.ts",
     "docs": "deno task npm && cd npm && typedoc --tsconfig tsconfig.json src/style.ts"
   },
   "imports": {

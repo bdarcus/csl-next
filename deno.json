@@ -1,0 +1,13 @@
+{
+  "lock": false,
+  "tasks": {
+    "cli": "deno run --allow-read --allow-env cli.ts",
+    "make_npm": "deno run -A scripts/build_npm.ts 0.1.0"
+  },
+  "imports": {
+    "edtf": "https://esm.sh/edtf@4.4.1",
+    "class-transformer": "https://esm.sh/class-transformer@0.5.1",
+    "yaml": "https://unpkg.com/yaml@2.2.2",
+    "reflect-metadata": "https://unpkg.com/reflect-metadata@0.1.13"
+  }
+}

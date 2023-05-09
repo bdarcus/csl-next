@@ -32,21 +32,22 @@ style.
 
 ![Screenshot from 2023-04-16 10-22-25](https://user-images.githubusercontent.com/1134/232319672-88e96d95-1806-4d6b-9d27-6d0cc32d5033.png)
 
-### Deno Tasks
+### Deno, Tasks
 
-I am using here `Deno` rather than `Nodejs`, as it's fast, and mostly simplifies things on the development side for me. 
+I am using here `Deno` rather than `Nodejs`. 
+It includes a `typescript` compiler, linter, and formatter, plus a test runner and bundler, all of it integrated and very fast.
 
 I have a few tasks setup, including to auto-generate an `NPM` module.
 
 <dl>
   <dt>npm</dt>
-  <dd>Generate the `NPM` module.</dd>
+  <dd>Generate the <code>NPM</code> module.</dd>
   <dt>schemas</dt>
-  <dd>Generate the `JSON` schemas.</dd>
+  <dd>Generate the <code>JSON</code> schemas.</dd>
   <dt>docs</dt>
   <dd>Generate the documentation, which outputs to the docs directory, and can be browsed locally.</dd>
   <dt>json</dt>
-  <dd>Converts the `YAML` example(s) to `JSON`.</dd>
+  <dd>Converts the </code>YAML</code> example(s) to <code>JSON</code>.</dd>
 </dl>
 
 ### Code Generation from Schemas

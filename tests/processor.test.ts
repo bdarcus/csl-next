@@ -1,27 +1,28 @@
-import { equal } from "node:assert/strict";
-import { describe, it } from "node:test";
-import { Processor } from "../src/processor.ts";
+//import { assertEquals } from "https://deno.land/std@0.186.0/testing/asserts.ts";
+//import { assert } from "https://deno.land/std@0.186.0/testing/asserts.ts";
+import { describe, it } from "https://deno.land/std@0.186.0/testing/bdd.ts";
+//import { Processor } from "../src/processor.ts";
 
 describe("sorting", () => {
-	it.todo("sorts references by author");
+  it("sorts references by author", () => {});
 
-	it.todo("sorts references by author, year");
+  it("sorts references by author, year", () => {});
 
-	it.todo("sorts references as cited");
+  it("sorts references as cited", () => {});
 });
 
 describe("grouping", () => {
-	it.todo("groups references by author");
+  it("groups references by author", () => {});
 
-	it.todo("groups references by author, year");
+  it("groups references by author, year", () => {});
 
-	it.todo("groups references as cited");
+  it("sorts references as cited", () => {});
 });
 
 describe("contributor formatting", () => {
-	it.todo("formats authors");
+  it("formats authors", () => {});
 });
 
 describe("dates formatting", () => {
-	it.todo("formats issued dates");
+  it("formats issued dates", () => {});
 });

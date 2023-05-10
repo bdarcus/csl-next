@@ -1,7 +1,7 @@
 import { Style } from "./style.ts";
 import { InputBibliography } from "./bibliography.ts";
 import * as fs from "node:fs";
-import { parse } from "npm:yaml";
+import { yaml } from "../deps.ts";
 
 /**
  * Parse a YAML style file.
@@ -10,7 +10,7 @@ import { parse } from "npm:yaml";
  */
 export function parseStyle(stylePath: string): Style {
   const style = fs.readFileSync(stylePath, "utf8");
-  return parse(style);
+  return yaml.parse(style);
 }
 
 /**
@@ -22,5 +22,5 @@ export function parseBibliography(
   bibliographyPath: string,
 ): InputBibliography {
   const style = fs.readFileSync(bibliographyPath, "utf8");
-  return parse(style);
+  return yaml.parse(style);
 }

@@ -8,6 +8,8 @@ export interface TemplateFile {
   templates: NamedTemplate[];
 }
 
+export type DateFormat = "year" | "year-month" | "year-month-day" | "month-day";
+
 export type WrapPunctuation = "parentheses" | "brackets" | "quotes";
 export interface HasFormatting {
   /**
@@ -560,10 +562,9 @@ interface RenderItemSimple extends HasFormatting {
 }
 
 interface RenderItemDate extends HasFormatting {
-  variable: Dates;
-  year?(date: string): string; // CSLDate
-  month?(date: string): string;
-  format?(date: string): string;
+  date: Dates;
+  // TODO align this with DateOptions
+  format: DateFormat;
 }
 
 interface RenderTitle extends HasFormatting {

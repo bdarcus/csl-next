@@ -70,7 +70,8 @@ citation:
 bibliography:
   format:
     - template: author-apa-full
-    - template: year
+    - date: issued
+      format: year
       wrap: parentheses
     - template: title
     - template: container-apa

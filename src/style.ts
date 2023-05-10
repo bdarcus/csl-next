@@ -568,17 +568,17 @@ interface RenderItemDate extends HasFormatting {
 }
 
 interface RenderTitle extends HasFormatting {
-  variable: Titles; // REVIEW title instead?
-  main(title: string): string; // REVIEW
-  sub(title: string): string;
+  title: Titles;
+  format?: "main" | "sub" | "full" | "short";
 }
 
 interface RenderContributors extends RenderList {
-  variable: ContributorRoles;
+  contributor: ContributorRoles;
+  // REVIEW add format?
 }
 
 interface RenderLocators extends RenderList {
-  variable: Locators;
+  locator: Locators;
 }
 
 interface CitationStyle extends RenderList {

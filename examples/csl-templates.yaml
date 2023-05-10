@@ -3,12 +3,16 @@
 title: Example template file
 description: This is an example of how we might bundle together widely used partial templates.
 templates:
+  - name: abc-date
+    template:
+      - date: issued
+        format: year-month-day
   - name: how-publisher-apa
     template:
       - wrap: parentheses
         delimiter: ", "
         format: 
-          - variable: publisher
+          - contributor: publisher
   - name: title-apa
     template:
       - when:
@@ -16,12 +20,12 @@ templates:
               - volume
               - issue
             format:
-              - variable: title
+              - title: title
                 # instead of using prefix and suffix strings for punctation, let's use
                 # easily-localized parameters
                 wrap: quotes
         else:
-          - variable: title
+          - title: title
             emph: true
   - name: citation-chicago-author-date
     template:
@@ -34,6 +38,7 @@ templates:
               - delimiter: " "
                 format:
                   - template: contributors-short
+
                   - template: date-in-text
         else:
           - delimiter: ", "

@@ -14,7 +14,7 @@
     "fmt": "deno fmt ./src/",
     "npm": "deno task lint && deno run -A scripts/build_npm.ts 0.1.0",
     "schemas": "deno task lint && deno run -A scripts/make_schemas.ts",
-    "docs": "deno task lint && typedoc --tsconfig tsconfig.json --skipErrorChecking src/style.ts"
+    "docs": "deno task lint && typedoc --tsconfig tsconfig.json --skipErrorChecking"
   },
   "imports": {
     "edtf": "https://esm.sh/edtf@4.4.1",

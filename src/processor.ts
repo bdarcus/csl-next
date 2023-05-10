@@ -2,8 +2,8 @@ import { ReferenceTypes, Style } from "./style.ts";
 import { ID, InputReference, Title } from "./reference.ts";
 import { InputBibliography } from "./bibliography.ts";
 import { Contributor } from "./contributor.ts";
-import "npm:reflect-metadata";
-import { plainToClass } from "npm:class-transformer";
+import { _reflect } from "../deps.ts";
+import { plainToClass } from "../deps.ts";
 
 /**
  * Takes citatons, bibliography, and style, and produces a formatted bibliography.

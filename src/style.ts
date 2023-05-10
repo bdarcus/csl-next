@@ -72,6 +72,8 @@ export type TemplateModel =
   | RenderLocators
   | RenderItemDate
   | RenderTitle
+  | RenderText
+  | RenderTerm
   | Cond;
 
 /**
@@ -559,6 +561,21 @@ interface RenderListBlock extends RenderList {
 
 interface RenderItemSimple extends HasFormatting {
   variable: SimpleTypes;
+}
+
+/**
+ * Non-localized plain text.
+ */
+interface RenderText extends HasFormatting {
+  text: string;
+}
+
+/**
+ * Localized strings.
+ */
+interface RenderTerm extends HasFormatting {
+  term: string; // REVIEW tighten this?
+  format: string; // TODO
 }
 
 interface RenderItemDate extends HasFormatting {

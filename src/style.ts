@@ -77,6 +77,11 @@ export type TemplateModel =
   | Cond;
 
 /**
+ * An inline template that can be referenced by unique key.
+ */
+export type NamedTemplate = Record<CalledTemplate, InlineTemplate>;
+
+/**
  * The rendering of style templates can be specified by reference to a template name or by inline definition.
  */
 export type Template = CalledTemplate | InlineTemplate;
@@ -520,20 +525,6 @@ export interface Style {
    * The citation specification.
    */
   citation?: CitationStyle;
-}
-
-export interface NamedTemplate {
-  /**
-   * The name token for the template, for reference from other templates.
-   */
-  name: string;
-  options?: OptionGroup;
-  template: /**
-     * The rendering instructions.
-     *
-     * @items.minimum 1
-     */
-    InlineTemplate; // REVIEW
 }
 
 interface RenderItemTemplate extends HasFormatting {

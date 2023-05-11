@@ -1,7 +1,13 @@
-import { LocalizedTermFormat, LocalizedTermName } from "./locale.ts";
+import {
+  LocalizationTerms,
+  LocalizedTermFormat,
+  LocalizedTermName,
+} from "./locale.ts";
 /**
  * The CSL NEXT style model.
  */
+
+export type CSL = Style | LocalizationTerms | TemplateFile;
 
 export interface TemplateFile {
   title?: string;

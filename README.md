@@ -1,9 +1,13 @@
 ## The Idea
 
-An experiment to create a new, simpler, more featureful, but extensible CSL.
+An experiment to create a new, simpler, more featureful, but extensible CSL. 
 
-The idea is to simplify and generalize the template model, and move more of the
-logic to extensible parameter groups.
+1. Dramatically simplify the citation and bibliography template language and put more logic in extensible and contextual parameter groups, so that processors, styles and UIs are easier to develop, maintain, and use.
+2. Do so in single codebase that provides a single source of truth reference implementation, and auto-generates (and where relevant) publishes:
+   - Documentation
+   - JSON schemas
+   - NPM module(s)
+   - Code for other languages (Rust, Haskell, Lua, etc.)
 
 From the beginning, it is designed to add new features even while simplifying
 the model; notably:

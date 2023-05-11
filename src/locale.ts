@@ -154,7 +154,7 @@ export type LocalizedTermNameLocatorNumber =
 
 export type LocalizedTermFormat = "short" | "symbol";
 
-export interface StandaloneLocalize extends Localization {
+export interface StandaloneLocalize extends LocalizedTerm {
   translators?: string[];
   description?: string;
   rights?: string; // use enum here, and in style

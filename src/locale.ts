@@ -1,3 +1,10 @@
+export type LocalizationTerms = {
+  title?: string;
+  description?: string;
+  locale: Lang;
+  punctuationInQuote?: boolean;
+  terms: Record<LocalizedTermName, LocalizedTerm>;
+};
 // REVIEW replace with https://esm.sh/locale-enum@1.1.1
 type Lang =
   | "af-ZA"
@@ -146,14 +153,6 @@ export type LocalizedTermNameLocatorNumber =
   | "volume";
 
 export type LocalizedTermFormat = "short" | "symbol";
-
-export interface Localization {
-  title?: string;
-  description?: string;
-  locale: Lang;
-  punctuationInQuote?: boolean;
-  terms: Record<LocalizedTermName, LocalizedTerm>;
-}
 
 export interface StandaloneLocalize extends Localization {
   translators?: string[];

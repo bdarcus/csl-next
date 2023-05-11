@@ -3,14 +3,13 @@
 An experiment to create a new, simpler, more featureful, but extensible CSL. 
 
 1. Dramatically simplify the citation and bibliography template language and put more logic in extensible and contextual parameter groups, so that processors, styles and UIs are easier to develop, maintain, and use.
-2. Do so in single codebase that provides a single source of truth reference implementation, and auto-generates (and where relevant) publishes:
+2. Do so in a single codebase that provides a single source of truth reference implementation, _and_ auto-generates (and where relevant) publishes:
    - Documentation
    - JSON schemas
    - NPM module(s)
    - Code for other languages (Rust, Haskell, Lua, etc.)
 
-From the beginning, it is designed to add new features even while simplifying
-the model; notably:
+From the beginning, it is designed to add new features even while simplifying the model; notably:
 
 1. multilingual
 2. different citations modes
@@ -26,8 +25,7 @@ The code here is a `typescript` project that:
    [quicktype](https://quicktype.io).
 2. provides a proof-of-concept processor implementation.
 
-The first is maybe 70% or so complete, while the second currently just reads and
-serializes data and styles.
+A first draft of the model is almost complete, while the second currently just reads and serializes data and styles.
 
 ### Schema-backed Editing
 

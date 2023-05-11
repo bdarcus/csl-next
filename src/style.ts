@@ -1,3 +1,4 @@
+import { LocalizedTermFormat, LocalizedTermName } from "./locale.ts";
 /**
  * The CSL NEXT style model.
  */
@@ -565,8 +566,8 @@ interface RenderText extends HasFormatting {
  * Localized strings.
  */
 interface RenderTerm extends HasFormatting {
-  term: string; // REVIEW tighten this?
-  format: string; // TODO
+  term: LocalizedTermName;
+  format: LocalizedTermFormat;
 }
 
 interface RenderItemDate extends HasFormatting {

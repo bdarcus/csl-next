@@ -44,10 +44,13 @@ It includes:
  - formatter
  - test runner
  - bundler
+ - benchmarker
+ - LSP server
  - simple and high-performace [key-value storage](https://deno.com/manual/runtime/kv), with both local and distributed options
 
-... and all of it is integrated and very fast. 
-It also allows compiling a codebar to a [single self-contained executable](https://deno.com/manual@v1.33.2/tools/compiler), that includes the runtime.
+... and all of it is integrated and _very_ fast. 
+
+It also allows compiling a codebase to a [single self-contained executable](https://deno.com/manual@v1.33.2/tools/compiler), that includes the runtime.
 
 I have a few tasks setup, including to auto-generate an `NPM` module.
 

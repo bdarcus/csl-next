@@ -1,6 +1,6 @@
 ## The Idea
 
-An experiment to create a new, simpler, more featureful, but extensible CSL. 
+An experiment to create a new, simpler, more featureful, but extensible [CSL](https://citationstyles.org/). 
 
 1. Dramatically simplify the citation and bibliography template language and put more logic in extensible and contextual parameter groups, so that processors, styles and UIs are easier to develop, maintain, and use.
 2. Do so in a single codebase that provides a single source of truth reference implementation, _and_ auto-generates and (where relevant) publishes:

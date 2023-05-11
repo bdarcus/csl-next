@@ -37,7 +37,17 @@ style.
 ### Deno, Tasks
 
 I am using here `Deno` rather than `Nodejs`. 
-It includes a `typescript` compiler, linter, and formatter, plus a test runner and bundler, all of it integrated and very fast.
+It includes:
+
+ - a `typescript` compiler
+ - linter
+ - formatter
+ - test runner
+ - bundler
+ - simple and high-performace [key-value storage](https://deno.com/manual/runtime/kv), with both local and distributed options
+
+... and all of it is integrated and very fast. 
+It also allows compiling a codebar to a [single self-contained executable](https://deno.com/manual@v1.33.2/tools/compiler), that includes the runtime.
 
 I have a few tasks setup, including to auto-generate an `NPM` module.
 

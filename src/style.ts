@@ -6,7 +6,7 @@ import { LocalizedTermFormat, LocalizedTermName } from "./locale.ts";
 export interface TemplateFile {
   title?: string;
   description?: string;
-  templates: NamedTemplate[];
+  templates: NamedTemplate;
 }
 
 export type DateFormat = "year" | "year-month" | "year-month-day" | "month-day";
@@ -517,7 +517,7 @@ export interface Style {
   /**
    * The templates for rendering the bibliography and citations.
    */
-  templates?: NamedTemplate[];
+  templates?: NamedTemplate;
   /**
    * The bibliography specification.
    */

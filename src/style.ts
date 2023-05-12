@@ -18,6 +18,12 @@ export interface TemplateFile {
 export type DateFormat = "year" | "year-month" | "year-month-day" | "month-day";
 
 export type WrapPunctuation = "parentheses" | "brackets" | "quotes";
+export type DelimiterPunctuation =
+  | "period"
+  | "colon"
+  | "comma"
+  | "semicolon"
+  | "space";
 export interface HasFormatting {
   /**
    * The symbol pair to wrap around one or more rendering components.
@@ -546,7 +552,7 @@ export interface RenderList extends HasFormatting {
   /**
    * The string with which to join two or more rendering comnponents.
    */
-  delimiter?: string;
+  delimiter?: DelimiterPunctuation;
   /**
    * The rendering instructions; either called template name, or inline instructions.
    */

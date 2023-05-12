@@ -86,4 +86,19 @@ export class ProcReference implements ProcHints, InputReference {
   formatAuthors(): string {
     return this.formatContributors(this.author);
   }
+
+  // write a method to render to string from the AST
+
+  // toDjotAST(
+  //   /**
+  //    * Global style options.
+  //    */
+  //   globalOptions: {},
+  //   /**
+  //    * The citation or bibliography style object
+  //    */
+  //   renderSpecs: {}): [] {
+  //   // use Array.reduce to build up the AST
+  //   return [];  // TODO
+  // }
 }

@@ -68,7 +68,7 @@ export type Variables =
   | Titles
   | SimpleTypes;
 
-type MatchWhich =
+export type MatchWhich =
   /**
    * The conditions that must be true for the templates to render.
    *
@@ -114,7 +114,7 @@ export type InlineTemplate = TemplateModel[];
 
 // Conditional definitions
 
-interface Cond {
+export interface Cond {
   /**
    * For the first condition that is non-nil, format the children.
    */
@@ -125,7 +125,7 @@ interface Cond {
   else?: InlineTemplate; // REVIEW
 }
 
-type Match = {
+export type Match = {
   /**
    * A list of reference item types; if one is true, then return true.
    *
@@ -138,35 +138,35 @@ type Match = {
   format: InlineTemplate; // REVIEW
 };
 
-type IsNumber = {
+export type IsNumber = {
   /**
    * Is the item variable a number?
    */
   isNumber: Locators;
 };
 
-type IsEDTFDate = {
+export type IsEDTFDate = {
   /**
    * Does the date conform to EDTF?
    */
   isEDTFDate: Dates;
 };
 
-type IsRefType = {
+export type IsRefType = {
   /**
    * Is the item reference type among the listed reference types?
    */
   isRefType: ReferenceTypes[];
 };
 
-type HasVariable = {
+export type HasVariable = {
   /**
    * Does the item reference include one of the listed variables?
    */
   hasVariable: Variables[];
 };
 
-type Locale = {
+export type Locale = {
   /**
    * The item reference locale; to allow multilingual output.
    */
@@ -174,11 +174,16 @@ type Locale = {
 };
 
 // REVIEW hould the below be an interface?
-type DataMatch = IsNumber | IsEDTFDate | IsRefType | HasVariable | Locale;
+export type DataMatch =
+  | IsNumber
+  | IsEDTFDate
+  | IsRefType
+  | HasVariable
+  | Locale;
 
-type Condition = Match & DataMatch;
+export type Condition = Match & DataMatch;
 
-type Substitute = "editor" | "translator" | "title";
+export type Substitute = "editor" | "translator" | "title";
 
 /**
  * Parameter groups.
@@ -301,24 +306,24 @@ export interface DateFormatting {
   month?: MonthStyle;
 }
 
-type DateStyle =
+export type DateStyle =
   | "full" // 'Thursday, April 27, 2023'
   | "long" // 'April 27, 2023'
   | "medium" // 'Apr 27, 2023'
   | "short"; // '4/27/23'
 
-type YearStyle =
+export type YearStyle =
   // The representation of the year. Possible values are:
   | "numeric" // (e.g., 2012)
   | "2-digit"; // (e.g., 12)
 
-type TimeStyle =
+export type TimeStyle =
   | "full" // '8:04:49 AM Eastern Daylight Time'
   | "long" // '8:04:49 AM EDT'
   | "medium" // '8:04:49 AM'
   | "short"; // '8:04 AM'
 
-type MonthStyle =
+export type MonthStyle =
   // The representation of the month. Possible values are:
   | "numeric" // (e.g., 3)
   | "2-digit" // (e.g., 03)
@@ -540,7 +545,7 @@ export interface Style {
   citation?: CitationStyle;
 }
 
-interface RenderItemTemplate extends HasFormatting {
+export interface RenderItemTemplate extends HasFormatting {
   /**
    * The template name to use for partial formatting.
    */

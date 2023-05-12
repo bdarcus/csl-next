@@ -12,3 +12,6 @@ const refs = CiteProc.getProcReferences();
 console.log(CiteProc);
 console.log(CiteProc.getProcReferences());
 console.log(refs[2].formatAuthors());
+
+console.log("\nBibliography style spec:\n");
+console.log(CiteProc.style.bibliography);

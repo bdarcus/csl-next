@@ -54,6 +54,8 @@ It includes:
 I have a few tasks setup, including to auto-generate an `NPM` module.
 
 <dl>
+  <dt>cli</dt>
+  <dd>The curent state of the processor.</dd>
   <dt>npm</dt>
   <dd>Generate the <code>NPM</code> module.</dd>
   <dt>schemas</dt>

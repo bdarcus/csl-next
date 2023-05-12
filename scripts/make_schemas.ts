@@ -25,6 +25,8 @@ const configs = [
   },
 ];
 
+console.log("");
+
 for (const config of configs) {
   // need to run on npm code, so make sure to run the make_npm.ts script first
   const schemaFileName = `./schemas/csl-${
@@ -33,8 +35,10 @@ for (const config of configs) {
   const command =
     `ts-json-schema-generator --no-type-check --path ${config.path} --type ${config.type} --out ${schemaFileName}`;
 
-  console.log(`Generating ${schemaFileName}...`);
-  console.log(command);
+  console.log(`[schemas] Generating ${schemaFileName}...`);
+  //  console.log(command);
 
   exec(command);
 }
+
+console.log("[schemas] Complete!");

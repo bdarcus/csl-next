@@ -559,50 +559,50 @@ export interface RenderList extends HasFormatting {
   format?: CalledTemplate | InlineTemplate;
 }
 
-interface RenderListBlock extends RenderList {
+export interface RenderListBlock extends RenderList {
   listStyle?: string; // TODO
 }
 
-interface RenderItemSimple extends HasFormatting {
+export interface RenderItemSimple extends HasFormatting {
   variable: SimpleTypes;
 }
 
 /**
  * Non-localized plain text.
  */
-interface RenderText extends HasFormatting {
+export interface RenderText extends HasFormatting {
   text: string;
 }
 
 /**
  * Localized strings.
  */
-interface RenderTerm extends HasFormatting {
+export interface RenderTerm extends HasFormatting {
   term: LocalizedTermName;
   format: LocalizedTermFormat;
 }
 
-interface RenderItemDate extends HasFormatting {
+export interface RenderItemDate extends HasFormatting {
   date: Dates;
   // TODO align this with DateOptions
   format: DateFormat;
 }
 
-interface RenderTitle extends HasFormatting {
+export interface RenderTitle extends HasFormatting {
   title: Titles;
   format?: "main" | "sub" | "full" | "short";
 }
 
-interface RenderContributors extends RenderList {
+export interface RenderContributors extends RenderList {
   contributor: ContributorRoles;
   // REVIEW add format?
 }
 
-interface RenderLocators extends RenderList {
+export interface RenderLocators extends RenderList {
   locator: Locators;
 }
 
-interface CitationStyle extends RenderList {
+export interface CitationStyle extends RenderList {
   /**
    * @default inline
    */
@@ -617,6 +617,6 @@ interface CitationStyle extends RenderList {
   nonIntegral?: RenderList;
 }
 
-interface BibliographyStyle extends RenderListBlock {
+export interface BibliographyStyle extends RenderListBlock {
   heading?: string; // TODO
 }

@@ -63,16 +63,18 @@ citation:
   nonIntegral:
     format:
       - wrap: parentheses
-        delimiter: ": "
+        delimiter: colon
         format:
           - template: year
           - template: locators-apa
 bibliography:
   format:
-    - template: author-apa-full
-    - date: issued
-      format: year
-      wrap: parentheses
-    - template: title
-    - template: container-apa
-    - template: howpublished-apa
+    - delimiter: space
+      format:
+      - template: author-apa-full
+      - date: issued
+        format: year
+        wrap: parentheses
+      - template: title
+      - template: container-apa
+      - template: howpublished-apa

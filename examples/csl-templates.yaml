@@ -3,18 +3,15 @@
 title: Example template file
 description: This is an example of how we might bundle together widely used partial templates.
 templates:
-  - name: abc-date
-    template:
+  abc-date:
       - date: issued
         format: year-month-day
-  - name: how-publisher-apa
-    template:
+  how-publisher-apa:
       - wrap: parentheses
         delimiter: ", "
-        format: 
+        format:
           - contributor: publisher
-  - name: title-apa
-    template:
+  title-apa:
       - when:
           - hasVariable:
               - volume
@@ -27,8 +24,7 @@ templates:
         else:
           - title: title
             emph: true
-  - name: citation-chicago-author-date
-    template:
+  citation-chicago-author-date:
       - delimiter: ", "
       - when:
           - hasVariable:

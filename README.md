@@ -2,7 +2,7 @@
 
 An experiment to create a new, simpler, more featureful, but extensible [CSL](https://citationstyles.org/). 
 
-1. Dramatically simplify the citation and bibliography template language and put more logic in extensible and contextual parameter groups, so that processors, styles and UIs are easier to develop, maintain, and use.
+1. Dramatically simplify the citation and bibliography template language by moving much of the logic to extensible and contextual parameter groups, so that processors, styles and UIs are easier to develop, maintain, and use.
 2. Do so in a single codebase that provides a single source of truth reference implementation, _and_ auto-generates and (where relevant) publishes:
    - Documentation
    - JSON schemas
@@ -13,6 +13,8 @@ From the beginning, it is designed to add new features even while simplifying th
 
 1. multilingual
 2. different citations modes
+3. enchanced dates and times
+4. distinct formatting of different titles, and title components
 
 ## Details
 
@@ -115,7 +117,8 @@ It's a placeholder to call it something, without suggesting any particular futur
 
 1. It may be the basis for CSL 2.0.
 2. It may inform a path to iterate CSL 1.0.
-3. Nothing at all.
+3. It could be something I develop indepently of CSL entirely.
+4. Nothing at all (in which case I will archive the repository).
 
 ### Why `typescript`?
 

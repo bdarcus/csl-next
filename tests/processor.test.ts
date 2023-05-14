@@ -3,6 +3,23 @@
 import { describe, it } from "https://deno.land/std@0.186.0/testing/bdd.ts";
 //import { Processor } from "../src/processor.ts";
 
+/**
+ * Load test data
+ */
+const style = loadStyle("./examples/style.csl.yaml");
+//const templates = loadYAML("./examples/csl-templates.yaml");
+const data = loadBibliography("./examples/bibliography.yaml");
+
+describe("parsing input", () => {
+  it("parses style files", () => {
+    assertStrictEquals(style.title, "APA");
+  });
+
+  it("parses bibliography files", () => {
+    assertStrictEquals(data.doe1.title, "The Title");
+  });
+});
+
 describe("sorting", () => {
   it("sorts references by author", () => {});
 

@@ -3,6 +3,7 @@
 # this is a flatter model, relying more heavily on parameters
 title: APA
 options:
+  # all of the below parameter options will have reasonable defaults
   # localized date formatting config
   dates:
     date: long
@@ -41,7 +42,8 @@ options:
       - title # this still needs work
 citation:
   options:
-    # There's only so many ways to sort and group, so let's just itemize them
+    # There's only so many ways to sort and group, so let's just itemize them.
+    # At least for me, however, this is a PITA to program.
     sort:
       - key: author
         order: ascending
@@ -54,27 +56,27 @@ citation:
     options:
       group:
         - author
-    format:
-      - template: author-apa
+    templates:
+      - templateKey: author-apa
       - wrap: parentheses
         format:
-          - template: year
-          - template: locators-apa
+          - templateKey: year
+          - templateKey: locators-apa
   nonIntegral:
-    format:
+    templates:
       - wrap: parentheses
         delimiter: colon
-        format:
-          - template: year
-          - template: locators-apa
+        templates:
+          - templateKey: year
+          - templateKey: locators-apa
 bibliography:
-  format:
+  templates:
     - delimiter: space
-      format:
-      - template: author-apa-full
+      templates:
+      - templateKey: author-apa-full
       - date: issued
         format: year
         wrap: parentheses
-      - template: title
-      - template: container-apa
-      - template: howpublished-apa
+      - templateKey: title
+      - templateKey: container-apa
+      - templateKey: howpublished-apa

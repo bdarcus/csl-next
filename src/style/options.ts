@@ -6,7 +6,7 @@ import { ContributorRoles, HasFormatting } from "../style.ts";
 
 export type DateFormat = "year" | "year-month" | "year-month-day" | "month-day";
 
-export type SortRules = {
+export interface SortRules {
   /**
    * The order to sort the list.
    *
@@ -14,11 +14,15 @@ export type SortRules = {
    */
   order: "ascending" | "descending";
   key: GroupSortKeys;
-};
+}
 
 export type GroupSortKeys = "author" | "year" | "title" | "as-cited";
 
 export type Substitute = "editor" | "translator" | "title";
+
+export interface Options {
+  options?: OptionGroup;
+}
 
 /**
  * Parameter groups.
@@ -341,7 +345,3 @@ export interface ContributorListFormatting extends HasFormatting {
    */
   shorten?: ContributorListShortening;
 }
-
-type Option = {
-  options?: OptionGroup;
-};

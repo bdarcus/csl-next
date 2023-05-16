@@ -13,13 +13,7 @@ import {
   Titles,
   Variables,
 } from "../style.ts";
-import { DateFormat, OptionGroup } from "./options.ts";
-
-export interface TemplateFile {
-  title?: string;
-  description?: string;
-  templates: NamedTemplate;
-}
+import { DateFormat, Options } from "./options.ts";
 
 export type WrapPunctuation = "parentheses" | "brackets" | "quotes";
 export type DelimiterPunctuation =
@@ -29,18 +23,19 @@ export type DelimiterPunctuation =
   | "semicolon"
   | "space";
 
-export type MatchWhich =
+export type MatchWhich = {
   /**
    * The conditions that must be true for the templates to render.
    *
    * @default "all"
    */
-  "all" | "any" | "none";
+  match: "all" | "any" | "none";
+};
 
 // this is the structured template model
 export type TemplateModel =
   | RenderList
-  | RenderItemTemplate
+  | CalledTemplate
   | RenderItemSimple
   | RenderContributors
   | RenderLocators
@@ -53,7 +48,7 @@ export type TemplateModel =
 /**
  * The rendering of style templates can be specified by reference to a template name or by inline definition.
  */
-export type RenderingTemplate = CalledTemplate | InlineTemplate;
+export type Template = CalledTemplate | InlineTemplate;
 
 export type TemplateKey = string;
 
@@ -62,19 +57,28 @@ export type TemplateKey = string;
  */
 export type NamedTemplate = Record<TemplateKey, InlineTemplate>;
 
+export interface TopLevelTemplate {
+  templates: NamedTemplate;
+}
+
+export interface TemplateFile extends TopLevelTemplate {
+  title?: string;
+  description?: string;
+}
+
 /**
  * A template is called by name.
  */
-export type CalledTemplate = {
-  templateKey: TemplateKey; // REVIEW can we make this more useful?
-};
+export interface CalledTemplate {
+  templateKey: TemplateKey;
+}
 
 /**
  * A template that is defined inline.
  */
-export type InlineTemplate = {
-  templates: TemplateModel[];
-};
+export interface InlineTemplate {
+  template: TemplateModel[];
+}
 
 // eg liquid or mustache option for dev?
 //type StringTemplate = string;
@@ -89,49 +93,38 @@ export interface Cond {
   /**
    * When all of the when conditions are nil, format the children.
    */
-  else?: RenderingTemplate; // REVIEW
+  else?: Template; // REVIEW
 }
 
-export type Match = {
-  /**
-   * A list of reference item types; if one is true, then return true.
-   *
-   * @default all
-   */
-  match?: MatchWhich;
-  /**
-   * When a match, process these templates.
-   */
-  templates: InlineTemplate; // REVIEW
-};
+export type Match = MatchWhich & Template;
 
-export type IsNumber = {
+export interface IsNumber {
   /**
    * Is the item variable a number?
    */
   isNumber: Locators;
-};
+}
 
-export type IsEDTFDate = {
+export interface IsEDTFDate {
   /**
    * Does the date conform to EDTF?
    */
   isEDTFDate: Dates;
-};
+}
 
-export type IsRefType = {
+export interface IsRefType {
   /**
    * Is the item reference type among the listed reference types?
    */
   isRefType: ReferenceTypes[];
-};
+}
 
-export type HasVariable = {
+export interface HasVariable {
   /**
    * Does the item reference include one of the listed variables?
    */
   hasVariable: Variables[];
-};
+}
 
 // REVIEW should the below be an interface?
 export type DataMatch =
@@ -143,28 +136,19 @@ export type DataMatch =
 
 export type Condition = Match & DataMatch;
 
-export type Locale = {
+export interface Locale {
   /**
    * The item reference locale; to allow multilingual output.
    */
   locale: string; // REVIEW; best place for this? Define the locale type
-};
-
-export interface RenderList extends HasFormatting {
-  options?: OptionGroup;
-  /**
-   * The string with which to join two or more rendering comnponents.
-   */
-  delimiter?: DelimiterPunctuation;
-  /**
-   * The rendering instructions; either called template name, or inline instructions.
-   */
-  templates?: RenderingTemplate[];
 }
 
-export interface RenderListBlock extends RenderList {
+export type RenderList = Options & InlineTemplate;
+
+// FIXME
+export type RenderListBlock = RenderList & {
   listStyle?: string; // TODO
-}
+};
 
 export interface RenderItemSimple extends HasFormatting {
   variable: SimpleTypes;
@@ -191,23 +175,17 @@ export interface RenderItemDate extends HasFormatting {
   format: DateFormat;
 }
 
-export interface RenderItemTemplate extends HasFormatting {
-  /**
-   * The template name to use for partial formatting.
-   */
-  template: string;
-}
-
 export interface RenderTitle extends HasFormatting {
   title: Titles;
   format?: "main" | "sub" | "full" | "short";
 }
-
-export interface RenderContributors extends RenderList {
+// FIXME
+export type RenderContributors = RenderList & {
   contributor: ContributorRoles;
   // REVIEW add format?
-}
+};
 
-export interface RenderLocators extends RenderList {
+// FIXME
+export type RenderLocators = RenderList & {
   locator: Locators;
-}
+};

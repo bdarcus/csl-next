@@ -1,17 +1,19 @@
 import { LocalizationTerms } from "./style/locale.ts";
 import {
-  NamedTemplate,
   RenderList,
   RenderListBlock,
   TemplateFile,
+  TopLevelTemplate,
   WrapPunctuation,
-} from "./style/templates.ts";
-import { OptionGroup } from "./style/options.ts";
+} from "./style/template.ts";
+import { Options } from "./style/options.ts";
 /**
  * The CSL NEXT style model.
+ *
+ * @summary Modular components can be independently created, maintained and shared, and in turn composed to create a style.
  */
 
-export type CSL = Style | LocalizationTerms | TemplateFile;
+export type CSL = Style | LocalizationTerms | TemplateFile | Options;
 
 export type ReferenceTypes = "book" | "article" | "chapter";
 
@@ -38,31 +40,7 @@ type StyleCategory = "science" | "social science" | "biology";
 /**
  * A CSL Style.
  */
-export interface Style {
-  /**
-   * The human-readable name of the style.
-   */
-  title?: string;
-  /**
-   * The machine-readable token that uniquely identifies the style.
-   */
-  id?: string;
-  /**
-   * The description of the style.
-   */
-  description?: string;
-  /** r
-   * The categories the style belongs to; for purposes of indexing.
-   */
-  categories?: StyleCategory[];
-  /**
-   * Global parameter options.
-   */
-  options?: OptionGroup;
-  /**
-   * The templates for rendering the bibliography and citations.
-   */
-  templates?: NamedTemplate;
+export interface Style extends Options, StyleMetadata, TopLevelTemplate {
   /**
    * The bibliography specification.
    */
@@ -71,6 +49,17 @@ export interface Style {
    * The citation specification.
    */
   citation?: CitationStyle;
+}
+
+export interface StyleMetadata {
+  /** The human-readable name of the style. */
+  title?: string;
+  /** The machine-readable token that uniquely identifies the style. */
+  id?: string;
+  /** The description of the style. */
+  description?: string;
+  /** The categories the style belongs to; for purposes of indexing. */
+  categories?: StyleCategory[];
 }
 
 export interface HasFormatting {

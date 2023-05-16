@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-style-schema.json
+# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-style-schema.yaml
 ---
 # this is a flatter model, relying more heavily on parameters
 title: APA
@@ -56,21 +56,21 @@ citation:
     options:
       group:
         - author
-    templates:
+    template:
       - templateKey: author-apa
       - wrap: parentheses
-        format:
+        template:
           - templateKey: year
           - templateKey: locators-apa
   nonIntegral:
-    templates:
+    template:
       - wrap: parentheses
         delimiter: colon
         templates:
           - templateKey: year
           - templateKey: locators-apa
 bibliography:
-  templates:
+  template:
     - delimiter: space
       templates:
       - templateKey: author-apa-full

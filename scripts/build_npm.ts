@@ -29,9 +29,10 @@ await build({
     version: Deno.args[0],
     description: "A reimagining of CSL.",
     devDependencies: {
-      "ts-json-schema-generator": "^1.2.0",
+      //"ts-json-schema-generator": "^1.2.0",
+      "typescript-json-schema": "^0.56.0",
       "typedoc": "^0.24.6",
-      "yaml-convert": "^1.0.1"
+      "yaml-convert": "^1.0.1",
     },
     license: "MIT",
     repository: {

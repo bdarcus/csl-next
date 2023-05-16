@@ -33,7 +33,7 @@ for (const config of configs) {
     config["type"].toLowerCase()
   }-schema.json`;
   const command =
-    `ts-json-schema-generator --no-type-check --path ${config.path} --type ${config.type} --out ${schemaFileName}`;
+    `typescript-json-schema --no-type-check ${config.path} ${config.type} --out ${schemaFileName}`;
 
   console.log(`[schemas] Generating ${schemaFileName}...`);
   //  console.log(command);

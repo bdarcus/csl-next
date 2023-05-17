@@ -1,5 +1,5 @@
 import { HasFormatting, ReferenceTypes, Style } from "./style.ts";
-import { InlineTemplate, TemplateModel } from "./style/template.ts";
+import { InlineTemplate } from "./style/template.ts";
 import { ID, InputReference, Title } from "./reference.ts";
 import { InputBibliography } from "./bibliography.ts";
 import { Contributor } from "./style/contributor.ts";
@@ -15,17 +15,13 @@ export interface ProcContext extends HasFormatting {
 /**
  * A simplified AST for reference component rendering.
  */
-export interface ProcTemplate extends HasFormatting {
-  /**
-   * The name of the variable or named template to render.
-   */
-  renderedVar: string;
+export interface ProcTemplate extends HasFormatting, InlineTemplate {
   /**
    * The value to render.
    *
    * It can either be a plain string, or a string with Djot markup.
    */
-  renderedVal: string;
+  procValue?: string;
 }
 
 /**
@@ -45,14 +41,13 @@ export class Processor {
   /**
    * Render a list of intermediate ProcReference objects.
    */
-  // deno-lint-ignore no-explicit-any
-  renderReferences(): any {
+  renderReferences(): ProcTemplate[] {
     const procRefs = this.getProcReferences();
-    console.log("Running renderReferences()...");
-    const result = procRefs.map((procRef) => {
-      return this.renderReference(procRef);
+    const template = this.style!.bibliography!.template;
+    const renderedRefs = procRefs.map((procRef) => {
+      return this.renderReference(procRef, template);
     });
-    return result;
+    return renderedRefs.flat(1);
   }
 
   /**
@@ -63,65 +58,32 @@ export class Processor {
    */
   // TODO: this should probably create rendering for both contexts at once.
   renderReference(
-    // deno-lint-ignore no-explicit-any
-    reference: any,
-    // deno-lint-ignore no-explicit-any
-  ): any {
-    const template = this.style.bibliography!.template!;
-    // deno-lint-ignore no-explicit-any
-    const result = template.map((component: TemplateModel) => {
-      const keys = Object.keys(component);
-      const value = (() => {
-        // FIXME
-        switch (true) {
-          case keys.includes("date"):
-            "Format date";
-            break;
-          case keys.includes("contributor"):
-            "Format contributor";
-            break;
-          case keys.includes("templates"):
-            // FIXME
-            this.renderTemplate(component.templates, reference);
-            break;
-          case keys.includes("templateKey"):
-            "Format templateKey";
-            break;
-          case keys.includes("title"):
-            "Format title";
-            break;
-          case keys.includes("text"):
-            "Format text";
-            break;
-          case keys.includes("variable"):
-            "Format variable";
-            break;
-        }
-      })();
-      const cres = {
-        ...component,
-        renderedCitation: { "renderVar": "title", "renderVal": value },
-        renderedBibliography: `${reference.title}-test`,
-      };
-      return cres;
-    });
-    return result;
-  }
-
-  private renderTemplate(
-    template: InlineTemplate[],
     reference: ProcReference,
-    // deno-lint-ignore no-explicit-any
-  ): any {
-    const result = template.map((component: TemplateModel) => {
-      const cres = {
-        ...component,
-        renderCitation: "TODO",
-        renderedBibliography: `${reference.title}-test`,
-      };
-      return cres;
+    template: InlineTemplate[],
+  ): ProcTemplate[] {
+    return template.map((component: InlineTemplate) => {
+      switch (true) {
+        case "title" in component:
+          return {
+            ...component,
+            procValue: reference[component.title as keyof ProcReference],
+          };
+        case "date" in component:
+          return {
+            ...component,
+            procValue: reference[component.date as keyof ProcReference],
+          };
+        case "contributor" in component:
+          return {
+            ...component,
+            procValue: reference[component.contributor as keyof ProcReference],
+          };
+        case "templates" in component:
+          return this.renderReference(reference, component.templates);
+        default:
+          return component;
+      }
     });
-    return result;
   }
 
   getProcReferences(): ProcReference[] {

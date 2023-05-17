@@ -1,3 +1,4 @@
+import { ReferenceTypes, Style } from "./style.ts";
 import { HasFormatting, ReferenceTypes, Style } from "./style.ts";
 import { InlineTemplate } from "./style/template.ts";
 import { ID, InputReference, Title } from "./reference.ts";

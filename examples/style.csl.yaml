@@ -1,7 +1,10 @@
-# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-style-schema.yaml
+# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-style-schema.json
 ---
 # this is a flatter model, relying more heavily on parameters
 title: APA
+templates:
+  title-apa:
+    title: title
 options:
   # all of the below parameter options will have reasonable defaults
   # localized date formatting config

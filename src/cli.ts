@@ -17,3 +17,4 @@ console.log(refs[2].formatAuthors());
 
 console.log("\nBibliography style spec:\n");
 console.log(CiteProc.style.bibliography);
+console.log(CiteProc.renderReferences());

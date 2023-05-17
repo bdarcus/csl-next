@@ -1,6 +1,5 @@
-import { ReferenceTypes, Style } from "./style.ts";
 import { HasFormatting, ReferenceTypes, Style } from "./style.ts";
-import { InlineTemplate } from "./style/template.ts";
+import { InlineTemplate, TemplateModel } from "./style/template.ts";
 import { ID, InputReference, Title } from "./reference.ts";
 import { InputBibliography } from "./bibliography.ts";
 import { Contributor } from "./style/contributor.ts";
@@ -20,13 +19,13 @@ export interface ProcTemplate extends HasFormatting {
   /**
    * The name of the variable or named template to render.
    */
-  renderVariable: string;
+  renderedVar: string;
   /**
    * The value to render.
    *
    * It can either be a plain string, or a string with Djot markup.
    */
-  renderValue: string;
+  renderedVal: string;
 }
 
 /**
@@ -46,12 +45,13 @@ export class Processor {
   /**
    * Render a list of intermediate ProcReference objects.
    */
-  renderReferences(): ProcTemplate[] {
+  // deno-lint-ignore no-explicit-any
+  renderReferences(): any {
     const procRefs = this.getProcReferences();
+    console.log("Running renderReferences()...");
     const result = procRefs.map((procRef) => {
-      this.renderReference(procRef);
+      return this.renderReference(procRef);
     });
-    // FIX this type error
     return result;
   }
 
@@ -62,14 +62,45 @@ export class Processor {
    * @returns A ProcReference, rendered according to the context.
    */
   // TODO: this should probably create rendering for both contexts at once.
-  private renderReference(
-    reference: ProcReference,
-  ): ProcTemplate[] {
-    const template = this.style.bibliography!.template as InlineTemplate;
-    const result = template.map((component) => {
+  renderReference(
+    // deno-lint-ignore no-explicit-any
+    reference: any,
+    // deno-lint-ignore no-explicit-any
+  ): any {
+    const template = this.style.bibliography!.template!;
+    // deno-lint-ignore no-explicit-any
+    const result = template.map((component: TemplateModel) => {
+      const keys = Object.keys(component);
+      const value = (() => {
+        // FIXME
+        switch (true) {
+          case keys.includes("date"):
+            "Format date";
+            break;
+          case keys.includes("contributor"):
+            "Format contributor";
+            break;
+          case keys.includes("templates"):
+            // FIXME
+            this.renderTemplate(component.templates, reference);
+            break;
+          case keys.includes("templateKey"):
+            "Format templateKey";
+            break;
+          case keys.includes("title"):
+            "Format title";
+            break;
+          case keys.includes("text"):
+            "Format text";
+            break;
+          case keys.includes("variable"):
+            "Format variable";
+            break;
+        }
+      })();
       const cres = {
         ...component,
-        renderedCitation: "TODO",
+        renderedCitation: { "renderVar": "title", "renderVal": value },
         renderedBibliography: `${reference.title}-test`,
       };
       return cres;
@@ -77,12 +108,12 @@ export class Processor {
     return result;
   }
 
-  // write a recursive mapping function to iterate through an InlineTemplate and render it to a ProcTemplate
   private renderTemplate(
-    template: InlineTemplate,
+    template: InlineTemplate[],
     reference: ProcReference,
-  ): ProcTemplate[] {
-    const result = template.map((component) => {
+    // deno-lint-ignore no-explicit-any
+  ): any {
+    const result = template.map((component: TemplateModel) => {
       const cres = {
         ...component,
         renderCitation: "TODO",
@@ -91,18 +122,6 @@ export class Processor {
       return cres;
     });
     return result;
-  }
-
-  /**
-   * Render a bibliography.
-   */
-  renderBibliography(): ProcTemplate[] {
-    if (this.style.bibliography) {
-      return this.renderReferences(
-        this.style.bibliography!.template as InlineTemplate,
-      );
-    }
-    return [];
   }
 
   getProcReferences(): ProcReference[] {
@@ -114,6 +133,8 @@ export class Processor {
     });
     return references;
   }
+
+  //getTemplates(): InlineTemplate[] {
 }
 
 /**

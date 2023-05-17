@@ -1,5 +1,5 @@
 import { HasFormatting, ReferenceTypes, Style } from "./style.ts";
-import { InlineTemplate } from "./style/template.ts";
+import { InlineTemplate, TemplateComponent } from "./style/template.ts";
 import { ID, InputReference, Title } from "./reference.ts";
 import { InputBibliography } from "./bibliography.ts";
 import { Contributor } from "./style/contributor.ts";
@@ -61,29 +61,32 @@ export class Processor {
     reference: ProcReference,
     template: InlineTemplate[],
   ): ProcTemplate[] {
-    return template.map((component: InlineTemplate) => {
-      switch (true) {
-        case "title" in component:
-          return {
-            ...component,
-            procValue: reference[component.title as keyof ProcReference],
-          };
-        case "date" in component:
-          return {
-            ...component,
-            procValue: reference[component.date as keyof ProcReference],
-          };
-        case "contributor" in component:
-          return {
-            ...component,
-            procValue: reference[component.contributor as keyof ProcReference],
-          };
-        case "templates" in component:
-          return this.renderReference(reference, component.templates);
-        default:
-          return component;
-      }
-    });
+    const result = (() =>
+      template.map((component: TemplateComponent) => {
+        switch (true) {
+          case "title" in component:
+            return {
+              ...component,
+              procValue: reference[component.title as keyof ProcReference],
+            };
+          case "date" in component:
+            return {
+              ...component,
+              procValue: reference[component.date as keyof ProcReference],
+            };
+          case "contributor" in component:
+            return {
+              ...component,
+              procValue:
+                reference[component.contributor as keyof ProcReference],
+            };
+          case "templates" in component:
+            return this.renderReference(reference, component.templates);
+          default:
+            return component;
+        }
+      }))();
+    return result();
   }
 
   getProcReferences(): ProcReference[] {

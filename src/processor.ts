@@ -1,12 +1,8 @@
-import {
-  HasFormatting,
-  InlineTemplate,
-  ReferenceTypes,
-  Style,
-} from "./style.ts";
+import { HasFormatting, ReferenceTypes, Style } from "./style.ts";
+import { InlineTemplate } from "./style/template.ts";
 import { ID, InputReference, Title } from "./reference.ts";
 import { InputBibliography } from "./bibliography.ts";
-import { Contributor } from "./contributor.ts";
+import { Contributor } from "./style/contributor.ts";
 import { _reflect } from "../deps.ts";
 import { plainToClass } from "../deps.ts";
 
@@ -68,7 +64,7 @@ export class Processor {
   private renderReference(
     reference: ProcReference,
   ): ProcTemplate[] {
-    const template = this.style.bibliography!.format as InlineTemplate;
+    const template = this.style.bibliography!.template as InlineTemplate;
     const result = template.map((component) => {
       const cres = {
         ...component,
@@ -102,7 +98,7 @@ export class Processor {
   renderBibliography(): ProcTemplate[] {
     if (this.style.bibliography) {
       return this.renderReferences(
-        this.style.bibliography!.format as InlineTemplate,
+        this.style.bibliography!.template as InlineTemplate,
       );
     }
     return [];

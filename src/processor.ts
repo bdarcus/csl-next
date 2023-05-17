@@ -1,7 +1,7 @@
 import { ReferenceTypes, Style } from "./style.ts";
 import { ID, InputReference, Title } from "./reference.ts";
 import { InputBibliography } from "./bibliography.ts";
-import { Contributor } from "./contributor.ts";
+import { Contributor } from "./style/contributor.ts";
 import { _reflect } from "../deps.ts";
 import { plainToClass } from "../deps.ts";
 

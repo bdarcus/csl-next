@@ -27,7 +27,10 @@ The code here is a `typescript` project that:
    [quicktype](https://quicktype.io).
 2. provides a proof-of-concept processor implementation.
 
-A first draft of the model is almost complete, while the second currently just reads and serializes data and styles.
+A first draft of the model is almost complete, while the second currently can: 
+
+1. read data and styles
+2. process 1 into an intermediate AST (though this is incomplete)
 
 ### Schema-backed Editing
 

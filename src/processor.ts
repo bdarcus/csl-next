@@ -4,7 +4,7 @@ import { ID, InputReference, Title } from "./reference.ts";
 import { InputBibliography } from "./bibliography.ts";
 import { Contributor } from "./style/contributor.ts";
 import { _reflect } from "../deps.ts";
-import { plainToClass } from "../deps.ts";
+import { edtf, plainToClass } from "../deps.ts";
 
 // TODO this isn't right, but I need to separately set pre-rendered values fgor each context.
 export interface ProcContext extends HasFormatting {
@@ -77,9 +77,10 @@ export class Processor {
           case "date" in component: {
             const date = reference[component.date as keyof ProcReference];
             if (date !== undefined) {
+              const dateStr = reference.formatDate(date);
               return {
                 ...component,
-                procValue: date,
+                procValue: dateStr,
               };
             }
             break;
@@ -193,6 +194,13 @@ export class ProcReference implements ProcHints, InputReference {
 
   formatAuthors(): string {
     return this.formatContributors(this.author);
+  }
+
+  formatDate(date: string): string {
+    const parsedDate = edtf.default(date);
+    // TODO make this smarter, use toLocaleString or something.
+    const dateString = parsedDate.toString();
+    return dateString;
   }
 
   // write a method to render to string from the AST

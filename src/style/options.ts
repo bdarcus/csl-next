@@ -4,8 +4,6 @@
 
 import { ContributorRoles, HasFormatting } from "../style.ts";
 
-export type DateFormat = "year" | "year-month" | "year-month-day" | "month-day";
-
 export interface SortRules {
   /**
    * The order to sort the list.

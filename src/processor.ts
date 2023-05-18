@@ -4,7 +4,7 @@ import { ID, InputReference, Title } from "./reference.ts";
 import { InputBibliography } from "./bibliography.ts";
 import { Contributor } from "./style/contributor.ts";
 import { _reflect } from "../deps.ts";
-import { edtf, plainToClass } from "../deps.ts";
+import { deno, edtf, plainToClass } from "../deps.ts";
 
 // TODO this isn't right, but I need to separately set pre-rendered values fgor each context.
 export interface ProcContext extends HasFormatting {
@@ -36,6 +36,17 @@ export class Processor {
     this.style = style;
     //	this.citeRefs = CiteRef;
     this.bibliography = bibliography;
+  }
+
+  // deno-lint-ignore no-explicit-any
+  dateConfig(format: string): any {
+    const monthConfig = this.style.options?.dates?.month || "long";
+    const dateFormats = {
+      year: { year: "numeric" },
+      monthDay: { month: `${monthConfig}`, day: "numeric" },
+      full: { month: `${monthConfig}`, day: "numeric" },
+    };
+    return dateFormats[format];
   }
 
   /**
@@ -77,7 +88,18 @@ export class Processor {
           case "date" in component: {
             const date = reference[component.date as keyof ProcReference];
             if (date !== undefined) {
-              const dateStr = reference.formatDate(date);
+              const monthConfig = this.style.options?.dates?.month || "long";
+              const dateConfig = {
+                year: { year: "numeric" },
+                "year-month": { year: "numeric", month: `${monthConfig}` },
+                "month-day": { month: `${monthConfig}`, day: "numeric" },
+                full: { month: `${monthConfig}`, day: "numeric" },
+              };
+              // FIXME hook the above up below
+              const dateStr = reference.formatDate(
+                date,
+                dateConfig[component.format] as deno.Intl.DateTimeFormatOptions,
+              );
               return {
                 ...component,
                 procValue: dateStr,
@@ -196,10 +218,13 @@ export class ProcReference implements ProcHints, InputReference {
     return this.formatContributors(this.author);
   }
 
-  formatDate(date: string): string {
+  formatDate(date: string, options: deno.Intl.DateTimeFormatOptions): string {
     const parsedDate = edtf.default(date);
     // TODO make this smarter, use toLocaleString or something.
-    const dateString = parsedDate.toString();
+    // new Intl.DateTimeFormat("en-AU", options).format(date)
+    const dateString = new Intl.DateTimeFormat("en-US", options).format(
+      parsedDate,
+    );
     return dateString;
   }
 

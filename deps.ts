@@ -12,6 +12,9 @@ export * as _reflect from "https://esm.sh/reflect-metadata@0.1.13";
 // djot
 export * as djot from "https://esm.sh/@djot/djot@0.2.2";
 
+// for formatting dates
+export * as deno from "https://deno.land/x/deno@v1.11.3/cli/dts/lib.es2020.intl.d.ts";
+
 // covers some of the template formatting details
 export {
   enclose, // wrap

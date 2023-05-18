@@ -15,6 +15,8 @@ import {
 } from "../style.ts";
 import { DateFormat, Options } from "./options.ts";
 
+export type DateFormat = "year" | "year-month" | "full" | "month-day";
+
 export type WrapPunctuation = "parentheses" | "brackets" | "quotes";
 export type DelimiterPunctuation =
   | "period"

@@ -124,10 +124,10 @@ export interface Locale {
 }
 
 // REVIEW is this needed, and is this right?
-export interface RenderList extends Options, InlineTemplate{}
+export interface RenderList extends Options, InlineTemplate {}
 
 // FIXME
-export interface RenderListBlock extends RenderList  {
+export interface RenderListBlock extends RenderList {
   listStyle?: string; // TODO
 }
 

@@ -9,12 +9,7 @@ const biby = loadBibliography(
 const csly = loadStyle("examples/style.csl.yaml");
 
 const CiteProc = new Processor(csly, biby);
-const refs = CiteProc.getProcReferences();
+//const refs = CiteProc.getProcReferences();
 
-console.log(CiteProc);
-console.log(CiteProc.getProcReferences());
-console.log(refs[2].formatAuthors());
-
-console.log("\nBibliography style spec:\n");
-console.log(CiteProc.style.bibliography);
+console.log("\nIntermediate rendering of bibliography, using example style:\n");
 console.log(CiteProc.renderReferences());

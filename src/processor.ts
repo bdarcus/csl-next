@@ -59,34 +59,58 @@ export class Processor {
   // TODO: this should probably create rendering for both contexts at once.
   renderReference(
     reference: ProcReference,
-    template: InlineTemplate[],
+    template: TemplateComponent[],
   ): ProcTemplate[] {
-    const result = (() =>
-      template.map((component: TemplateComponent) => {
+    try {
+      const result = template.map((component: TemplateComponent) => {
         switch (true) {
-          case "title" in component:
-            return {
-              ...component,
-              procValue: reference[component.title as keyof ProcReference],
-            };
-          case "date" in component:
-            return {
-              ...component,
-              procValue: reference[component.date as keyof ProcReference],
-            };
-          case "contributor" in component:
-            return {
-              ...component,
-              procValue:
-                reference[component.contributor as keyof ProcReference],
-            };
+          case "title" in component: {
+            const title = reference[component.title as keyof ProcReference];
+            if (title !== undefined) {
+              return {
+                ...component,
+                procValue: title,
+              };
+            }
+            break;
+          }
+          case "date" in component: {
+            const date = reference[component.date as keyof ProcReference];
+            if (date !== undefined) {
+              return {
+                ...component,
+                procValue: date,
+              };
+            }
+            break;
+          }
+          case "contributors" in component: {
+            const contributors =
+              reference[component.contributors as keyof ProcReference];
+            if (contributors !== undefined) {
+              return {
+                ...component,
+                procValue: contributors,
+              };
+            }
+            break;
+          }
           case "templates" in component:
             return this.renderReference(reference, component.templates);
+          case "templateKey" in component: {
+            return this.renderReference(
+              reference,
+              this.getTemplate(component.templateKey),
+            );
+          } //return component.templateKey;
           default:
             return component;
         }
-      }))();
-    return result();
+      });
+      return result;
+    } catch (e) {
+      console.log("error: ", e);
+    }
   }
 
   getProcReferences(): ProcReference[] {
@@ -99,7 +123,16 @@ export class Processor {
     return references;
   }
 
-  //getTemplates(): InlineTemplate[] {
+  getTemplate(templateKey: string): InlineTemplate | undefined {
+    try {
+      const template = this.style.templates[templateKey];
+      return template;
+    } catch (e) {
+      console.log("error: ", e);
+    }
+  }
+
+  //getTemplate(templateKey: string): InlineTemplate {}
 }
 
 /**

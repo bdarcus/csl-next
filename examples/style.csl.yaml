@@ -1,7 +1,17 @@
-# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-style-schema.yaml
+# yaml-language-server: $schema=/home/bruce/Code/csl-next.js/schemas/csl-style-schema.json
 ---
 # this is a flatter model, relying more heavily on parameters
 title: APA
+templates:
+  title-apa:
+    - title: title
+  author-apa-full:
+    - contributors: author
+  container-apa:
+    - title: container-title
+  howpublished-apa:
+    - contributors: publisher
+      wrap: parentheses
 options:
   # all of the below parameter options will have reasonable defaults
   # localized date formatting config
@@ -77,6 +87,6 @@ bibliography:
       - date: issued
         format: year
         wrap: parentheses
-      - templateKey: title
+      - templateKey: title-apa
       - templateKey: container-apa
       - templateKey: howpublished-apa

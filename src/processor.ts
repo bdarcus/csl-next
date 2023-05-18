@@ -86,11 +86,13 @@ export class Processor {
           }
           case "contributors" in component: {
             const contributors =
+              // REVIEW make sure this works for non-author contributors.
               reference[component.contributors as keyof ProcReference];
             if (contributors !== undefined) {
+              const resultStr = reference.formatContributors(contributors);
               return {
                 ...component,
-                procValue: contributors,
+                procValue: resultStr,
               };
             }
             break;

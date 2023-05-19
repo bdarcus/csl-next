@@ -34,13 +34,13 @@ await build({
       "typedoc": "^0.24.6",
       "yaml-convert": "^1.0.1",
     },
-    license: "MIT",
+    license: "AGPL-3.0-or-later",
     repository: {
       type: "git",
-      url: "git+https://github.com/bdarcus/csl-next.js.git",
+      url: "git+https://github.com/bdarcus/csl-next.git",
     },
     bugs: {
-      url: "https://github.com/bdarcus/csl-next.js/issues",
+      url: "https://github.com/bdarcus/csl-next/issues",
     },
   },
   postBuild() {

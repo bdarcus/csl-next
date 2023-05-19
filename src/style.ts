@@ -6,14 +6,14 @@ import {
   TopLevelTemplate,
   WrapPunctuation,
 } from "./style/template.ts";
-import { Options } from "./style/options.ts";
+import { OptionsFile } from "./style/options.ts";
 /**
  * The CSL NEXT style model.
  *
  * @summary Modular components can be independently created, maintained and shared, and in turn composed to create a style.
  */
 
-export type CSL = Style | LocalizationTerms | TemplateFile | Options;
+export type CSL = Style | LocalizationTerms | TemplateFile | OptionsFile;
 
 export type ReferenceTypes = "book" | "article" | "chapter";
 

@@ -1,8 +1,11 @@
+import { ContributorRoles, HasFormatting } from "../style.ts";
+
 /**
  * @description Option model for style configuration.
  */
 
-import { ContributorRoles, HasFormatting } from "../style.ts";
+// Not clear this is needed, but provide as an option to show possibilities.
+export type OptionsFile = Record<string, OptionGroup>;
 
 export interface SortRules {
   /**

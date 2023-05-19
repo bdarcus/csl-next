@@ -38,14 +38,21 @@ export class Processor {
     this.bibliography = bibliography;
   }
 
-  // deno-lint-ignore no-explicit-any
-  dateConfig(format: string): any {
+  /**
+   * Construct configuration options for Intl.DateTimeFormat.
+   * @param format The CSL date format string.
+   * @default "year"
+   * @returns configuration object for DateTime formatting
+   */
+  dateFormatConfig(format: string): deno.Intl.DateTimeFormatOptions {
     const monthConfig = this.style.options?.dates?.month || "long";
     const dateFormats = {
       year: { year: "numeric" },
-      monthDay: { month: `${monthConfig}`, day: "numeric" },
+      "year-month": { year: "numeric", month: `${monthConfig}` },
+      "month-day": { month: `${monthConfig}`, day: "numeric" },
       full: { month: `${monthConfig}`, day: "numeric" },
     };
+
     return dateFormats[format];
   }
 
@@ -88,17 +95,12 @@ export class Processor {
           case "date" in component: {
             const date = reference[component.date as keyof ProcReference];
             if (date !== undefined) {
-              const monthConfig = this.style.options?.dates?.month || "long";
-              const dateConfig = {
-                year: { year: "numeric" },
-                "year-month": { year: "numeric", month: `${monthConfig}` },
-                "month-day": { month: `${monthConfig}`, day: "numeric" },
-                full: { month: `${monthConfig}`, day: "numeric" },
-              };
               // FIXME hook the above up below
               const dateStr = reference.formatDate(
                 date,
-                dateConfig[component.format] as deno.Intl.DateTimeFormatOptions,
+                this.dateFormatConfig([
+                  component.format,
+                ]) as deno.Intl.DateTimeFormatOptions,
               );
               return {
                 ...component,

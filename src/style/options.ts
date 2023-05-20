@@ -7,6 +7,7 @@ import { ContributorRoles, HasFormatting } from "../style.ts";
 // Not clear this is needed, but provide as an option to show possibilities.
 export type OptionsFile = Record<string, OptionGroup>;
 
+// REVIEW remove?
 export interface SortRules {
   /**
    * The order to sort the list.
@@ -32,7 +33,7 @@ export interface OptionGroup {
   /**
    * Sorting configuration.
    */
-  sort?: Sort[];
+  sort?: SortConfig[];
   /**
    * Grouping configuration.
    */
@@ -82,7 +83,7 @@ export interface SortGroup {
 /**
  * Reference sorting configuration.
  */
-export interface Sort extends SortGroup {
+export interface SortConfig extends SortGroup {
   order: "ascending" | "descending";
 }
 

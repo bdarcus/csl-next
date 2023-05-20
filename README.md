@@ -151,6 +151,6 @@ I am:
 I've opened the discussion forum for general discussion, feedback, and questions.
 
 Pull requests are welcome.
-If you're interested in contributing, see the issue tracker for details, particularly the priority task list in [#7](https://github.com/bdarcus/csl-next.js/issues/7), and the [milestones](https://github.com/bdarcus/csl-next.js/milestones?direction=asc&sort=due_date&state=open).
+If you're interested in contributing, see the issue tracker for details, particularly [#7](https://github.com/bdarcus/csl-next.js/issues/7), and the [milestones](https://github.com/bdarcus/csl-next.js/milestones?direction=asc&sort=due_date&state=open).
 
 I'll likely add more guidelines later, but you can review the commit history to see the general strategy on commit messages, and I have the CI setup for pull-requests that should flag linting or formatting issues, along with deno tasks to flag and clean those up locally.

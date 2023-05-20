@@ -6,7 +6,7 @@ import {
   TopLevelTemplate,
   WrapPunctuation,
 } from "./style/template.ts";
-import { OptionsFile } from "./style/options.ts";
+import { Options, OptionsFile } from "./style/options.ts";
 /**
  * The CSL NEXT style model.
  *

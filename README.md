@@ -132,19 +132,12 @@ It's a placeholder to call it something, without suggesting any particular futur
 5. There are two good `EDTF` JavaScript libraries for date validation and formatting.
 6. It might be possible to incorporate some code from [citeproc-js](https://github.com/Juris-M/citeproc-js)?
 
-### Why `JSON Schema`? What happened to `XML`?
+### Why `JSON`/`YAML` and `JSON Schema`? What happened to `XML`?
 
-1. `JSON` (and `YAML`) is more broadly supported today.
-2. No decisions on whether or not `XML`, actually, but this is a test to see how much simpler the model can be, and ensure it maps well to standard programming languages (the first implementation of CSL was in XSLT!).
-3. It should be feasible to do both (though not clear the effort is worth it).
-
-### Why isn't more functional code here now?
-
-I am:
-
-1. a `typescript` newbie, and an amateur programmer without much experience with it or `Javascript`.
-2. pretty good at modeling these sorts of data, with strong domain knowledge, so that's what I started with.
-3. didn't want to waste time going down a private rabbit hole without a broader interest check, and opportunity for collaboration.
+1. `JSON` (and `YAML`) is much more broadly-supported today.
+2. It's feasible to implement these simpler templates in a non-XML language.
+3. The same schemas can be used for validation and IDE-completion for both formats.
+4. It provides certain flexibility in this context because of the tigher coupling with widely-used languages.
 
 ## Contributions
 

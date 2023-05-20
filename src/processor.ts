@@ -122,19 +122,31 @@ export class Processor {
             }
             break;
           }
-          case "templates" in component:
-            return this.renderReference(reference, component.templates);
+          case "templates" in component: {
+            const result = this.renderReference(reference, component.templates);
+            // I don't like having to do all these checks.
+            if (result[0] !== undefined) {
+              return result;
+            }
+            break;
+          }
           case "templateKey" in component: {
-            return this.renderReference(
+            const result = this.renderReference(
               reference,
               this.getTemplate(component.templateKey),
             );
-          } //return component.templateKey;
+            if (result[0] !== undefined) {
+              return result;
+            }
+            break;
+          }
           default:
             return component;
         }
       });
-      return result;
+      if (result !== undefined) {
+        return result;
+      }
     } catch (e) {
       console.log("error: ", e);
     }
@@ -210,13 +222,19 @@ export class ProcReference implements ProcHints, InputReference {
     this.disambEtAlNames = disambEtAlNames;
   }
 
-  formatContributors(contributors: Contributor[]): string {
+  formatContributors(contributors: Contributor[]): string | undefined {
     // TODO: substitution, shortening, etc.
     const contribArray = contributors.map((contributor) => contributor.name);
-    return contribArray.join(", ");
+    if (contribArray.length > 1) {
+      return contribArray.join(", ");
+    } else if (contribArray.length === 1 && contribArray[0] !== undefined) {
+      return contribArray[0];
+    } else {
+      return undefined;
+    }
   }
 
-  formatAuthors(): string {
+  formatAuthors(): string | undefined {
     return this.formatContributors(this.author);
   }
 

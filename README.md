@@ -146,7 +146,11 @@ I am:
 2. pretty good at modeling these sorts of data, with strong domain knowledge, so that's what I started with.
 3. didn't want to waste time going down a private rabbit hole without a broader interest check, and opportunity for collaboration.
 
-### Further questions, ideas, offers of support or help?
+## Contributions
 
-See the issue tracker for details, particularly the priority task list in
-[#7](https://github.com/bdarcus/csl-next.js/issues/7).
+I've opened the discussion forum for general discussion, feedback, and questions.
+
+Pull requests are welcome.
+If you're interested in contributing, ee the issue tracker for details, particularly the priority task list in [#7](https://github.com/bdarcus/csl-next.js/issues/7), and the [milestones](https://github.com/bdarcus/csl-next.js/milestones?direction=asc&sort=due_date&state=open).
+
+I'll likely add more guidelines later, but you can review the commit history to the general strategy on commit messages, and I have the CI setup for pull-requests that should flag linting or formatting issues, along with deno tasks to clean those up locally.

@@ -13,7 +13,7 @@ import {
   Titles,
   Variables,
 } from "../style.ts";
-import { DateFormat, Options } from "./options.ts";
+import { Options } from "./options.ts";
 
 export type DateFormat = "year" | "year-month" | "full" | "month-day";
 

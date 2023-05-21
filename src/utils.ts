@@ -1,6 +1,6 @@
-import { yaml } from "../deps.ts";
 import { InputBibliography } from "./bibliography.ts";
 import { Style } from "./style.ts";
+import { yaml } from "../deps.ts";
 
 export function loadBibliography(
   // REVIEW these functions should probably be async, but

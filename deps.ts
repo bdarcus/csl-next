@@ -1,5 +1,5 @@
 export * as edtf from "https://esm.sh/edtf@4.4.1";
-export { plainToClass } from "https://esm.sh/class-transformer@0.5.1";
+//export { plainToClass } from "https://esm.sh/class-transformer@0.5.1";
 export * as yaml from "https://esm.sh/yaml@2.2.2";
 export * as _reflect from "https://esm.sh/reflect-metadata@0.1.13";
 

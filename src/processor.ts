@@ -1,11 +1,11 @@
-import { HasFormatting, ReferenceTypes, Style } from "./style.ts";
+import { HasFormatting, Style } from "./style.ts";
 import { SortConfig } from "./style/options.ts";
 import { InlineTemplate, TemplateComponent } from "./style/template.ts";
-import { ID, InputReference, Title } from "./reference.ts";
+import { InputReference } from "./reference.ts";
 import { InputBibliography } from "./bibliography.ts";
 import { Contributor } from "./style/contributor.ts";
 import { _reflect } from "../deps.ts";
-import { edtf, plainToClass } from "../deps.ts";
+import { edtf } from "../deps.ts";
 
 // TODO this isn't right, but I need to separately set pre-rendered values fgor each context.
 export interface ProcContext extends HasFormatting {
@@ -84,7 +84,8 @@ export class Processor {
       const result = template.map((component: TemplateComponent) => {
         switch (true) {
           case "title" in component: {
-            const title = reference[component.title as keyof ProcReference];
+            const title =
+              reference.data[component.title as keyof InputReference];
             if (title !== undefined) {
               return {
                 ...component,
@@ -94,7 +95,7 @@ export class Processor {
             break;
           }
           case "date" in component: {
-            const date = reference[component.date as keyof ProcReference];
+            const date = reference.data[component.date as keyof InputReference];
             if (date !== undefined) {
               // TODO times, and missing times?
               const dateStr = reference.formatDate(
@@ -113,7 +114,7 @@ export class Processor {
           case "contributors" in component: {
             const contributors =
               // REVIEW make sure this works for non-author contributors.
-              reference[component.contributors as keyof ProcReference];
+              reference.data[component.contributors as keyof InputReference];
             if (contributors !== undefined) {
               const resultStr = reference.formatContributors(contributors);
               return {
@@ -158,13 +159,16 @@ export class Processor {
     // first check bib sort config, then fallback to global
     const sortConfig = this.style.bibliography?.options?.sort ||
       this.style.options?.sort || undefined;
+    const groupConfig = this.style.bibliography?.options?.group ||
+      this.style.options?.group || undefined;
     const references = citekeys.map((citekey) => {
-      const pref = plainToClass(ProcReference, this.bibliography[citekey]);
-      pref.citekey = citekey;
+      const pref = new ProcReference(this.bibliography[citekey], {});
+      pref.data.citekey = citekey;
       return pref;
     });
     if (sortConfig !== undefined) {
-      return this.sortReferences(sortConfig, references);
+      const sorted = this.sortReferences(sortConfig, references);
+      return this.groupReferences(groupConfig, sorted);
     } else {
       return references;
     }
@@ -192,8 +196,8 @@ export class Processor {
   }
 
   groupReferences(
-    references: ProcReference[],
     groupKeys: string[],
+    references: ProcReference[],
   ): ProcReference[] {
     const groups: Record<string, ProcReference[]> = {};
     // REVIEW maybe change to map?
@@ -204,14 +208,15 @@ export class Processor {
         groups[groupKey] = [];
       }
       const index = Object.keys(groups[groupKey]).length + 1;
-      reference.groupIndex = index;
-      reference.groupKey = groupKey;
+      reference.procHints.groupIndex = index;
+      reference.procHints.groupKey = groupKey;
       groups[groupKey].push(reference);
       const groupLength = groups[groupKey].length;
       groups[groupKey].map((ref) => {
-        ref.groupLength = groupLength;
+        ref.procHints.groupLength = groupLength;
       });
     });
+    // Since adding hints based on the grouping, we no longer need the actual groups.
     return Object.values(groups).flat();
   }
 
@@ -230,61 +235,33 @@ export class Processor {
 /**
  * Data provided during processing to facilitate sorting and disambiguation.
  */
-interface ProcHints {
-  citekey: ID;
+interface ProcHint {
+  procHints: ProcHintOptions;
+}
+
+interface ProcHintOptions {
   disambCondition?: boolean;
-  sortKeys?: string[];
   groupIndex?: number;
   groupLength?: number;
   groupKey?: string;
-  disambEtAlNames?: boolean;
+}
+
+interface ReferenceData {
+  data: InputReference;
 }
 
 /**
  * A reference sorted and processed before final rendering, with methods that provide such rendering.
  */
-export class ProcReference implements ProcHints, InputReference {
-  // TODO change this to just have a data object?
-  type: ReferenceTypes;
-  title: Title;
-  issued: Date;
-  author: Contributor[];
-  editor: Contributor[];
-  // REVIEW maybe put the below in a common object instead?
-  citekey: ID;
-  disambCondition?: boolean;
-  sortKeys?: string[];
-  groupIndex?: number;
-  groupLength?: number | undefined;
-  groupKey?: string;
-  disambEtAlNames?: boolean;
-
+export class ProcReference implements ReferenceData {
+  data: InputReference;
+  procHints: ProcHintOptions = {};
   constructor(
-    type: ReferenceTypes,
-    title: Title,
-    issued: Date,
-    author: Contributor[],
-    editor: Contributor[],
-    citekey: ID,
-    disambCondition?: boolean,
-    sortKeys?: string[],
-    groupIndex?: number,
-    groupLength?: number,
-    groupKey?: string,
-    disambEtAlNames?: boolean,
+    data: InputReference,
+    procHints: ProcHintOptions,
   ) {
-    this.type = type;
-    this.title = title;
-    this.issued = issued;
-    this.author = author;
-    this.editor = editor;
-    this.citekey = citekey;
-    this.disambCondition = disambCondition;
-    this.sortKeys = sortKeys;
-    this.groupIndex = groupIndex;
-    this.groupLength = groupLength;
-    this.groupKey = groupKey;
-    this.disambEtAlNames = disambEtAlNames;
+    this.data = data;
+    this.procHints = procHints;
   }
 
   formatContributors(contributors: Contributor[]): string | undefined {
@@ -300,7 +277,7 @@ export class ProcReference implements ProcHints, InputReference {
   }
 
   formatAuthors(): string | undefined {
-    return this.formatContributors(this.author);
+    return this.formatContributors(this.data.author);
   }
 
   formatDate(date: string, options: Intl.DateTimeFormatOptions): string {
@@ -314,7 +291,7 @@ export class ProcReference implements ProcHints, InputReference {
   makeKey(key: string): string | undefined {
     switch (key) {
       case "author": {
-        const authors = this.author;
+        const authors = this.data.author;
         if (authors !== undefined) {
           // TODO author formatting
           const formattedAuthors = this.formatAuthors();
@@ -323,13 +300,13 @@ export class ProcReference implements ProcHints, InputReference {
         break;
       }
       case "year": {
-        const year = this.formatDate(this.issued, { year: "numeric" });
+        const year = this.formatDate(this.data.issued, { year: "numeric" });
         return year;
       }
       // TODO complete for all key options
       case "title":
         // REVIEW make sure this actually works
-        return this.title.toString();
+        return this.data.title.toString();
     }
   }
 

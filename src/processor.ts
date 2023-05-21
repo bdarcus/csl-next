@@ -177,8 +177,8 @@ export class Processor {
     // TODO adjust to the move of makeSortKey to ProcReference.
     return references.sort((a, b) => {
       for (const { key, order } of sortConfig) {
-        const aValue = a.makeSortKey(key);
-        const bValue = b.makeSortKey(key);
+        const aValue = a.makeKey(key);
+        const bValue = b.makeKey(key);
         if (aValue === undefined || bValue === undefined) {
           continue;
         }
@@ -189,6 +189,30 @@ export class Processor {
       }
       return 0;
     });
+  }
+
+  groupReferences(
+    references: ProcReference[],
+    groupKeys: string[],
+  ): ProcReference[] {
+    const groups: Record<string, ProcReference[]> = {};
+    // REVIEW maybe change to map?
+    references.forEach((reference) => {
+      const groupValues = groupKeys.map((key) => reference.makeKey(key));
+      const groupKey = groupValues.join(":");
+      if (!groups[groupKey]) {
+        groups[groupKey] = [];
+      }
+      const index = Object.keys(groups[groupKey]).length + 1;
+      reference.groupIndex = index;
+      reference.groupKey = groupKey;
+      groups[groupKey].push(reference);
+      const groupLength = groups[groupKey].length;
+      groups[groupKey].map((ref) => {
+        ref.groupLength = groupLength;
+      });
+    });
+    return Object.values(groups).flat();
   }
 
   getTemplate(templateKey: string): InlineTemplate | undefined {
@@ -210,7 +234,9 @@ interface ProcHints {
   citekey: ID;
   disambCondition?: boolean;
   sortKeys?: string[];
-  disambYearSuffix?: number;
+  groupIndex?: number;
+  groupLength?: number;
+  groupKey?: string;
   disambEtAlNames?: boolean;
 }
 
@@ -228,7 +254,9 @@ export class ProcReference implements ProcHints, InputReference {
   citekey: ID;
   disambCondition?: boolean;
   sortKeys?: string[];
-  disambYearSuffix?: number;
+  groupIndex?: number;
+  groupLength?: number | undefined;
+  groupKey?: string;
   disambEtAlNames?: boolean;
 
   constructor(
@@ -240,7 +268,9 @@ export class ProcReference implements ProcHints, InputReference {
     citekey: ID,
     disambCondition?: boolean,
     sortKeys?: string[],
-    disambYearSuffix?: number,
+    groupIndex?: number,
+    groupLength?: number,
+    groupKey?: string,
     disambEtAlNames?: boolean,
   ) {
     this.type = type;
@@ -251,7 +281,9 @@ export class ProcReference implements ProcHints, InputReference {
     this.citekey = citekey;
     this.disambCondition = disambCondition;
     this.sortKeys = sortKeys;
-    this.disambYearSuffix = disambYearSuffix;
+    this.groupIndex = groupIndex;
+    this.groupLength = groupLength;
+    this.groupKey = groupKey;
     this.disambEtAlNames = disambEtAlNames;
   }
 
@@ -279,7 +311,7 @@ export class ProcReference implements ProcHints, InputReference {
     return dateString;
   }
 
-  makeSortKey(key: string): string | undefined {
+  makeKey(key: string): string | undefined {
     switch (key) {
       case "author": {
         const authors = this.author;

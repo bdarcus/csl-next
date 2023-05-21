@@ -1,10 +1,11 @@
 import { HasFormatting, ReferenceTypes, Style } from "./style.ts";
+import { SortConfig } from "./style/options.ts";
 import { InlineTemplate, TemplateComponent } from "./style/template.ts";
 import { ID, InputReference, Title } from "./reference.ts";
 import { InputBibliography } from "./bibliography.ts";
 import { Contributor } from "./style/contributor.ts";
 import { _reflect } from "../deps.ts";
-import { deno, edtf, plainToClass } from "../deps.ts";
+import { edtf, plainToClass } from "../deps.ts";
 
 // TODO this isn't right, but I need to separately set pre-rendered values fgor each context.
 export interface ProcContext extends HasFormatting {
@@ -44,7 +45,7 @@ export class Processor {
    * @default "year"
    * @returns configuration object for DateTime formatting
    */
-  dateFormatConfig(format: string): deno.Intl.DateTimeFormatOptions {
+  dateFormatConfig(format: string): Intl.DateTimeFormatOptions {
     const monthConfig = this.style.options?.dates?.month || "long";
     const dateFormats = {
       year: { year: "numeric" },
@@ -95,12 +96,12 @@ export class Processor {
           case "date" in component: {
             const date = reference[component.date as keyof ProcReference];
             if (date !== undefined) {
-              // FIXME hook the above up below
+              // TODO times, and missing times?
               const dateStr = reference.formatDate(
                 date,
                 this.dateFormatConfig([
                   component.format,
-                ]) as deno.Intl.DateTimeFormatOptions,
+                ]) as Intl.DateTimeFormatOptions,
               );
               return {
                 ...component,
@@ -154,12 +155,40 @@ export class Processor {
 
   getProcReferences(): ProcReference[] {
     const citekeys = Object.keys(this.bibliography);
+    // first check bib sort config, then fallback to global
+    const sortConfig = this.style.bibliography?.options?.sort ||
+      this.style.options?.sort || undefined;
     const references = citekeys.map((citekey) => {
       const pref = plainToClass(ProcReference, this.bibliography[citekey]);
       pref.citekey = citekey;
       return pref;
     });
-    return references;
+    if (sortConfig !== undefined) {
+      return this.sortReferences(sortConfig, references);
+    } else {
+      return references;
+    }
+  }
+
+  sortReferences(
+    sortConfig: SortConfig[],
+    references: ProcReference[],
+  ): ProcReference[] {
+    // TODO adjust to the move of makeSortKey to ProcReference.
+    return references.sort((a, b) => {
+      for (const { key, order } of sortConfig) {
+        const aValue = a.makeSortKey(key);
+        const bValue = b.makeSortKey(key);
+        if (aValue === undefined || bValue === undefined) {
+          continue;
+        }
+        const comparison = aValue.localeCompare(bValue);
+        if (comparison !== 0) {
+          return order === "ascending" ? comparison : -comparison;
+        }
+      }
+      return 0;
+    });
   }
 
   getTemplate(templateKey: string): InlineTemplate | undefined {
@@ -189,8 +218,10 @@ interface ProcHints {
  * A reference sorted and processed before final rendering, with methods that provide such rendering.
  */
 export class ProcReference implements ProcHints, InputReference {
+  // TODO change this to just have a data object?
   type: ReferenceTypes;
   title: Title;
+  issued: Date;
   author: Contributor[];
   editor: Contributor[];
   // REVIEW maybe put the below in a common object instead?
@@ -203,6 +234,7 @@ export class ProcReference implements ProcHints, InputReference {
   constructor(
     type: ReferenceTypes,
     title: Title,
+    issued: Date,
     author: Contributor[],
     editor: Contributor[],
     citekey: ID,
@@ -213,6 +245,7 @@ export class ProcReference implements ProcHints, InputReference {
   ) {
     this.type = type;
     this.title = title;
+    this.issued = issued;
     this.author = author;
     this.editor = editor;
     this.citekey = citekey;
@@ -238,14 +271,34 @@ export class ProcReference implements ProcHints, InputReference {
     return this.formatContributors(this.author);
   }
 
-  formatDate(date: string, options: deno.Intl.DateTimeFormatOptions): string {
+  formatDate(date: string, options: Intl.DateTimeFormatOptions): string {
     const parsedDate = edtf.default(date);
-    // TODO make this smarter, use toLocaleString or something.
-    // new Intl.DateTimeFormat("en-AU", options).format(date)
     const dateString = new Intl.DateTimeFormat("en-US", options).format(
       parsedDate,
     );
     return dateString;
+  }
+
+  makeSortKey(key: string): string | undefined {
+    switch (key) {
+      case "author": {
+        const authors = this.author;
+        if (authors !== undefined) {
+          // TODO author formatting
+          const formattedAuthors = this.formatAuthors();
+          return formattedAuthors;
+        }
+        break;
+      }
+      case "year": {
+        const year = this.formatDate(this.issued, { year: "numeric" });
+        return year;
+      }
+      // TODO complete for all key options
+      case "title":
+        // REVIEW make sure this actually works
+        return this.title.toString();
+    }
   }
 
   // write a method to render to string from the AST

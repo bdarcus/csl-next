@@ -96,6 +96,9 @@ export class Processor {
           }
           case "date" in component: {
             const date = reference.data[component.date as keyof InputReference];
+            const hints = reference.procHints;
+            const disambuateYear = hints.groupLength! > 1 &&
+              component.format === "year";
             if (date !== undefined) {
               // TODO times, and missing times?
               const dateStr = reference.formatDate(
@@ -104,9 +107,12 @@ export class Processor {
                   component.format,
                 ]) as Intl.DateTimeFormatOptions,
               );
+              const yearSuffix = disambuateYear
+                ? String.fromCharCode(96 + hints.groupIndex!)
+                : "";
               return {
                 ...component,
-                procValue: dateStr,
+                procValue: dateStr + yearSuffix,
               };
             }
             break;

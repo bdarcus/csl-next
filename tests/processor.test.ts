@@ -26,7 +26,6 @@ describe("parsing input", () => {
 describe("sorting", () => {
   it("makes correct author sort keys", () => {
     // FIX
-
     const sortKey = procReferences[3].makeKey("author") as string;
     assertStrictEquals(sortKey, "Doe");
   });

@@ -48,10 +48,14 @@ export class Processor {
   dateFormatConfig(format: string): Intl.DateTimeFormatOptions {
     const monthConfig = this.style.options?.dates?.month || "long";
     const dateFormats = {
-      year: { year: "numeric" },
-      "year-month": { year: "numeric", month: `${monthConfig}` },
-      "month-day": { month: `${monthConfig}`, day: "numeric" },
-      full: { month: `${monthConfig}`, day: "numeric" },
+      year: { year: "numeric", month: undefined, day: undefined },
+      "year-month": {
+        year: "numeric",
+        month: `${monthConfig}`,
+        day: undefined,
+      },
+      "month-day": { year: undefined, month: `${monthConfig}`, day: "numeric" },
+      full: { year: "numeric", month: `${monthConfig}`, day: "numeric" },
     };
 
     return dateFormats[format];
@@ -288,10 +292,13 @@ export class ProcReference implements ReferenceData {
 
   formatDate(date: string, options: Intl.DateTimeFormatOptions): string {
     const parsedDate = edtf.default(date);
-    const dateString = new Intl.DateTimeFormat("en-US", options).format(
-      parsedDate,
-    );
-    return dateString;
+    const year = parsedDate.year.toString();
+    const optKeys = Object.keys(options);
+    const useYear = optKeys.includes("year") && optKeys.length === 1;
+    const formattedDate = useYear
+      ? year
+      : edtf.format(parsedDate, "en-US", options);
+    return formattedDate;
   }
 
   makeKey(key: string): string | undefined {

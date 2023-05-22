@@ -1,4 +1,5 @@
 import { ID } from "./reference.ts";
+import { Locator } from "./locator.ts";
 
 type CitationModeType = "integral" | "nonIntegral";
 
@@ -20,9 +21,9 @@ export type Citation = {
   // richer than CSL 1.0, but matches biblatex/org-cite
   prefix?: string;
   /**
-   * The string that follows a list of citation references.
+   * An array of locator key-values and/or strings.
    */
-  suffix?: string;
+  suffix?: Locator[];
   references: CiteRef[];
 };
 

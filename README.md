@@ -32,6 +32,22 @@ A first draft of the model is almost complete, while the second currently can:
 1. read data and styles
 2. process 1 into an intermediate AST (though this is incomplete)
 
+The AST is simply the input style model enhanced with the rendered string for each component of the template. 
+Here's an example bibliography reference, using the files in the examples directory.
+
+```js
+  [
+    [ { contributors: "author", procValue: "Doe, Jane" } ],
+    {
+      date: "issued",
+      format: "year",
+      wrap: "parentheses",
+      procValue: "2023b"
+    },
+    [ { title: "title", procValue: "The Title" } ],
+  ]
+```
+
 ### Schema-backed Editing
 
 Here is `VSCode`, with schema-backed validation and auto-completion of a YAML style.

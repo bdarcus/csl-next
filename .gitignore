@@ -10,4 +10,3 @@ examples/*.json
 play
 .vscode
 npm
-.chglog

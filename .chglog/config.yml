@@ -12,17 +12,28 @@ options:
         - refactor
   commit_groups:
     group_by: Type
-    sort_by: Title
+    sort_by: RawTitle
     title_maps:
       feat: Added
       fix: Fixed
       refactor: Changed
+    title_order:
+      - feat
+      - fix
+      - refactor
   header:
     pattern: "^(\\w*)(?:\\(([\\w\\$\\.\\-\\*\\s]*)\\))?\\:\\s(.*)$"
     pattern_maps:
       - Type
       - Scope
       - Subject
+  issues:
+    prefix:
+      - #
+  refs:
+    actions:
+      - Closes
+      - Fixes
   notes:
     keywords:
       - BREAKING CHANGE

@@ -6,7 +6,8 @@ lib
 src/.vscode
 docs
 notes.md
-example/*.json
+examples/*.json
 play
 .vscode
 npm
+.chglog

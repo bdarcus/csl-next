@@ -7,4 +7,6 @@ src/.vscode
 docs
 notes.md
 example/*.json
-
+play
+.vscode
+npm

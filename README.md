@@ -89,16 +89,6 @@ I have a few tasks setup, including to auto-generate an `NPM` module.
 
 ### Code Generation from Schemas
 
-To convert the schemas to other languages, try this (in this case Rust):
-
-```console
-$ npm install -g quicktype
-$ quicktype schemas/csl-style-schema.json -o style.rs
-```
-
-Note that the generated code will include a model definition, that should mostly
-match the typescript model, _and_ serialization and deserialization code.
-
 [Here's a small demo repository](https://github.com/bdarcus/csln-rs) that includes a script to run this conversion, and then builds a simple rust binary that can read and write a `Style` or `InputReference`.
 
 Feel free to experiment with your language of choice and report your experience!

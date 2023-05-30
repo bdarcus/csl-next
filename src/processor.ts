@@ -1,4 +1,4 @@
-import { HasFormatting, Style } from "./style.ts";
+import { HasFormatting, Style } from "./style/mod.ts";
 import { SortConfig } from "./style/options.ts";
 import { InlineTemplate, TemplateComponent } from "./style/template.ts";
 import { InputReference } from "./reference.ts";

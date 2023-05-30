@@ -3,16 +3,8 @@
  */
 
 import { LocalizedTermFormat, LocalizedTermName } from "./locale.ts";
-import {
-  ContributorRoles,
-  Dates,
-  HasFormatting,
-  Locators,
-  ReferenceTypes,
-  SimpleTypes,
-  Titles,
-  Variables,
-} from "../style.ts";
+import { HasFormatting, Locators, Variables } from "../style/mod.ts";
+import { ContributorRoles, Dates, ReferenceTypes, SimpleTypes, Titles } from "../variables.ts";
 import { Options } from "./options.ts";
 
 export type DateFormat = "year" | "year-month" | "full" | "month-day";

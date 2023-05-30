@@ -1,7 +1,7 @@
 // Typescript model for a CSL Reference
 
 import { Contributor } from "./style/contributor.ts";
-import { ReferenceTypes } from "./style.ts";
+import { ReferenceTypes } from "./variables.ts";
 
 // Types
 

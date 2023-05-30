@@ -1,19 +1,19 @@
-import { LocalizationTerms } from "./style/locale.ts";
+import { LocalizationTerms } from "./locale.ts";
 import {
   RenderList,
   RenderListBlock,
   TemplateFile,
   TopLevelTemplate,
   WrapPunctuation,
-} from "./style/template.ts";
-import { Options, OptionsFile } from "./style/options.ts";
+} from "./template.ts";
+import { Options, OptionsFile } from "./options.ts";
 import {
   ContributorRoles,
   Dates,
   ReferenceTypes,
   SimpleTypes,
   Titles,
-} from "./variables.ts";
+} from "../variables.ts";
 /**
  * The CSL NEXT style model.
  *

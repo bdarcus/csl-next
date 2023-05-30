@@ -1,4 +1,4 @@
-import { HasFormatting } from "../style.ts";
+import { HasFormatting } from "../style/mod.ts";
 import { ContributorRoles } from "../variables.ts";
 
 /**

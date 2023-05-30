@@ -1,5 +1,5 @@
 import { InputBibliography } from "./bibliography.ts";
-import { Style } from "./style.ts";
+import { Style } from "./style/mod.ts";
 import { yaml } from "../deps.ts";
 
 export function loadBibliography(

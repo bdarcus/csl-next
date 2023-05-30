@@ -1,4 +1,5 @@
-import { ContributorRoles, HasFormatting } from "../style.ts";
+import { HasFormatting } from "../style.ts";
+import { ContributorRoles } from "../variables.ts";
 
 /**
  * @description Option model for style configuration.
@@ -172,41 +173,21 @@ export type MonthStyle =
   | "short" // (e.g., Mar)
   | "narrow"; // (e.g., M).
 
-export type AndAsString = "text" | "symbol";
-
 /**
  * Which of the contributor names in a list to apply the transformation.
  */
 export type ContributorScope = "first" | "all" | "none";
+
+import { ContributorRoleForms } from "../variables.ts";
 
 /**
  * Contributor role configuration.
  */
 export interface RoleOption extends HasFormatting {
   /**
-   * The display form of the role.
-   *
-   * ### `long`
-   *
-   * The full name of the role.
-   *
-   * > Jane Smith (editor)
-   *
-   * ### `short`
-   *
-   * > Jane Smith (ed.)
-   *
-   * ### `verb`
-   *
-   * > edited by Jane Smith
-   *
-   * ### `verb-short`
-   *
-   * > ed. Jane Smith
-   *
    * @default short
    */
-  form?: "long" | "short" | "verb" | "verb-short";
+  form?: ContributorRoleForms;
   /**
    * Contributor roles for which to omit the role description.
    *
@@ -224,97 +205,59 @@ export interface ContributorListShortening {
    * @default 3
    */
   min?: number;
-  /**
-   * When shortening, use the first number of contributors.
-   */
+  /** When shortening, use the first number of contributors. */
   useFirst?: number;
-  /**
-   * When shortening, replace omitted names with this term form.
-   *
-   * ### `short`
-   *
-   * > Doe, Johnson, et al.
-   *
-   * ### `long`
-   *
-   * > Doe, Johnson, and others
-   */
-  atAl?: "short" | "long";
+  /** When shortening, replace omitted names with this term form. */
+  atAl?: etALFormOptions;
   /**
    * Determines when the delimiter is used to separate the second to last and the last
    * item in contributor lists (if `and` is not set, the name delimiter is always used,
-   * regardless of the value of `delimiterPrecedesLast`). Allowed values:
-   *
-   * ### `contextual`
-   *
-   * The contributor delimiter is only used for lists of three or more:
-   *
-   *   - 2 names: “J. Doe and T. Williams”
-   *   - 3 names: “J. Doe, S. Smith, and T. Williams”
-   *
-   * ### `after-inverted-name`
-   *
-   * Delimiter is only used if the preceding name is inverted as a result of the
-   * `asSort` parameter. E.g. with `asSort` set to “first”:
-   *
-   *   - “Doe, J., and T. Williams”
-   *   -  “Doe, J., S. Smith and T. Williams”
-   *
-   * ### `always`
-   *
-   * Delimiter is always used:
-   *
-   *  - 2 names: “J. Doe, and T. Williams”
-   *  - 3 names: “J. Doe, S. Smith, and T. Williams”
-   *
-   * ### `never`
-   *
-   * Delimiter is never used:
-   *
-   *   - 2 names: “J. Doe and T. Williams”
-   *   - 3 names: “J. Doe, S. Smith and T. Williams”
+   * regardless of the value of `delimiterPrecedesLast`).
    *
    * @default contextual
    */
-  delimiterPrecedesLast?: "always" | "never" | "contextual";
+  delimiterPrecedesLast?: delimiterPrecedesLastOptions;
   /**
-	 * Determines when the delimiter or a space is used between a truncated contributor list
-	 * and the “et-al” (or “and others”) term in case of et-al abbreviation.
-	 *
-	 * Allowed values:
-	 *
-	 * ### `contextual`
-	 *
-	 * Delimiter is only used for contributor lists truncated to two or more items:
-
-	 *   - 1 name: “J. Doe et al.”
-	 *   - 2 names: “J. Doe, S. Smith, et al.”
-	 *
-	 * ### `after-inverted-name`
-	 *
-	 * Delimiter is only used if the preceding name is inverted as a result of the `asSort` parameter.
-	 * E.g. with `asSort` set to “first”:
-	 *
-	 *   - “Doe, J., et al.”
-	 *   - “Doe, J., S. Smith et al.”
-	 *
-	 * ### `always`
-	 *
-	 * Delimiter is always used:
-	 *
-	 *   - 1 name: “J. Doe, et al.”
-	 *   - 2 names: “J. Doe, S. Smith, et al.”
-	 *
-	 * ### `never`
-	 *
-	 * Delimiter is never used:
-	 *   - 1 name: “J. Doe et al.”
-	 *   - 2 names: “J. Doe, S. Smith et al.”
-	 *
-	 * @default contextual
-	 */
-  delimiterPrecedesEtAl?: "always" | "never" | "contextual";
+   * Determines when the delimiter or a space is used between a truncated contributor list
+   * and the “et-al” (or “and others”) term in case of et-al abbreviation.
+   *
+   * @default contextual
+   */
+  delimiterPrecedesEtAl?: delimiterPrecedesLastOptions;
 }
+
+export type etALFormOptions =
+  /** Doe, Johnson, et al. */
+  | "short"
+  /** Doe, Johnson, and others */
+  | "long";
+
+/** When to apply the delimiter to the end of a list. */
+export type delimiterPrecedesLastOptions =
+  /* Delimiter is only used if the preceding name is inverted as a result of the
+   * `asSort` parameter. E.g. with `asSort` set to “first”:
+   *
+   *   - “Doe, J., and T. Williams”
+   *   - “Doe, J., S. Smith and T. Williams”
+   */
+  | "after-inverted-name"
+  /* Delimiter is always used:
+   *
+   *   - 1 name: “J. Doe, et al.”
+   *   - 2 names: “J. Doe, S. Smith, et al.”
+   */
+  | "always"
+  /* Delimiter is never used:
+   *   - 1 name: “J. Doe et al.”
+   *   - 2 names: “J. Doe, S. Smith et al.”
+   */
+  | "never"
+  /* Delimiter is only used for contributor lists truncated to two or more items:
+   *   - 1 name: “J. Doe et al.”
+   *   - 2 names: “J. Doe, S. Smith, et al.”
+   */
+  | "contextual";
+
 export interface ContributorListFormatting extends HasFormatting {
   /**
    * Format a contributor name as sorted.
@@ -324,14 +267,6 @@ export interface ContributorListFormatting extends HasFormatting {
   displayAsSort?: ContributorScope;
   /**
    * The delimiter between last and second-to-last item.
-   *
-   * The default "text" value produces:
-   *
-   * >  Doe, Johnson and Smith
-   *
-   * The "symbol" value produces:
-   *
-   * >  Doe, Johnson & Smith
    *
    * @default text
    */
@@ -347,3 +282,9 @@ export interface ContributorListFormatting extends HasFormatting {
    */
   shorten?: ContributorListShortening;
 }
+
+export type AndAsString =
+  /** Doe, Johnson and Smith */
+  | "text"
+  /** Doe, Johnson & Smith  */
+  | "symbol";

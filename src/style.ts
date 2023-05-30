@@ -7,6 +7,13 @@ import {
   WrapPunctuation,
 } from "./style/template.ts";
 import { Options, OptionsFile } from "./style/options.ts";
+import {
+  ContributorRoles,
+  Dates,
+  ReferenceTypes,
+  SimpleTypes,
+  Titles,
+} from "./variables.ts";
 /**
  * The CSL NEXT style model.
  *
@@ -15,18 +22,7 @@ import { Options, OptionsFile } from "./style/options.ts";
 
 export type CSL = Style | LocalizationTerms | TemplateFile | OptionsFile;
 
-export type ReferenceTypes = "book" | "article" | "chapter";
-
-export type ContributorRoles = "author" | "editor" | "publisher";
-
-export type Dates = "issued" | "accessed";
-
-export type Titles = "title" | "container-title";
-
 export type Locators = "page" | "chapter";
-
-// REVIEW
-export type SimpleTypes = "volume" | "issue" | "pages";
 
 export type Variables =
   | ReferenceTypes

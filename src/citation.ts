@@ -1,5 +1,5 @@
 import { ID } from "./reference.ts";
-import { Locator } from "./locator.ts";
+import { LocatorTerms } from "./locator.ts";
 
 type CitationModeType = "integral" | "nonIntegral";
 
@@ -41,3 +41,14 @@ export type CiteRef = {
    */
   suffix?: Locator[];
 };
+
+
+// CSL locators model
+// A locator is a simple key-value object, where the value is some potentially discontinuos list of numbers and/or strings.
+// Examples:
+//   - page 1
+//   - page 23, 25-36
+//   - chapter IV
+
+/** A key-value object, or a string. */
+export type Locator = Record<LocatorTerms, string>;

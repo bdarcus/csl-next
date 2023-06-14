@@ -8,7 +8,7 @@ await build({
   typeCheck: false,
   test: false,
   entryPoints: [
-    "./src/style.ts",
+    "./src/style/mod.ts",
     "./src/reference.ts",
     "./src/bibliography.ts",
     "./src/citation.ts",

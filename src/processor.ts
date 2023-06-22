@@ -22,7 +22,7 @@ export interface ProcTemplate extends HasFormatting, InlineTemplate {
    *
    * It can either be a plain string, or a string with Djot markup.
    */
-  procValue?: string;
+  value?: string;
 }
 
 /**
@@ -93,7 +93,7 @@ export class Processor {
             if (title !== undefined) {
               return {
                 ...component,
-                procValue: title,
+                value: title,
               };
             }
             break;
@@ -116,7 +116,7 @@ export class Processor {
                 : "";
               return {
                 ...component,
-                procValue: dateStr + yearSuffix,
+                value: dateStr + yearSuffix,
               };
             }
             break;
@@ -129,7 +129,7 @@ export class Processor {
               const resultStr = reference.formatContributors(contributors);
               return {
                 ...component,
-                procValue: resultStr,
+                value: resultStr,
               };
             }
             break;

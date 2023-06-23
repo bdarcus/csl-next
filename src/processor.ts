@@ -167,9 +167,9 @@ export class Processor {
   getProcReferences(): ProcReference[] {
     const citekeys = Object.keys(this.bibliography);
     // first check bib sort config, then fallback to global
-    const sortConfig = this.style.bibliography?.options?.sort ||
-      this.style.options?.sort || undefined;
-    const groupConfig = this.style.bibliography?.options?.group ||
+    const sortConfig = this.style.bibliography?.options?.processing?.sort ||
+      this.style.options?.processing?.sort || undefined;
+    const groupConfig = this.style.bibliography?.options?.processing?.group ||
       this.style.options?.group || undefined;
     const references = citekeys.map((citekey) => {
       const pref = new ProcReference(this.bibliography[citekey], {});

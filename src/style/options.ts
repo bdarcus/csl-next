@@ -32,21 +32,13 @@ export interface Options {
  */
 export interface OptionGroup {
   /**
-   * Sorting configuration.
+   * Processing configuration.
    */
-  sort?: SortConfig[];
-  /**
-   * Grouping configuration.
-   */
-  group?: GroupSortKeys[];
+  processing?: Processing | ProcessingPresets; // allow a string key for this also
   /**
    * Substitution configuration.
    */
   substitute?: Substitution;
-  /**
-   * Disambiguation configuration of rendererd group display names.
-   */
-  disambiguate?: Disambiguation;
   /**
    * Localization configuration.
    */
@@ -59,6 +51,38 @@ export interface OptionGroup {
    * Contributor list formatting configuration.
    */
   contributors?: ContributorListFormatting;
+}
+
+/**
+ * Preconfigured processing options.
+ */
+export type ProcessingPresets =
+  /// For author-date (Doe, 2019) citations; typically in-text, though can also be footnote-based.
+  | "author-date"
+  /// For numeric (1) citations, where the number is the order of first appearance in the document.
+  | "numeric-as-cited"
+  /// For numeric (1) citations, where the number based on author-date sorted of the reference list.
+  // Review: Is this actually a thing?
+  | "numeric-sorted"
+  /// TODO
+  | "note";
+
+/**
+ * Processing configures the often-related sorting, grouping and disambiguation operations.
+ */
+export interface Processing {
+  /**
+   * Sorting configuration.
+   */
+  sort?: SortConfig[];
+  /**
+   * Grouping configuration.
+   */
+  group?: GroupSortKeys[];
+  /**
+   * Disambiguation configuration of rendererd group display names.
+   */
+  disambiguate?: Disambiguation;
 }
 
 /**

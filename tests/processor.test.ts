@@ -27,7 +27,7 @@ describe("sorting", () => {
   it("makes correct author sort keys", () => {
     // FIX
 
-    const sortKey = procReferences[3].makeSortKey("author") as string;
+    const sortKey = procReferences[3].makeKey("author") as string;
     assertStrictEquals(sortKey, "Doe");
   });
 

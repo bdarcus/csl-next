@@ -45,21 +45,26 @@ export class Processor {
    * @default "year"
    * @returns configuration object for DateTime formatting
    */
-  dateFormatConfig(format: string): Intl.DateTimeFormatOptions {
-    const monthConfig = this.style.options?.dates?.month || "long";
-    const dateFormats = {
-      year: { year: "numeric", month: undefined, day: undefined },
-      "year-month": {
-        year: "numeric",
-        month: `${monthConfig}`,
-        day: undefined,
-      },
-      "month-day": { year: undefined, month: `${monthConfig}`, day: "numeric" },
-      full: { year: "numeric", month: `${monthConfig}`, day: "numeric" },
-    };
+dateFormatConfig(format: string): Intl.DateTimeFormatOptions {
+  const monthConfig = this.style.options?.dates?.month || "long";
+  const dateFormats: Record<string, Intl.DateTimeFormatOptions> = {
+    year: { year: "numeric", month: undefined, day: undefined },
+    "year-month": {
+      year: "numeric",
+      month: `${monthConfig}`,
+      day: undefined,
+    },
+    "month-day": { year: undefined, month: `${monthConfig}`, day: "numeric" },
+    full: { year: "numeric", month: `${monthConfig}`, day: "numeric" },
+  };
 
+  if (format in dateFormats) {
     return dateFormats[format];
+  } else {
+    // TODO: handle invalid format
+    return dateFormats.year;
   }
+}
 
   /**
    * Render a list of intermediate ProcReference objects.
@@ -313,13 +318,17 @@ export class ProcReference implements ReferenceData {
         break;
       }
       case "year": {
-        const year = this.formatDate(this.data.issued, { year: "numeric" });
-        return year;
+        const issued = this.data.issued;
+        if (issued !== undefined) {
+          const year = this.formatDate(issued.toString(), { year: "numeric" });
+          return year;
+        }
+        break;
       }
       // TODO complete for all key options
       case "title":
         // REVIEW make sure this actually works
-        return this.data.title.toString();
+        return this.data.title?.toString();
     }
   }
 
